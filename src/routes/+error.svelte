@@ -3,12 +3,12 @@
   import { Button } from '$lib/components/ui/button';
 </script>
 
-<!-- Hallmark · genre: modern-minimal · macrostructure: Centered-Hero · design-system: design.md -->
+<!-- Hallmark · genre: playful · macrostructure: Centered-Hero · theme: Hum · design-system: design.md -->
 <div
   class="mx-auto flex w-full max-w-md flex-col items-center justify-center gap-6 px-4 py-32 text-center"
 >
-  <div class="flex flex-col gap-2">
-    <h1 class="text-4xl font-black tracking-[-0.04em] text-[var(--color-ink)]">
+<div class="flex flex-col gap-2">
+    <h1 class="text-4xl font-bold tracking-[-0.02em] text-[var(--color-ink)]">
       {$page.status}
     </h1>
     <p class="text-lg text-[var(--color-muted)]">
@@ -16,7 +16,7 @@
     </p>
   </div>
 
-  <Button href="/" size="lg" class="rounded-xl font-bold">
+  <Button href="/" size="lg" class="px-6 py-3">
     Return Home
   </Button>
 </div>

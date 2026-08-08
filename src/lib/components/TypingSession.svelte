@@ -44,7 +44,7 @@
     const word = s.words[s.currentWordIndex] ?? "";
     const typed = s.typedWords[s.currentWordIndex] ?? "";
     for (let i = 0; i < typed.length; i++) if (typed[i] !== word[i]) return word[i];
-    return word[typed.length] ?? null;
+    return word[typed.length] ?? (boxed ? null : " ");
   });
 
   // drill (boxed): a correctly-completed combo flashes, then auto-advances
@@ -52,6 +52,17 @@
   let comboTimer: ReturnType<typeof setTimeout> | undefined;
   // increments per wrong key — drives the Words shake retrigger (keyed remount)
   let errorTick = $state(0);
+  // keys currently held down — lights up the keyboard
+  let pressed = $state(new Set<string>());
+
+  function norm(key: string): string {
+    return key === ' ' ? ' ' : key.toLowerCase();
+  }
+
+  function onKeyUp(e: KeyboardEvent) {
+    const p = new Set(pressed);
+    if (p.delete(norm(e.key))) pressed = p;
+  }
 
   function comboGood(s: TypingState): boolean {
     if (s.finished) return false;
@@ -72,9 +83,9 @@
   function handleKey(e: KeyboardEvent) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     const key = e.key;
-    // drill (boxed): only letters / numbers / `;` are valid — no space,
+    // drill (boxed): any printable character is valid, but no space,
     // backspace, or navigation keys. Words advance automatically on success.
-    if (boxed && !/^[a-z0-9;]$/i.test(key)) return;
+    if (boxed && (key.length !== 1 || key === ' ')) return;
     if (key === 'Tab') {
       e.preventDefault();
       session = { ...session, state: initialState(words) };
@@ -125,15 +136,20 @@
     }
   }
 
-  function onKeyDown(e: KeyboardEvent) {
+  function onKeyDownTrack(e: KeyboardEvent) {
+    const p = new Set(pressed);
+    p.add(norm(e.key));
+    pressed = p;
     handleKey(e);
   }
 
   onMount(() => {
-    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keydown', onKeyDownTrack);
+    window.addEventListener('keyup', onKeyUp);
   });
   onDestroy(() => {
-    window.removeEventListener('keydown', onKeyDown);
+    window.removeEventListener('keydown', onKeyDownTrack);
+    window.removeEventListener('keyup', onKeyUp);
   });
 </script>
 
@@ -157,7 +173,7 @@
       {/if}
     </div>
     <div
-      class="h-1.5 w-40 overflow-hidden rounded-full bg-[var(--color-surface)]"
+      class="h-2 w-40 overflow-hidden rounded-full bg-[var(--color-surface)]"
     >
       <div
         class="h-full rounded-full bg-[var(--color-accent)] transition-all"
@@ -179,12 +195,12 @@
         class="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
         <div
-          class="animate-combo-pop rounded-full border border-[var(--color-correct)]/40 bg-[var(--color-correct)]/10 px-5 py-2 text-2xl font-black text-[var(--color-correct)]"
+          class="animate-combo-pop rounded-full border border-[var(--color-mint)]/40 bg-[var(--color-mint)]/10 px-5 py-2 text-2xl font-bold text-[var(--color-mint)]"
           >✓</div
         >
       </div>
     {/if}
   </div>
 
-  <Keyboard {focusKeys} {learnedKeys} {target} />
+  <Keyboard {focusKeys} {learnedKeys} {target} {pressed} />
 </div>

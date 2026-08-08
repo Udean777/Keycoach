@@ -1,5 +1,5 @@
 import type { Language } from "$lib/i18n.svelte";
-import { getSrs, putSrs } from "../db";
+import { getSrs, putSrs, clearAllSrs } from "../db";
 import { applyOutcome, newKeyState, type KeyState } from "../srs/srs";
 
 /**
@@ -65,6 +65,15 @@ function createSrsStore() {
     await putSrs({ lang: state.lang, keys: [...state.keys.values()] });
   }
 
+  async function reset() {
+    state = { lang: state.lang, keys: new Map() };
+    try {
+      await clearAllSrs();
+    } catch (err) {
+      console.warn("Failed clearing SRS from DB:", err);
+    }
+  }
+
   return {
     get states() {
       return state.keys;
@@ -75,7 +84,9 @@ function createSrsStore() {
     ensure,
     record,
     load,
+    reset,
   };
 }
 
 export const srs = createSrsStore();
+

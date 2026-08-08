@@ -88,24 +88,25 @@
 </script>
 
 <div class="mx-auto w-full max-w-4xl px-4 py-12">
+  <!-- Hallmark · genre: playful · macrostructure: Workbench · theme: Hum · design-system: design.md · designed-as-app -->
   <div class="mb-8 flex flex-col gap-1.5">
     <Button
       variant="link"
       href="/lessons"
-      class="w-fit h-auto p-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-accent)]"
+      class="w-fit h-auto p-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-accent-2)]"
     >
       ← {t().lesson.back}
     </Button>
     <div class="mt-2 flex items-end justify-between gap-4">
       <div class="flex flex-col gap-1">
-        <h1 class="text-2xl font-black tracking-[-0.03em]">{lesson.id}</h1>
-        <p class="text-xs text-[var(--color-muted)]">
+        <h1 class="text-2xl font-bold tracking-[-0.02em]">{lesson.id}</h1>
+        <p class="font-label font-medium text-xs text-[var(--color-muted)]">
           {lesson.keys.join(" · ")}
         </p>
       </div>
       <Badge
         variant="outline"
-        class="shrink-0 border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-muted)]"
+        class="shrink-0 rounded-full border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-3 py-1 font-label text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--color-ink-2)]"
       >
         {lesson.mode}
       </Badge>
@@ -114,54 +115,92 @@
 
   {#if finished && result}
     <section
-      class="mx-auto max-w-lg rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center"
+      class="relative mx-auto max-w-lg rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_16px_40px_-12px_color-mix(in_oklch,var(--color-ink)_15%,transparent)]"
     >
-      <div class="text-4xl">
-        {"★".repeat(result.stars)}{"☆".repeat(3 - result.stars)}
+      <div class="text-5xl tracking-[0.1em] text-[var(--color-accent-3)] drop-shadow-sm mb-4">
+        {"★".repeat(result.stars)}<span class="opacity-20">{"★".repeat(3 - result.stars)}</span>
       </div>
-      <h2 class="mt-3 text-xl font-black tracking-[-0.03em]">
+      <h2 class="text-2xl font-bold tracking-[-0.02em] text-[var(--color-ink)]">
         {t().lesson.done}
       </h2>
-      <div class="mt-6 flex justify-center gap-12">
-        <div>
-          <p class="text-3xl font-black tabular-nums">{result.wpm}</p>
-          <p class="text-xs text-[var(--color-muted)] uppercase">
+      
+      <div class="mt-8 flex justify-center gap-4">
+        <div class="flex-1 rounded-[16px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm">
+          <p class="text-3xl font-bold tabular-nums text-[var(--color-ink)]">{result.wpm}</p>
+          <p class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]">
             {t().results.wpm}
           </p>
         </div>
-        <div>
-          <p class="text-3xl font-black tabular-nums">{result.accuracy}%</p>
-          <p class="text-xs text-[var(--color-muted)] uppercase">
+        <div class="flex-1 rounded-[16px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm">
+          <p class="text-3xl font-bold tabular-nums text-[var(--color-ink)]">{result.accuracy}%</p>
+          <p class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]">
             {t().results.accuracy}
           </p>
         </div>
       </div>
+
+      <div class="mt-6 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-bg)] p-5 shadow-sm text-left">
+        <p class="font-label mb-3 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)]">
+          {t().results.objectives}
+        </p>
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <div class="grid h-5 w-5 shrink-0 place-items-center rounded-full {result.accuracy >= 80 ? 'bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]' : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'}">
+              {#if result.accuracy >= 80}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              {/if}
+            </div>
+            <span class="text-sm font-bold {result.accuracy >= 80 ? 'text-[var(--color-ink)]' : 'text-[var(--color-muted)]'}">{t().results.objAcc80}</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="grid h-5 w-5 shrink-0 place-items-center rounded-full {result.accuracy >= 95 ? 'bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]' : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'}">
+              {#if result.accuracy >= 95}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              {/if}
+            </div>
+            <span class="text-sm font-bold {result.accuracy >= 95 ? 'text-[var(--color-ink)]' : 'text-[var(--color-muted)]'}">{t().results.objAcc95}</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="grid h-5 w-5 shrink-0 place-items-center rounded-full {result.wpm >= (lesson.mode === 'drill' ? 25 : 20) ? 'bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]' : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'}">
+              {#if result.wpm >= (lesson.mode === 'drill' ? 25 : 20)}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              {/if}
+            </div>
+            <span class="text-sm font-bold {result.wpm >= (lesson.mode === 'drill' ? 25 : 20) ? 'text-[var(--color-ink)]' : 'text-[var(--color-muted)]'}">
+              {t().results.objWpm.replace('{wpm}', lesson.mode === 'drill' ? '25' : '20')}
+            </span>
+          </div>
+        </div>
+      </div>
+
       <div class="mt-8 flex flex-wrap justify-center gap-3">
         <Button
           variant="outline"
           href="/"
-          class="rounded-xl px-4 py-2 font-bold text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
+          class="px-4 py-2 text-[var(--color-muted)]"
         >
           {t().nav.home}
         </Button>
         <Button
           variant="outline"
           onclick={replay}
-          class="rounded-xl px-4 py-2 font-bold text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
+          class="px-4 py-2 text-[var(--color-muted)]"
         >
           {t().lesson.again}
         </Button>
         {#if nextLesson}
           <Button
             href={`/lessons/${nextLesson.id}`}
-            class="rounded-xl bg-[var(--color-accent)] px-4 py-2 font-bold text-[var(--color-bg)] hover:bg-[var(--color-accent-strong)]"
+            class="px-4 py-2"
           >
             {t().lesson.next} →
           </Button>
         {:else}
           <Button
             href="/lessons"
-            class="rounded-xl bg-[var(--color-accent)] px-4 py-2 font-bold text-[var(--color-bg)]"
+            class="px-4 py-2"
           >
             {t().lesson.back}
           </Button>
@@ -178,14 +217,12 @@
     />
   {:else}
     <div class="mt-12 flex flex-col gap-4">
-      <!-- Session metrics skeleton -->
       <div class="flex justify-between px-4">
         <Skeleton class="h-4 w-16" />
         <Skeleton class="h-4 w-16" />
       </div>
-      <!-- Text block skeleton -->
       <div
-        class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+        class="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
       >
         <Skeleton class="h-4 w-full" />
         <Skeleton class="h-4 w-[90%]" />

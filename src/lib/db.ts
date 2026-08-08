@@ -62,6 +62,17 @@ export async function putLessonProgress(p: LessonProgress): Promise<void> {
   }
 }
 
+export async function clearAllProgress(): Promise<void> {
+  for (const k in memoryProgress) delete memoryProgress[k];
+  if (supabase) {
+    try {
+      await supabase.from("lesson_progress").delete().neq("lesson_id", "");
+    } catch (err) {
+      console.warn("Supabase delete error:", err);
+    }
+  }
+}
+
 export async function getAllLessonProgress(): Promise<LessonProgress[]> {
   if (supabase) {
     try {
@@ -118,6 +129,17 @@ export async function putSrs(s: SrsLangState): Promise<void> {
       });
     } catch (err) {
       console.warn("Supabase upsert SRS error:", err);
+    }
+  }
+}
+
+export async function clearAllSrs(): Promise<void> {
+  for (const k in memorySrs) delete memorySrs[k];
+  if (supabase) {
+    try {
+      await supabase.from("srs_state").delete().neq("lang", "");
+    } catch (err) {
+      console.warn("Supabase delete SRS error:", err);
     }
   }
 }

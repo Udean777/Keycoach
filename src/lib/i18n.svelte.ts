@@ -2,19 +2,19 @@ import type { LanguageCode } from "./dictionaries";
 
 export type Language = LanguageCode;
 
-export const langs: { id: Language; label: string }[] = [
-  { id: "en", label: "English" },
-  { id: "id", label: "Bahasa Indonesia" },
-  { id: "es", label: "Español" },
-  { id: "de", label: "Deutsch" },
-  { id: "ru", label: "Русский" },
+export const langs: { id: Language; label: string; flag: string }[] = [
+  { id: "en", label: "English", flag: "🇬🇧" },
+  { id: "id", label: "Bahasa Indonesia", flag: "🇮🇩" },
+  { id: "es", label: "Español", flag: "🇪🇸" },
+  { id: "de", label: "Deutsch", flag: "🇩🇪" },
+  { id: "ru", label: "Русский", flag: "🇷🇺" },
 ];
 
 export const messages: Record<Language, any> = {
   en: {
     app: {
       name: "Keycoach",
-      tagline: "Learn to touch type, one key at a time.",
+      tagline: "Build your touch-typing instincts. Type faster without looking.",
     },
     nav: {
       home: "Home",
@@ -39,6 +39,7 @@ export const messages: Record<Language, any> = {
       completed: "Done",
       locked: "Locked",
       best: "Best",
+      eyebrow: "Lesson path",
     },
     lesson: {
       keys: "Keys",
@@ -57,15 +58,30 @@ export const messages: Record<Language, any> = {
       nothing: "Nothing due right now. Great job!",
       done: "Review complete!",
       back: "Back to home",
+      eyebrow: "SRS due",
     },
     results: {
       wpm: "WPM",
       accuracy: "Accuracy",
       stars: "Stars",
+      objectives: "Objectives",
+      objAcc80: "Accuracy ≥ 80%",
+      objAcc95: "Accuracy ≥ 95%",
+      objWpm: "Speed ≥ {wpm} WPM",
     },
     settings: {
       title: "Settings",
       language: "Language",
+      preferences: "Preferences",
+      danger: "Danger zone",
+      resetTitle: "Reset all your progress",
+      resetDesc:
+        "Reset all your progress and typing statistics. This action cannot be undone.",
+      resetConfirm: "Are you absolutely sure?",
+      resetConfirmDesc:
+        "This will permanently delete all your progress, typing statistics, and reset the SRS schedule. This action cannot be undone.",
+      reset: "Reset progress",
+      cancel: "Cancel",
     },
     footer: {
       made: "Built with SvelteKit",
@@ -75,7 +91,7 @@ export const messages: Record<Language, any> = {
   id: {
     app: {
       name: "Keycoach",
-      tagline: "Belajar mengetik 10 jari, satu tombol demi satu tombol.",
+      tagline: "Latih insting ngetik 10 jarimu biar makin ngebut tanpa perlu melirik.",
     },
     nav: {
       home: "Beranda",
@@ -101,6 +117,7 @@ export const messages: Record<Language, any> = {
       completed: "Selesai",
       locked: "Terkunci",
       best: "Terbaik",
+      eyebrow: "Jalur pelajaran",
     },
     lesson: {
       keys: "Tombol",
@@ -119,15 +136,30 @@ export const messages: Record<Language, any> = {
       nothing: "Tidak ada yang terjadwal sekarang. Bagus!",
       done: "Review selesai!",
       back: "Kembali ke beranda",
+      eyebrow: "Jatuh tempo SRS",
     },
     results: {
       wpm: "KPM",
       accuracy: "Akurasi",
       stars: "Bintang",
+      objectives: "Target",
+      objAcc80: "Akurasi ≥ 80%",
+      objAcc95: "Akurasi ≥ 95%",
+      objWpm: "Kecepatan ≥ {wpm} KPM",
     },
     settings: {
       title: "Pengaturan",
       language: "Bahasa",
+      preferences: "Preferensi",
+      danger: "Zona bahaya",
+      resetTitle: "Reset semua progres",
+      resetDesc:
+        "Reset semua progres dan statistik pengetikan Anda. Tindakan ini tidak dapat dibatalkan.",
+      resetConfirm: "Anda yakin?",
+      resetConfirmDesc:
+        "Ini akan menghapus permanen semua progres, statistik pengetikan, dan menyetel ulang jadwal SRS. Tindakan ini tidak dapat dibatalkan.",
+      reset: "Reset progres",
+      cancel: "Batal",
     },
     footer: {
       made: "Dibangun dengan SvelteKit",
@@ -137,7 +169,7 @@ export const messages: Record<Language, any> = {
   es: {
     app: {
       name: "Keycoach",
-      tagline: "Aprende a escribir, una tecla a la vez.",
+      tagline: "Desarrolla tu instinto para mecanografiar más rápido sin mirar el teclado.",
     },
     nav: {
       home: "Inicio",
@@ -162,6 +194,7 @@ export const messages: Record<Language, any> = {
       completed: "Hecho",
       locked: "Bloqueado",
       best: "Mejor",
+      eyebrow: "Ruta de lecciones",
     },
     lesson: {
       keys: "Teclas",
@@ -180,14 +213,23 @@ export const messages: Record<Language, any> = {
       nothing: "Nada pendiente. ¡Buen trabajo!",
       done: "¡Repaso completo!",
       back: "Volver al inicio",
+      eyebrow: "Vencidos SRS",
     },
-    results: { wpm: "PPM", accuracy: "Precisión", stars: "Estrellas" },
-    settings: { title: "Ajustes", language: "Idioma" },
+    results: { wpm: "PPM", accuracy: "Precisión", stars: "Estrellas", objectives: "Objetivos", objAcc80: "Precisión ≥ 80%", objAcc95: "Precisión ≥ 95%", objWpm: "Velocidad ≥ {wpm} PPM" },
+    settings: { title: "Ajustes", language: "Idioma", preferences: "Preferencias",
+      danger: "Zona de peligro",
+      resetTitle: "Reiniciar todo el progreso",
+      resetDesc: "Reinicia todo el progreso y estadísticas. Esta acción no se puede deshacer.",
+      resetConfirm: "¿Estás totalmente seguro?",
+      resetConfirmDesc: "Esto eliminará permanentemente todo el progreso, estadísticas y restablecerá el calendario SRS. Esta acción no se puede deshacer.",
+      reset: "Reiniciar progreso",
+      cancel: "Cancelar",
+    },
     footer: { made: "Creado con SvelteKit" },
     common: { back: "Volver" },
   },
   de: {
-    app: { name: "Keycoach", tagline: "Tippen lernen, Taste für Taste." },
+    app: { name: "Keycoach", tagline: "Trainiere deinen Tipp-Instinkt, um schneller zu tippen, ohne hinzusehen." },
     nav: {
       home: "Start",
       lessons: "Lektionen",
@@ -211,6 +253,7 @@ export const messages: Record<Language, any> = {
       completed: "Fertig",
       locked: "Gesperrt",
       best: "Beste",
+      eyebrow: "Lektionspfad",
     },
     lesson: {
       keys: "Tasten",
@@ -229,16 +272,25 @@ export const messages: Record<Language, any> = {
       nothing: "Nichts fällig. Tolle Arbeit!",
       done: "Wiederholung abgeschlossen!",
       back: "Zurück zum Start",
+      eyebrow: "SRS fällig",
     },
-    results: { wpm: "WPM", accuracy: "Genauigkeit", stars: "Sterne" },
-    settings: { title: "Einstellungen", language: "Sprache" },
+    results: { wpm: "WPM", accuracy: "Genauigkeit", stars: "Sterne", objectives: "Ziele", objAcc80: "Genauigkeit ≥ 80%", objAcc95: "Genauigkeit ≥ 95%", objWpm: "Geschwindigkeit ≥ {wpm} WPM" },
+    settings: { title: "Einstellungen", language: "Sprache", preferences: "Einstellungen",
+      danger: "Gefahrenzone",
+      resetTitle: "Gesamten Fortschritt zurücksetzen",
+      resetDesc: "Setzt den gesamten Fortschritt und die Statistik zurück. Dies kann nicht rückgängig gemacht werden.",
+      resetConfirm: "Sind Sie ganz sicher?",
+      resetConfirmDesc: "Dies löscht dauerhaft den gesamten Fortschritt, die Statistik und setzt den SRS-Plan zurück. Diese Aktion kann nicht rückgängig gemacht werden.",
+      reset: "Fortschritt zurücksetzen",
+      cancel: "Abbrechen",
+    },
     footer: { made: "Erstellt mit SvelteKit" },
     common: { back: "Zurück" },
   },
   ru: {
     app: {
       name: "Keycoach",
-      tagline: "Научитесь печатать, клавиша за клавишей.",
+      tagline: "Тренируйте инстинкт слепой печати, чтобы набирать текст быстрее и не глядя.",
     },
     nav: {
       home: "Главная",
@@ -263,6 +315,7 @@ export const messages: Record<Language, any> = {
       completed: "Готово",
       locked: "Заблокировано",
       best: "Лучший",
+      eyebrow: "Путь уроков",
     },
     lesson: {
       keys: "Клавиши",
@@ -281,9 +334,18 @@ export const messages: Record<Language, any> = {
       nothing: "Нет заданий. Отличная работа!",
       done: "Повторение завершено!",
       back: "На главную",
+      eyebrow: "Сдача SRS",
     },
-    results: { wpm: "Сл/м", accuracy: "Точность", stars: "Звезды" },
-    settings: { title: "Настройки", language: "Язык" },
+    results: { wpm: "Сл/м", accuracy: "Точность", stars: "Звезды", objectives: "Цели", objAcc80: "Точность ≥ 80%", objAcc95: "Точность ≥ 95%", objWpm: "Скорость ≥ {wpm} Сл/м" },
+    settings: { title: "Настройки", language: "Язык", preferences: "Предпочтения",
+      danger: "Опасная зона",
+      resetTitle: "Сбросить весь прогресс",
+      resetDesc: "Сбрасывает весь прогресс и статистику. Это действие нельзя отменить.",
+      resetConfirm: "Вы точно уверены?",
+      resetConfirmDesc: "Это навсегда удалит весь прогресс, статистику и сбросит расписание SRS. Действие нельзя отменить.",
+      reset: "Сбросить прогресс",
+      cancel: "Отмена",
+    },
     footer: { made: "Сделано на SvelteKit" },
     common: { back: "Назад" },
   },
@@ -309,6 +371,7 @@ export type Messages = {
     completed: string;
     locked: string;
     best: string;
+    eyebrow: string;
   };
   lesson: {
     keys: string;
@@ -327,9 +390,21 @@ export type Messages = {
     nothing: string;
     done: string;
     back: string;
+    eyebrow: string;
   };
-  results: { wpm: string; accuracy: string; stars: string };
-  settings: { title: string; language: string };
+  results: { wpm: string; accuracy: string; stars: string; objectives: string; objAcc80: string; objAcc95: string; objWpm: string };
+  settings: {
+    title: string;
+    language: string;
+    preferences: string;
+    danger: string;
+    resetTitle: string;
+    resetDesc: string;
+    resetConfirm: string;
+    resetConfirmDesc: string;
+    reset: string;
+    cancel: string;
+  };
   footer: { made: string };
   common: { back: string };
 };

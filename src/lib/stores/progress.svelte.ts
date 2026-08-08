@@ -2,6 +2,7 @@ import {
   getLessonProgress,
   getAllLessonProgress,
   putLessonProgress,
+  clearAllProgress,
   type LessonProgress,
 } from "../db";
 
@@ -54,6 +55,14 @@ export function createProgressStore() {
     save,
     get,
     isUnlocked,
+    async reset() {
+      lessons = {};
+      try {
+        await clearAllProgress();
+      } catch (err) {
+        console.warn("Failed clearing progress from DB:", err);
+      }
+    }
   };
 }
 

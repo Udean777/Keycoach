@@ -1,5 +1,6 @@
 <script lang="ts">
   import { LAYOUTS, type LayoutName, type KeyboardType } from "$lib/keyboardLayouts";
+  import * as Select from "$lib/components/ui/select";
 
   interface Props {
     focusKeys?: string[];
@@ -24,7 +25,7 @@
 
   function cls(k: string): string {
     const isModifier = k.length > 1 && k !== " ";
-    let base = "flex h-10 sm:h-12 items-center justify-center rounded-lg border shadow-sm transition-all duration-100 select-none uppercase";
+    let base = "flex h-10 sm:h-12 items-center justify-center rounded-xl shadow-[0_2px_0_0_var(--color-surface-2)] transition-all duration-100 select-none uppercase";
     
     if (isModifier) {
       base += " text-[10px] sm:text-xs font-semibold tracking-wide lowercase";
@@ -33,19 +34,19 @@
     }
 
     if (target && target === k) {
-      return `${base} animate-key-bounce border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-bg)] ring-2 ring-[var(--color-accent)]/40`;
+      return `${base} animate-key-bounce bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_0_0_3px_color-mix(in_oklch,var(--color-accent)_40%,transparent)]`;
     }
     if (pressed.has(k)) {
-      return `${base} border-[var(--color-accent-strong)] bg-[var(--color-accent-strong)] text-[var(--color-bg)] scale-[0.97]`;
+      return `${base} bg-[var(--color-accent-2)] text-[var(--color-ink)] shadow-none scale-[0.97]`;
     }
     if (learnKeys.has(k)) {
-      return `${base} border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:border-[var(--color-accent)]`;
+      return `${base} border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:border-[var(--color-accent)]`;
     }
     
     if (isModifier) {
-      return `${base} border-[var(--color-border)]/50 bg-[var(--color-surface)]/50 text-[var(--color-muted)]/60`;
+      return `${base} border border-[var(--color-border)]/50 bg-[var(--color-surface)]/50 text-[var(--color-muted)]/60`;
     }
-    return `${base} border-[var(--color-border)]/80 bg-[var(--color-surface)]/80 text-[var(--color-muted)]/80`;
+    return `${base} border border-[var(--color-border)]/80 bg-[var(--color-surface)]/80 text-[var(--color-muted)]/80`;
   }
 </script>
 
@@ -53,19 +54,40 @@
   <!-- Settings Bar -->
   <div class="flex justify-between items-center px-2">
     <div class="flex gap-2 text-xs sm:text-sm">
-      <select bind:value={activeLayout} class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md px-2 py-1 outline-none focus:border-[var(--color-accent)] text-[var(--color-ink)] transition-colors cursor-pointer">
-        {#each Object.values(LAYOUTS) as l}
-          <option value={l.id}>{l.name}</option>
-        {/each}
-      </select>
-      <select bind:value={keyboardType} class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md px-2 py-1 outline-none focus:border-[var(--color-accent)] text-[var(--color-ink)] transition-colors cursor-pointer">
-        <option value="windows">Windows / PC</option>
-        <option value="mac">Mac / Apple</option>
-      </select>
+      <Select.Root
+        type="single"
+        name="layout"
+        value={activeLayout}
+        onValueChange={(val) => (activeLayout = val as LayoutName)}
+      >
+        <Select.Trigger class="w-[140px] h-8 text-xs bg-[var(--color-surface)] border-[var(--color-border)]">
+          {Object.values(LAYOUTS).find(l => l.id === activeLayout)?.name ?? "Layout"}
+        </Select.Trigger>
+        <Select.Content>
+          {#each Object.values(LAYOUTS) as l}
+            <Select.Item value={l.id}>{l.name}</Select.Item>
+          {/each}
+        </Select.Content>
+      </Select.Root>
+
+      <Select.Root
+        type="single"
+        name="os"
+        value={keyboardType}
+        onValueChange={(val) => (keyboardType = val as KeyboardType)}
+      >
+        <Select.Trigger class="w-[120px] h-8 text-xs bg-[var(--color-surface)] border-[var(--color-border)]">
+          {keyboardType === "windows" ? "Windows / PC" : "Mac / Apple"}
+        </Select.Trigger>
+        <Select.Content>
+          <Select.Item value="windows">Windows / PC</Select.Item>
+          <Select.Item value="mac">Mac / Apple</Select.Item>
+        </Select.Content>
+      </Select.Root>
     </div>
   </div>
 
-  <div class="rounded-2xl border border-[var(--color-border)]/80 bg-[var(--color-surface)]/80 p-2 sm:p-4 shadow-xl backdrop-blur-md">
+  <div class="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 sm:p-4 shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]">
     <div class="flex flex-col gap-1.5 sm:gap-2">
       <!-- Row 1: Numbers -->
       <div class="flex gap-1.5 sm:gap-2">

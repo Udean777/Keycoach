@@ -17,6 +17,8 @@ export interface StageDef {
   mode: LessonMode;
   /** number of tokens to type (drill tokens, or words) */
   count: number;
+  /** clear previously learned keys before applying this stage */
+  resetKeys?: boolean;
 }
 
 export interface CompiledLesson {
@@ -30,21 +32,38 @@ export interface CompiledLesson {
 }
 
 export const STAGES: StageDef[] = [
-  { id: "asdf", focus: "asdf", mode: "drill", count: 10 },
-  { id: "jkl;", focus: "jkl;", mode: "drill", count: 12 },
-  { id: "home", focus: "asdfjkl;", mode: "word", count: 15 },
-  { id: "home-full", focus: "asdfghjkl;", mode: "word", count: 20 },
+  // Bagian Kiri (Left Keyboard)
+  { id: "left-home", focus: "asdf", mode: "drill", count: 10, resetKeys: true },
+  { id: "left-top", focus: "qwer", mode: "drill", count: 12 },
+  { id: "left-bottom", focus: "zxcv", mode: "drill", count: 12 },
+  { id: "left-reach", focus: "tgb", mode: "drill", count: 12 },
+  { id: "left-all", focus: "asdfqwerzxcvtgb", mode: "word", count: 15 },
+
+  // Bagian Kanan (Right Keyboard)
+  { id: "right-home", focus: "jkl;", mode: "drill", count: 10, resetKeys: true },
+  { id: "right-top", focus: "uiop", mode: "drill", count: 12 },
+  { id: "right-bottom", focus: "m,.", mode: "drill", count: 12 },
+  { id: "right-reach", focus: "yhn", mode: "drill", count: 12 },
+  { id: "right-all", focus: "jkl;uiopm,.yhn", mode: "word", count: 15 },
+
+  // Tahap Gabungan (Combined)
+  { id: "home", focus: "asdfjkl;", mode: "word", count: 15, resetKeys: true },
+  { id: "home-full", focus: "asdfghjkl;", mode: "word", count: 20, resetKeys: true },
   {
     id: "sentence",
     focus: "asdfghjkl qwertyuiop zxcvbnm,.!?",
     mode: "sentence",
     count: 1,
+    resetKeys: true,
   },
 ];
 
 export function compileStages(defs: StageDef[] = STAGES): CompiledLesson[] {
   let learned = new Set<string>();
   return defs.map((s) => {
+    if (s.resetKeys) {
+      learned.clear();
+    }
     const focus = s.focus.split("");
     const keys = [...learned, ...focus];
     learned = new Set(keys);
