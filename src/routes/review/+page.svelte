@@ -8,7 +8,9 @@
   import { progress } from "$lib/stores/progress.svelte.ts";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import TypingSession from "$lib/components/TypingSession.svelte";
-  import { t, getLang } from "$lib/i18n";
+  import { t, getLang } from "$lib/i18n.svelte";
+  import { Skeleton } from "$lib/components/ui/skeleton";
+  import { Button } from "$lib/components/ui/button";
 
   const lessons = compileStages();
   const allKeys = lessons[lessons.length - 1].keys;
@@ -17,6 +19,7 @@
   let words = $state<string[]>([]);
   let started = $state(false);
   let finished = $state(false);
+  let loaded = $state(false);
 
   function buildReview(): string[] {
     const lang = getLang();
@@ -40,6 +43,7 @@
       words = buildReview();
       started = true;
     }
+    loaded = true;
   }
 
   function replay() {
@@ -57,14 +61,29 @@
     <p class="text-sm text-[var(--color-muted)]">{t().review.subtitle}</p>
   </div>
 
-  {#if !started && !finished}
+  {#if !loaded}
+    <div class="mt-12 flex flex-col gap-4">
+      <div class="flex justify-between px-4">
+        <Skeleton class="h-4 w-16" />
+        <Skeleton class="h-4 w-16" />
+      </div>
+      <div
+        class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+      >
+        <Skeleton class="h-4 w-full" />
+        <Skeleton class="h-4 w-[90%]" />
+        <Skeleton class="h-4 w-[80%]" />
+        <Skeleton class="h-4 w-[70%]" />
+      </div>
+    </div>
+  {:else if !started && !finished}
     <div
       class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center text-sm text-[var(--color-muted)]"
     >
       <p>{t().review.nothing}</p>
-      <a href="/" class="mt-4 inline-block text-[var(--color-accent)]"
-        >← {t().review.back}</a
-      >
+      <Button variant="link" href="/" class="mt-4 text-[var(--color-accent)]">
+        ← {t().review.back}
+      </Button>
     </div>
   {:else if finished}
     <div
@@ -74,19 +93,21 @@
       <h2 class="mt-3 text-xl font-black tracking-[-0.03em]">
         {t().review.done}
       </h2>
-      <div class="mt-6 flex justify-center gap-3">
-        <button
+      <div class="mt-8 flex justify-center gap-3">
+        <Button
+          variant="outline"
+          href="/"
+          class="rounded-xl px-4 py-2 font-bold"
+        >
+          {t().nav.home}
+        </Button>
+        <Button
+          variant="outline"
           onclick={replay}
-          class="rounded-xl border border-[var(--color-border)] px-4 py-2 text-sm font-bold text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
+          class="rounded-xl px-4 py-2 font-bold"
         >
           {t().lesson.again}
-        </button>
-        <a
-          href="/"
-          class="rounded-xl bg-[var(--color-accent)] px-4 py-2 text-sm font-bold text-[var(--color-bg)] transition-colors hover:bg-[var(--color-accent-strong)]"
-        >
-          {t().review.back}
-        </a>
+        </Button>
       </div>
     </div>
   {:else if due.length > 0}

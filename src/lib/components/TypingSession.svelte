@@ -9,6 +9,7 @@
     errorCounts,
     type TypingState
   } from '$lib/engine/typing';
+  import { playTick, playError } from '$lib/engine/sound';
   import { srs } from '$lib/stores/srs.svelte.ts';
   import Words from './Words.svelte';
   import Keyboard from './Keyboard.svelte';
@@ -95,7 +96,12 @@
     if (next.log.length > prev.log.length) {
       const press = next.log[next.log.length - 1];
       srs.record(press.target, press.correct);
-      if (!press.correct) errorTick++;
+      if (!press.correct) {
+        errorTick++;
+        playError();
+      } else {
+        if (key !== 'Backspace') playTick();
+      }
     }
     if (next.finished && !session.reported) {
       session = { ...session, reported: true };

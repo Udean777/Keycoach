@@ -30,13 +30,16 @@ export interface CompiledLesson {
 }
 
 export const STAGES: StageDef[] = [
-  { id: "as", focus: "as", mode: "drill", count: 5 },
-  { id: "df", focus: "df", mode: "drill", count: 8 },
-  { id: "jk", focus: "jk", mode: "drill", count: 12 },
-  { id: "l", focus: "l;", mode: "drill", count: 15 },
-  { id: "home-row", focus: "asdfghjkl;", mode: "drill", count: 18 },
-  { id: "home-words", focus: "asdfghjkl", mode: "word", count: 20 },
-  { id: "sentence", focus: "asdfghjkl qwertyuiop zxcvbnm,.!?", mode: "sentence", count: 1 },
+  { id: "asdf", focus: "asdf", mode: "drill", count: 10 },
+  { id: "jkl;", focus: "jkl;", mode: "drill", count: 12 },
+  { id: "home", focus: "asdfjkl;", mode: "word", count: 15 },
+  { id: "home-full", focus: "asdfghjkl;", mode: "word", count: 20 },
+  {
+    id: "sentence",
+    focus: "asdfghjkl qwertyuiop zxcvbnm,.!?",
+    mode: "sentence",
+    count: 1,
+  },
 ];
 
 export function compileStages(defs: StageDef[] = STAGES): CompiledLesson[] {

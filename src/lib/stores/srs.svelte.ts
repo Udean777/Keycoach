@@ -1,10 +1,6 @@
+import type { Language } from "$lib/i18n.svelte";
 import { getSrs, putSrs } from "../db";
-import {
-  applyOutcome,
-  newKeyState,
-  type KeyState,
-} from "../srs/srs";
-import type { Language } from "../i18n";
+import { applyOutcome, newKeyState, type KeyState } from "../srs/srs";
 
 /**
  * Reactive SRS store (runes). Per-language map of key -> KeyState, mirrored to
@@ -17,7 +13,7 @@ import type { Language } from "../i18n";
 function createSrsStore() {
   let state = $state<{ lang: Language; keys: Map<string, KeyState> }>({
     lang: "en",
-    keys: new Map()
+    keys: new Map(),
   });
 
   /** ensure every learned key has an entry (so drills can weight them) */
@@ -53,9 +49,10 @@ function createSrsStore() {
       const stored = await getSrs(l);
       state = {
         lang: l,
-        keys: stored && stored.keys?.length
-          ? new Map(stored.keys.map((k) => [k.key, k]))
-          : new Map()
+        keys:
+          stored && stored.keys?.length
+            ? new Map(stored.keys.map((k) => [k.key, k]))
+            : new Map(),
       };
     } catch (err) {
       console.warn("Failed loading SRS store:", err);

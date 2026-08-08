@@ -1,17 +1,19 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Hallmark · genre: modern-minimal · macrostructure: N/A · theme: custom (brand teal · dark mono) · enrichment: none */
-  --color-bg: oklch(16% 0.02 250);
-  --color-surface: oklch(20% 0.02 250);
-  --color-border: oklch(28% 0.03 255);
-  --color-ink: oklch(93% 0.005 250);
-  --color-ink-2: oklch(72% 0.01 250);
-  --color-muted: oklch(60% 0.02 250);
-  --color-accent: oklch(72% 0.09 195);
-  --color-accent-strong: oklch(80% 0.09 190);
-  --color-correct: oklch(74% 0.14 150);
-  --color-wrong: oklch(65% 0.19 25);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-correct: var(--correct);
+  --color-wrong: var(--wrong);
 
   --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
 
@@ -26,6 +28,34 @@
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-short: 160ms;
+}
+
+@layer base {
+  :root {
+    --bg: oklch(98% 0.01 250);
+    --surface: oklch(100% 0.01 250);
+    --border: oklch(90% 0.02 250);
+    --ink: oklch(20% 0.01 250);
+    --ink-2: oklch(40% 0.01 250);
+    --muted: oklch(50% 0.02 250);
+    --accent: oklch(55% 0.1 195);
+    --accent-strong: oklch(45% 0.1 190);
+    --correct: oklch(60% 0.14 150);
+    --wrong: oklch(55% 0.19 25);
+  }
+  
+  .dark {
+    --bg: oklch(16% 0.02 250);
+    --surface: oklch(20% 0.02 250);
+    --border: oklch(28% 0.03 255);
+    --ink: oklch(93% 0.005 250);
+    --ink-2: oklch(72% 0.01 250);
+    --muted: oklch(60% 0.02 250);
+    --accent: oklch(72% 0.09 195);
+    --accent-strong: oklch(80% 0.09 190);
+    --correct: oklch(74% 0.14 150);
+    --wrong: oklch(65% 0.19 25);
+  }
 }
 
 html,

@@ -6,8 +6,11 @@
   import { progress } from "$lib/stores/progress.svelte.ts";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import TypingSession from "$lib/components/TypingSession.svelte";
-  import { t, getLang } from "$lib/i18n";
+  import { t, getLang } from "$lib/i18n.svelte";
   import type { LessonMode } from "$lib/curriculum";
+  import { Skeleton } from "$lib/components/ui/skeleton";
+  import { Button } from "$lib/components/ui/button";
+  import { Badge } from "$lib/components/ui/badge";
 
   const lessons = compileStages();
   const order = lessons.map((l) => l.id);
@@ -15,9 +18,7 @@
     lessons.find((l) => l.id === page.params.id) ?? lessons[0],
   );
   const idx = $derived(order.indexOf(lesson.id));
-  const nextLesson = $derived(
-    idx + 1 < order.length ? lessons[idx + 1] : null,
-  );
+  const nextLesson = $derived(idx + 1 < order.length ? lessons[idx + 1] : null);
 
   let words = $state<string[]>([]);
   let started = $state(false);
@@ -50,7 +51,10 @@
     started = true;
   }
 
-  async function onComplete(res: { state: TypingState; errorsByKey: Record<string, number> }) {
+  async function onComplete(res: {
+    state: TypingState;
+    errorsByKey: Record<string, number>;
+  }) {
     const wpm = computeStats(res.state).wpm;
     const accuracy = computeStats(res.state).accuracy;
     const stars = computeStars(wpm, accuracy, lesson.mode);
@@ -85,20 +89,26 @@
 
 <div class="mx-auto w-full max-w-4xl px-4 py-12">
   <div class="mb-8 flex flex-col gap-1.5">
-    <a
+    <Button
+      variant="link"
       href="/lessons"
-      class="w-fit text-xs text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]"
-      >← {t().lesson.back}</a
+      class="w-fit h-auto p-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-accent)]"
     >
+      ← {t().lesson.back}
+    </Button>
     <div class="mt-2 flex items-end justify-between gap-4">
       <div class="flex flex-col gap-1">
         <h1 class="text-2xl font-black tracking-[-0.03em]">{lesson.id}</h1>
-        <p class="text-xs text-[var(--color-muted)]">{lesson.keys.join(" · ")}</p>
+        <p class="text-xs text-[var(--color-muted)]">
+          {lesson.keys.join(" · ")}
+        </p>
       </div>
-      <span
-        class="shrink-0 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-muted)]"
-        >{lesson.mode}</span
+      <Badge
+        variant="outline"
+        class="shrink-0 border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-muted)]"
       >
+        {lesson.mode}
+      </Badge>
     </div>
   </div>
 
@@ -109,7 +119,9 @@
       <div class="text-4xl">
         {"★".repeat(result.stars)}{"☆".repeat(3 - result.stars)}
       </div>
-      <h2 class="mt-3 text-xl font-black tracking-[-0.03em]">{t().lesson.done}</h2>
+      <h2 class="mt-3 text-xl font-black tracking-[-0.03em]">
+        {t().lesson.done}
+      </h2>
       <div class="mt-6 flex justify-center gap-12">
         <div>
           <p class="text-3xl font-black tabular-nums">{result.wpm}</p>
@@ -125,43 +137,61 @@
         </div>
       </div>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a
+        <Button
+          variant="outline"
           href="/"
-          class="rounded-xl border border-[var(--color-border)] px-4 py-2 text-sm font-bold text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
+          class="rounded-xl px-4 py-2 font-bold text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
         >
           {t().nav.home}
-        </a>
-        <button
+        </Button>
+        <Button
+          variant="outline"
           onclick={replay}
-          class="rounded-xl border border-[var(--color-border)] px-4 py-2 text-sm font-bold text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
+          class="rounded-xl px-4 py-2 font-bold text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-ink)]"
         >
           {t().lesson.again}
-        </button>
+        </Button>
         {#if nextLesson}
-          <a
+          <Button
             href={`/lessons/${nextLesson.id}`}
-            class="rounded-xl bg-[var(--color-accent)] px-4 py-2 text-sm font-bold text-[var(--color-bg)] transition-colors hover:bg-[var(--color-accent-strong)]"
+            class="rounded-xl bg-[var(--color-accent)] px-4 py-2 font-bold text-[var(--color-bg)] hover:bg-[var(--color-accent-strong)]"
           >
             {t().lesson.next} →
-          </a>
+          </Button>
         {:else}
-          <a
+          <Button
             href="/lessons"
-            class="rounded-xl bg-[var(--color-accent)] px-4 py-2 text-sm font-bold text-[var(--color-bg)]"
-            >{t().lesson.back}</a
+            class="rounded-xl bg-[var(--color-accent)] px-4 py-2 font-bold text-[var(--color-bg)]"
           >
+            {t().lesson.back}
+          </Button>
         {/if}
       </div>
     </section>
   {:else if started}
     <TypingSession
       {words}
-focusKeys={lesson.focus}
+      focusKeys={lesson.focus}
       learnedKeys={lesson.keys}
       boxed={lesson.mode === "drill"}
-      onComplete={onComplete}
+      {onComplete}
     />
   {:else}
-    <p class="text-sm text-[var(--color-muted)]">…</p>
+    <div class="mt-12 flex flex-col gap-4">
+      <!-- Session metrics skeleton -->
+      <div class="flex justify-between px-4">
+        <Skeleton class="h-4 w-16" />
+        <Skeleton class="h-4 w-16" />
+      </div>
+      <!-- Text block skeleton -->
+      <div
+        class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+      >
+        <Skeleton class="h-4 w-full" />
+        <Skeleton class="h-4 w-[90%]" />
+        <Skeleton class="h-4 w-[80%]" />
+        <Skeleton class="h-4 w-[70%]" />
+      </div>
+    </div>
   {/if}
 </div>

@@ -1,12 +1,9 @@
 <script lang="ts">
-  import { langs, getLang, setLang, t, subscribeLang } from "$lib/i18n";
+  import { langs, getLang, setLang, t } from "$lib/i18n.svelte";
   import { srs } from "$lib/stores/srs.svelte.ts";
-  import { onMount } from "svelte";
+  import type { Language } from "$lib/i18n.svelte";
 
-  let currentLang = $state(getLang());
-  subscribeLang(() => (currentLang = getLang()));
-
-  function pick(lang: "en" | "id") {
+  function pick(lang: Language) {
     setLang(lang);
     void srs.load(lang);
   }
@@ -23,13 +20,14 @@
     {#each langs as l (l.id)}
       <button
         onclick={() => pick(l.id)}
-        aria-pressed={currentLang === l.id}
-        class="flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-bold transition-colors {currentLang === l.id
+        aria-pressed={getLang() === l.id}
+        class="flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-bold transition-colors {getLang() ===
+        l.id
           ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)]'
           : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:border-[var(--color-border)]/70 hover:bg-[var(--color-surface)]/70'}"
       >
         {l.label}
-        {#if currentLang === l.id}
+        {#if getLang() === l.id}
           <span aria-hidden="true">✓</span>
         {/if}
       </button>
