@@ -2,15 +2,15 @@
 	import { type VariantProps, tv } from "tailwind-variants";
 
 	export const badgeVariants = tv({
-		base: "h-5 gap-1 rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&>svg]:size-3! group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden whitespace-nowrap transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none",
+		base: "h-5 gap-1 rounded-full border px-2 py-0.5 font-label text-[11px] font-medium uppercase tracking-[0.05em] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&>svg]:size-3! group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden whitespace-nowrap transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 [&>svg]:pointer-events-none",
 		variants: {
 			variant: {
-				default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
-				secondary: "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
-				destructive: "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
-				outline: "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
-				ghost: "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
-				link: "text-primary underline-offset-4 hover:underline",
+				default: "border-[var(--color-accent-strong)]/40 bg-[var(--color-accent)]/15 text-[var(--color-ink-2)] [a]:hover:bg-[var(--color-accent)]/25",
+				secondary: "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-ink-2)] [a]:hover:bg-[var(--color-surface)]",
+				destructive: "border-[var(--color-wrong)]/30 bg-[var(--color-wrong)]/10 text-[var(--color-wrong)] [a]:hover:bg-[var(--color-wrong)]/20",
+				outline: "border-[var(--color-border)] bg-transparent text-[var(--color-muted)] [a]:hover:bg-[var(--color-surface)] [a]:hover:text-[var(--color-ink)]",
+				ghost: "border-transparent text-[var(--color-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink-2)]",
+				link: "border-transparent text-[var(--color-accent-2)] underline-offset-4 hover:underline",
 			},
 		},
 		defaultVariants: {

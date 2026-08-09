@@ -1,42 +1,71 @@
-# sv
+# Keycoach
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A touch-typing coach that trains your instincts: structured lesson stages, spaced-repetition (SRS) reviews, and 3-star objectives. Built with SvelteKit 5 (runes) and Tailwind CSS 4.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Structured curriculum** — 13 progressive stages covering left hand, right hand, and full keyboard mastery.
+- **Smart SRS review** — schedules due keys automatically, so you practice what you miss.
+- **3-star objectives** — hit 95% accuracy and target speed to earn stars per stage.
+- **Multi-language UI** — English, Bahasa Indonesia, Español, Deutsch, Русский (progress is stored per language).
+- **Local-first storage** — progress lives in IndexedDB; optional Supabase persistence when configured.
+- **Arcade design system** — see `design.md`; accessible (prefers-reduced-motion honored), responsive.
+
+## Stack
+
+- SvelteKit 5 (runes) + Vite, `ssr=false` SPA
+- Tailwind CSS 4 (`@tailwindcss/vite`)
+- shadcn-svelte UI primitives (bits-ui)
+- idb for IndexedDB, @supabase/supabase-js
+- Vitest for unit tests
+
+## Getting started
 
 ```sh
-# create a new project
-npx sv create my-app
-```
+# install dependencies
+npm install
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-bun x sv@0.17.0 create --template minimal --types ts --add vitest="usages:unit" tailwindcss="plugins:none" sveltekit-adapter="adapter:static" --no-download-check --install bun .
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+# start dev server
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Environment
 
-To create a production version of your app:
+Copy `.env.example` to `.env` and fill in Supabase credentials. The app works
+fully offline without them — sync is only enabled when both are set.
 
-```sh
-npm run build
+```
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
 ```
 
-You can preview the production build with `npm run preview`.
+## Scripts
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+| Command           | Description                       |
+| ----------------- | --------------------------------- |
+| `npm run dev`     | Start the dev server              |
+| `npm run build`   | Production build (adapter-vercel) |
+| `npm run preview` | Preview the production build      |
+| `npm run check`   | Type-check with svelte-check      |
+| `npm run test`    | Run vitest unit tests             |
+
+## Project structure
+
+```
+src/
+├── routes/            # /, /lessons/[id], /review, /settings, sitemap.xml
+├── lib/
+│   ├── components/    # UI primitives (shadcn) + app components
+│   ├── stores/        # runes-based stores (progress, srs, i18n)
+│   ├── srs/           # spaced-repetition engine
+│   ├── curriculum.ts  # lesson stage definitions
+│   ├── generate.ts    # word generation for drills
+│   └── db.ts          # IndexedDB layer
+static/                # logo.jpg, og.jpg, robots.txt
+```
+
+## SEO
+
+- Per-route titles, descriptions, canonical/OG/Twitter tags and JSON-LD structured data — all emitted in `src/routes/+layout.svelte` from `page.url.origin`.
+- `sitemap.xml` generated dynamically at `/sitemap.xml`.
+- `robots.txt` references the sitemap.

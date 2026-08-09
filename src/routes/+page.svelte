@@ -111,9 +111,15 @@
       use:reveal
     >
       <div class="reveal-stagger flex min-w-0 flex-col items-start gap-6">
-        <span class="mono-label flex items-center gap-2 reveal-child" style="--i: 0">
-          <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-correct)]"
-          ></span>
+        <span
+          class="mono-label flex items-center gap-2 reveal-child"
+          style="--i: 0"
+        >
+          <img
+            src="/logo.jpg"
+            alt={t().app.name}
+            class="h-6 w-6 rounded-full object-cover"
+          />
           {t().home.heroBadge}
         </span>
 
@@ -131,7 +137,10 @@
           {t().app.tagline}
         </p>
 
-        <div class="reveal-child mt-1 flex flex-col gap-3 sm:flex-row sm:items-center" style="--i: 3">
+        <div
+          class="reveal-child mt-1 flex flex-col gap-3 sm:flex-row sm:items-center"
+          style="--i: 3"
+        >
           <Button
             href={next ? `/lessons/${next.id}` : "/lessons/L1-HOME-1"}
             size="lg"
@@ -161,7 +170,7 @@
 
       <div
         class="reveal flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_16px_40px_-20px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]"
-				style="--i: 1"
+        style="--i: 1"
         use:reveal
       >
         <div
@@ -212,8 +221,14 @@
           </h2>
         </div>
 
-        <div class="reveal flex flex-col divide-y divide-[var(--color-border)]" use:reveal>
-          <div class="reveal-child grid gap-4 py-7 sm:grid-cols-[8rem_1fr_2.5fr] sm:gap-6" style="--i: 0">
+        <div
+          class="reveal flex flex-col divide-y divide-[var(--color-border)]"
+          use:reveal
+        >
+          <div
+            class="reveal-child grid gap-4 py-7 sm:grid-cols-[8rem_1fr_2.5fr] sm:gap-6"
+            style="--i: 0"
+          >
             <span
               class="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)]"
             >
@@ -231,7 +246,10 @@
             </p>
           </div>
 
-          <div class="reveal-child grid gap-4 py-7 sm:grid-cols-[8rem_1fr_2.5fr] sm:gap-6" style="--i: 1">
+          <div
+            class="reveal-child grid gap-4 py-7 sm:grid-cols-[8rem_1fr_2.5fr] sm:gap-6"
+            style="--i: 1"
+          >
             <span
               class="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)]"
             >
@@ -249,7 +267,10 @@
             </p>
           </div>
 
-          <div class="reveal-child grid gap-4 py-7 sm:grid-cols-[8rem_1fr_2.5fr] sm:gap-6" style="--i: 2">
+          <div
+            class="reveal-child grid gap-4 py-7 sm:grid-cols-[8rem_1fr_2.5fr] sm:gap-6"
+            style="--i: 2"
+          >
             <span
               class="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)]"
             >
@@ -371,14 +392,20 @@
 
     <!-- 05 · Closing CTA -- one line, one action -->
     <section class="border-t border-[var(--color-border)] py-16 lg:py-24">
-      <div class="reveal-stagger flex max-w-2xl flex-col items-start gap-5" use:reveal>
+      <div
+        class="reveal-stagger flex max-w-2xl flex-col items-start gap-5"
+        use:reveal
+      >
         <h2
           class="reveal-child text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.03em] text-[var(--color-ink)]"
           style="--i: 0"
         >
           {t().home.ctaTitle}
         </h2>
-        <p class="reveal-child text-base text-[var(--color-muted)] font-medium" style="--i: 1">
+        <p
+          class="reveal-child text-base text-[var(--color-muted)] font-medium"
+          style="--i: 1"
+        >
           {t().home.subtitle}
         </p>
         <span class="reveal-child" style="--i: 2">
