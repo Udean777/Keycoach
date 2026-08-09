@@ -11,6 +11,7 @@
   import { t, getLang } from "$lib/i18n.svelte";
   import { Skeleton } from "$lib/components/ui/skeleton";
   import { Button } from "$lib/components/ui/button";
+  import { reveal } from "$lib/actions/reveal";
 
   const lessons = compileStages();
   const allKeys = lessons[lessons.length - 1].keys;
@@ -19,7 +20,7 @@
   let words = $state<string[]>([]);
   let started = $state(false);
   let finished = $state(false);
-  let loaded = $state(false);
+  let loaded = $derived(progress.loaded);
 
   function buildReview(): string[] {
     const lang = getLang();
@@ -43,7 +44,6 @@
       words = buildReview();
       started = true;
     }
-    loaded = true;
   }
 
   function replay() {
@@ -54,10 +54,11 @@
   onMount(init);
 </script>
 
-<!-- Hallmark · genre: modern-minimal · macrostructure: Workbench · design-system: design.md · designed-as-app -->
+<!-- Hallmark · genre: playful (arcade) · macrostructure: Workbench · theme: arcade · design-system: design.md · designed-as-app -->
 <div class="mx-auto w-full max-w-4xl px-4 py-14">
-  <div class="mb-10 flex flex-col gap-1.5">
-    <h1 class="text-2xl font-black tracking-[-0.03em]">{t().review.title}</h1>
+  <div class="reveal mb-10 flex flex-col gap-1.5" use:reveal>
+    <span class="mono-label">{t().review.eyebrow}</span>
+    <h1 class="text-2xl font-bold tracking-[-0.02em]">{t().review.title}</h1>
     <p class="text-sm text-[var(--color-muted)]">{t().review.subtitle}</p>
   </div>
 
@@ -68,7 +69,7 @@
         <Skeleton class="h-4 w-16" />
       </div>
       <div
-        class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+        class="rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
       >
         <Skeleton class="h-4 w-full" />
         <Skeleton class="h-4 w-[90%]" />
@@ -78,33 +79,34 @@
     </div>
   {:else if !started && !finished}
     <div
-      class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center text-sm text-[var(--color-muted)]"
+      class="reveal rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center text-sm text-[var(--color-muted)]"
+      use:reveal
     >
       <p>{t().review.nothing}</p>
-      <Button variant="link" href="/" class="mt-4 text-[var(--color-accent)]">
+      <Button variant="link" href="/" class="mt-4 text-[var(--color-accent-2)]">
         ← {t().review.back}
       </Button>
     </div>
   {:else if finished}
     <div
-      class="mx-auto max-w-lg rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center"
+      class="animate-result-in mx-auto max-w-lg rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]"
     >
-      <div class="text-4xl text-[var(--color-correct)]">✓</div>
-      <h2 class="mt-3 text-xl font-black tracking-[-0.03em]">
+      <div class="animate-star-pop text-4xl text-[var(--color-mint)]">✓</div>
+      <h2 class="mt-3 text-xl font-bold tracking-[-0.02em]">
         {t().review.done}
       </h2>
       <div class="mt-8 flex justify-center gap-3">
         <Button
           variant="outline"
           href="/"
-          class="rounded-xl px-4 py-2 font-bold"
+          class="px-4 py-2"
         >
           {t().nav.home}
         </Button>
         <Button
           variant="outline"
           onclick={replay}
-          class="rounded-xl px-4 py-2 font-bold"
+          class="px-4 py-2"
         >
           {t().lesson.again}
         </Button>

@@ -4,18 +4,22 @@
   import { compileStages } from "$lib/curriculum";
   import { t } from "$lib/i18n.svelte";
   import { Skeleton } from "$lib/components/ui/skeleton";
+  import { reveal } from "$lib/actions/reveal";
 
-  let loaded = $state(false);
+  let loaded = $derived(progress.loaded);
   const lessons = compileStages();
   const order = lessons.map((l) => l.id);
+
+  const tints = ["accent", "accent-2", "accent-3", "mint", "lavender"];
+  function tint(i: number) {
+    return `color-mix(in oklch, var(--color-${tints[i % tints.length]}) 8%, var(--color-surface))`;
+  }
 
   onMount(async () => {
     try {
       await progress.load();
     } catch (err) {
       console.error("Error initializing lessons page:", err);
-    } finally {
-      loaded = true;
     }
   });
 </script>
@@ -40,68 +44,68 @@
     </div>
   </div>
 {:else}
-  <!-- Hallmark · genre: modern-minimal · macrostructure: Index-First · design-system: design.md · designed-as-app -->
+  <!-- Hallmark · genre: playful (arcade) · macrostructure: Index-First · theme: arcade · design-system: design.md · designed-as-app -->
   <div class="mx-auto w-full max-w-3xl px-4 py-14">
-    <section class="mb-10 flex flex-col gap-1.5">
-      <h1 class="text-2xl font-black tracking-[-0.03em]">
+    <section class="reveal mb-10 flex flex-col gap-1.5" use:reveal>
+      <span class="mono-label">{t().lessons.eyebrow}</span>
+      <h1 class="text-2xl font-bold tracking-[-0.02em]">
         {t().lessons.title}
       </h1>
       <p class="text-sm text-[var(--color-muted)]">{t().lessons.subtitle}</p>
     </section>
 
-    <div class="flex flex-col">
+    <div class="reveal-stagger grid grid-cols-1 gap-3 sm:grid-cols-2" use:reveal>
       {#each lessons as lesson, i (lesson.id)}
         {@const p = progress.get(lesson.id)}
         {@const unlocked = progress.isUnlocked(lesson.id, order)}
         {@const stars = p?.stars ?? 0}
-        <a
-          href={unlocked ? `/lessons/${lesson.id}` : undefined}
-          class="group flex items-center justify-between gap-4 border-b border-[var(--color-border)] py-4 transition-colors aria-disabled:opacity-50 {unlocked
-            ? 'hover:bg-[var(--color-surface)]/50'
-            : 'cursor-not-allowed opacity-50'}"
-          aria-disabled={!unlocked}
-        >
-          <div class="flex items-center gap-4">
+        {@const accent = tints[i % tints.length]}
+        <div class="reveal-child" style="--i: {i}">
+          <a
+            href={unlocked ? `/lessons/${lesson.id}` : undefined}
+            class="group flex items-center gap-4 rounded-[12px] border border-[var(--color-border)] p-4 transition-[transform,border-color] duration-200 {unlocked
+              ? 'hover:-translate-y-1 hover:border-[var(--color-accent)]/50'
+              : 'cursor-not-allowed opacity-50'}"
+            style={unlocked
+              ? `background: ${tint(i)}; box-shadow: 0 8px 20px -12px color-mix(in oklch, var(--color-ink) 25%, transparent);`
+              : `background: color-mix(in oklch, var(--color-ink) 3%, var(--color-surface));`}
+            aria-disabled={!unlocked}
+          >
             <span
-              class="w-8 shrink-0 text-[11px] font-semibold tabular-nums text-[var(--color-muted)]"
-              >{String(i + 1).padStart(2, "0")}</span
-            >
-            <span
-              class="grid h-8 w-8 shrink-0 place-items-center rounded-md border text-sm {stars >=
-              1
-                ? 'border-[var(--color-correct)]/40 bg-[var(--color-correct)]/10 text-[var(--color-correct)]'
-                : unlocked
-                  ? 'border-[var(--color-accent)]/40 text-[var(--color-accent)]'
-                  : 'border-[var(--color-border)] text-[var(--color-muted)]'}"
+              class={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-base font-bold transition-colors ${
+                stars >= 1
+                  ? 'bg-[var(--color-mint)]/20 text-[var(--color-mint)]'
+                  : unlocked
+                    ? `bg-[var(--color-${accent})]/15`
+                    : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'
+              }`}
+              style={stars >= 1 || !unlocked ? undefined : `color: var(--color-${accent});`}
             >
               {#if stars >= 1}<span>★</span>{:else}{String(i + 1).padStart(
-                  2,
-                  "0",
-                )}{/if}
+                    2,
+                    "0",
+                  )}{/if}
             </span>
-            <div class="flex flex-col">
+            <div class="flex min-w-0 flex-1 flex-col">
               <p class="font-bold leading-tight">{lesson.id}</p>
-              <p class="text-xs text-[var(--color-muted)] capitalize">
+              <p class="text-xs text-[var(--color-ink-2)] capitalize">
                 {lesson.mode}
               </p>
             </div>
-          </div>
-          <div
-            class="flex items-center gap-4 text-xs tabular-nums text-[var(--color-muted)]"
-          >
-            {#if stars > 0}
-              <span class="text-[var(--color-accent)]">{"★".repeat(stars)}</span
-              >
-              <span>{p?.bestWpm ?? 0} WPM · {p?.bestAccuracy ?? 0}%</span>
-            {:else if !unlocked}
-              <span>{t().lessons.locked}</span>
-            {:else}
-              <span class="text-[var(--color-muted)]"
-                >{t().lessons.completed}</span
-              >
-            {/if}
-          </div>
-        </a>
+            <div
+              class="flex shrink-0 flex-col items-end gap-1 text-xs tabular-nums text-[var(--color-muted)]"
+            >
+              {#if stars > 0}
+                <span class={`text-[var(--color-${accent})]`}>{"★".repeat(stars)}</span>
+                <span>{p?.bestWpm ?? 0} WPM · {p?.bestAccuracy ?? 0}%</span>
+              {:else if !unlocked}
+                <span>{t().lessons.locked}</span>
+              {:else}
+                <span>{t().lessons.completed}</span>
+              {/if}
+            </div>
+          </a>
+        </div>
       {/each}
     </div>
   </div>

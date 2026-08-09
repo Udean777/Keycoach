@@ -13,7 +13,7 @@
 <div
 	bind:this={ref}
 	data-slot="card-footer"
-	class={cn("rounded-b-xl border-t bg-muted/50 p-(--card-spacing) flex items-center", className)}
+	class={cn("rounded-b-[var(--radius-card)] border-t border-border bg-surface-2/50 p-(--card-spacing) flex items-center", className)}
 	{...restProps}
 >
 	{@render children?.()}

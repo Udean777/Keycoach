@@ -1,5 +1,5 @@
 import type { Language } from "$lib/i18n.svelte";
-import { getSrs, putSrs } from "../db";
+import { getSrs, putSrs, clearAllSrs } from "../db";
 import { applyOutcome, newKeyState, type KeyState } from "../srs/srs";
 
 /**
@@ -15,6 +15,9 @@ function createSrsStore() {
     lang: "en",
     keys: new Map(),
   });
+  // load() is idempotent per language (store survives navigation; language
+  // switch is the only reason to re-fetch from IndexedDB).
+  const loadedLangs = new Set<Language>();
 
   /** ensure every learned key has an entry (so drills can weight them) */
   function ensure(keys: string[]) {
@@ -45,6 +48,7 @@ function createSrsStore() {
 
   /** load a language's state from IndexedDB */
   async function load(l: Language) {
+    if (loadedLangs.has(l)) return;
     try {
       const stored = await getSrs(l);
       state = {
@@ -58,11 +62,22 @@ function createSrsStore() {
       console.warn("Failed loading SRS store:", err);
       state = { lang: l, keys: new Map() };
     }
+    loadedLangs.add(l);
   }
 
   /** write-through to IndexedDB */
   async function persist() {
     await putSrs({ lang: state.lang, keys: [...state.keys.values()] });
+  }
+
+  async function reset() {
+    state = { lang: state.lang, keys: new Map() };
+    loadedLangs.clear();
+    try {
+      await clearAllSrs();
+    } catch (err) {
+      console.warn("Failed clearing SRS from DB:", err);
+    }
   }
 
   return {
@@ -75,7 +90,9 @@ function createSrsStore() {
     ensure,
     record,
     load,
+    reset,
   };
 }
 
 export const srs = createSrsStore();
+
