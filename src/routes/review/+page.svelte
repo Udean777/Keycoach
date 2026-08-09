@@ -2,6 +2,7 @@
   // SRS review mode: practices the keys currently due for review using all
   // learned keys.
   import { onMount } from "svelte";
+  import { Check } from "lucide-svelte";
   import { compileStages } from "$lib/curriculum";
   import { generateWords } from "$lib/generate";
   import { dueKeys } from "$lib/srs/srs";
@@ -91,7 +92,9 @@
     <div
       class="animate-result-in mx-auto max-w-lg rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]"
     >
-      <div class="animate-star-pop text-4xl text-[var(--color-mint)]">✓</div>
+      <div class="animate-star-pop flex justify-center text-4xl text-[var(--color-mint)]">
+        <Check class="h-12 w-12 stroke-[3]" />
+      </div>
       <h2 class="mt-3 text-xl font-bold tracking-[-0.02em]">
         {t().review.done}
       </h2>

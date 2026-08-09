@@ -5,6 +5,7 @@
   import { t } from "$lib/i18n.svelte";
   import { Skeleton } from "$lib/components/ui/skeleton";
   import { reveal } from "$lib/actions/reveal";
+  import { Star } from "lucide-svelte";
 
   let loaded = $derived(progress.loaded);
   const lessons = compileStages();
@@ -81,7 +82,7 @@
               }`}
               style={stars >= 1 || !unlocked ? undefined : `color: var(--color-${accent});`}
             >
-              {#if stars >= 1}<span>★</span>{:else}{String(i + 1).padStart(
+              {#if stars >= 1}<span><Star class="h-5 w-5 fill-current" /></span>{:else}{String(i + 1).padStart(
                     2,
                     "0",
                   )}{/if}
@@ -96,7 +97,11 @@
               class="flex shrink-0 flex-col items-end gap-1 text-xs tabular-nums text-[var(--color-muted)]"
             >
               {#if stars > 0}
-                <span class={`text-[var(--color-${accent})]`}>{"★".repeat(stars)}</span>
+                <span class={`flex gap-0.5 text-[var(--color-${accent})]`}>
+                  {#each Array(stars) as _}
+                    <Star class="h-3.5 w-3.5 fill-current" />
+                  {/each}
+                </span>
                 <span>{p?.bestWpm ?? 0} WPM · {p?.bestAccuracy ?? 0}%</span>
               {:else if !unlocked}
                 <span>{t().lessons.locked}</span>

@@ -11,6 +11,7 @@
   } from '$lib/engine/typing';
   import { playTick, playError } from '$lib/engine/sound';
   import { srs } from '$lib/stores/srs.svelte.ts';
+  import { Check } from 'lucide-svelte';
   import Words from './Words.svelte';
   import Keyboard from './Keyboard.svelte';
 
@@ -195,9 +196,10 @@
         class="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
         <div
-          class="animate-combo-pop rounded-full border border-[var(--color-mint)]/40 bg-[var(--color-mint)]/10 px-5 py-2 text-2xl font-bold text-[var(--color-mint)]"
-          >✓</div
+          class="animate-combo-pop rounded-full border border-[var(--color-mint)]/40 bg-[var(--color-mint)]/10 px-5 py-2 text-[var(--color-mint)]"
         >
+          <Check class="h-6 w-6 stroke-[3]" />
+        </div>
       </div>
     {/if}
   </div>

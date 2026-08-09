@@ -12,6 +12,7 @@
   import { Button } from "$lib/components/ui/button";
   import { Badge } from "$lib/components/ui/badge";
   import { reveal } from "$lib/actions/reveal";
+  import { Star } from "lucide-svelte";
 
   const lessons = compileStages();
   const order = lessons.map((l) => l.id);
@@ -120,10 +121,15 @@
     <section
       class="animate-result-in relative mx-auto max-w-lg rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-8 text-center shadow-[0_16px_40px_-12px_color-mix(in_oklch,var(--color-ink)_15%,transparent)]"
     >
-      <div class="text-5xl tracking-[0.1em] text-[var(--color-accent-3)] drop-shadow-sm mb-4">
+      <div class="mb-4 flex justify-center text-[var(--color-accent-3)] drop-shadow-sm">
         {#each { length: result.stars } as _, i}
-          <span class="animate-star-pop" style="--reveal-delay: {i * 160}ms">★</span>
-        {/each}<span class="opacity-20">{"★".repeat(3 - result.stars)}</span>
+          <span class="animate-star-pop" style="--reveal-delay: {i * 160}ms">
+            <Star class="h-10 w-10 fill-current" />
+          </span>
+        {/each}
+        {#each { length: 3 - result.stars } as _}
+          <Star class="h-10 w-10 opacity-20" />
+        {/each}
       </div>
       <h2 class="text-2xl font-bold tracking-[-0.02em] text-[var(--color-ink)]">
         {t().lesson.done}

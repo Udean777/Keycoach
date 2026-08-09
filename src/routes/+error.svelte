@@ -15,7 +15,7 @@
     style="--i: 0"
   >
     <img
-      src="/logo.jpg"
+      src="/logo.webp"
       alt={t().app.name}
       class="h-14 w-14 rounded-2xl object-cover shadow-[0_4px_16px_-4px_var(--color-accent-strong)]"
     />

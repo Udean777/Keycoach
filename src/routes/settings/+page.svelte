@@ -3,6 +3,7 @@
   import { srs } from "$lib/stores/srs.svelte.ts";
   import { progress } from "$lib/stores/progress.svelte.ts";
   import type { Language } from "$lib/i18n.svelte";
+  import { Check } from "lucide-svelte";
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { reveal } from "$lib/actions/reveal";
 
@@ -41,9 +42,9 @@
         >
           {l.label}
           {#if getLang() === l.id}
-            <span class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-xs font-bold text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]"
-              >✓</span
-            >
+            <span class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]">
+              <Check class="h-3.5 w-3.5 stroke-[4]" />
+            </span>
           {/if}
         </button>
       </div>

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="static/logo.jpg" alt="Keycoach logo" width="96" height="96" />
+<img src="static/logo.webp" alt="Keycoach logo" width="96" height="96" />
 
 # ⌨️ Keycoach
 
@@ -86,7 +86,7 @@ src/
 │   ├── curriculum.ts  # lesson stage definitions
 │   ├── generate.ts    # word generation for drills
 │   └── db.ts          # IndexedDB layer
-static/                # logo.jpg, og.jpg, robots.txt
+static/                # logo.webp, og.webp, robots.txt
 docs/
 └── design.md          # the arcade design system
 ```
@@ -99,11 +99,11 @@ docs/
 
 ## 🖼️ Open Graph
 
-`static/og.jpg` (1376×768) powers the social share card.
+`static/og.webp` (1376×768) powers the social share card.
 
 <div align="center">
 
-<img src="static/og.jpg" alt="Keycoach open graph share card" width="640" />
+<img src="static/og.webp" alt="Keycoach open graph share card" width="640" />
 
 </div>
 

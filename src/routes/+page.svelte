@@ -15,6 +15,7 @@
     Trophy,
     Keyboard as KeyboardIcon,
     RefreshCcw,
+    Star,
   } from "lucide-svelte";
   import VirtualKeyboard from "$lib/components/Keyboard.svelte";
   import { reveal } from "$lib/actions/reveal";
@@ -116,7 +117,7 @@
           style="--i: 0"
         >
           <img
-            src="/logo.jpg"
+            src="/logo.webp"
             alt={t().app.name}
             class="h-6 w-6 rounded-full object-cover"
           />
@@ -363,9 +364,11 @@
                   >{lesson.id}</span
                 >
                 {#if p?.stars}
-                  <span class="text-xs font-bold text-[var(--color-accent-3)]"
-                    >{"★".repeat(p.stars)}</span
-                  >
+                  <span class="flex gap-0.5 text-[var(--color-accent-3)]">
+                    {#each Array(p.stars) as _}
+                      <Star class="h-3.5 w-3.5 fill-current" />
+                    {/each}
+                  </span>
                 {:else if !open}
                   <span class="text-xs text-[var(--color-muted)]">
                     <Lock class="h-3.5 w-3.5" />

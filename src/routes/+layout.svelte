@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./layout.css";
 
-  import { Home, GraduationCap, RefreshCcw, Settings } from "lucide-svelte";
+  import { Home, GraduationCap, RefreshCcw, Settings, X } from "lucide-svelte";
   import { page } from "$app/state";
   import { ModeWatcher } from "mode-watcher";
   import ThemeToggle from "$lib/components/ThemeToggle.svelte";
@@ -78,7 +78,7 @@
   <meta property="og:title" content={seo().title} />
   <meta property="og:description" content={seo().desc} />
   <meta property="og:url" content={canonical()} />
-  <meta property="og:image" content="{origin()}/og.jpg" />
+  <meta property="og:image" content="{origin()}/og.webp" />
   <meta property="og:image:width" content="1376" />
   <meta property="og:image:height" content="768" />
   <meta property="og:image:alt" content={name()} />
@@ -86,7 +86,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={seo().title} />
   <meta name="twitter:description" content={seo().desc} />
-  <meta name="twitter:image" content="{origin()}/og.jpg" />
+  <meta name="twitter:image" content="{origin()}/og.webp" />
 
   <script type="application/ld+json">
 {jsonText()}
@@ -110,7 +110,7 @@
           class="grid h-8 w-8 place-items-center overflow-hidden rounded-[10px] bg-[var(--color-accent)] shadow-[0_2px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:translate-y-[1px] group-active:shadow-none"
         >
           <img
-            src="/logo.jpg"
+            src="/logo.webp"
             alt={t().app.name}
             class="h-full w-full object-cover"
           />
@@ -149,12 +149,12 @@
           }}
         >
           <Select.Trigger class="h-9 w-12 justify-center">
-            {langs.find((l) => l.id === getLang())?.flag}
+            {langs.find((l) => l.id === getLang())?.code}
           </Select.Trigger>
           <Select.Content>
             {#each langs as l (l.id)}
               <Select.Item value={l.id} label={l.label}>
-                <span class="text-base leading-none">{l.flag}</span>
+                <span class="w-7 text-xs font-bold text-[var(--color-muted)]">{l.code}</span>
                 {l.label}
               </Select.Item>
             {/each}
@@ -168,7 +168,7 @@
           class="grid h-8 w-8 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] sm:hidden"
         >
           {#if menuOpen}
-            <span class="text-xs font-bold">✕</span>
+            <X class="h-4 w-4" />
           {:else}
             <span class="flex flex-col items-center gap-[3px]">
               <span class="h-0.5 w-4 rounded-full bg-current"></span>
@@ -224,7 +224,7 @@
             class="grid h-7 w-7 place-items-center overflow-hidden rounded-[8px] bg-[var(--color-accent)] shadow-[0_1.5px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5"
           >
             <img
-              src="/logo.jpg"
+              src="/logo.webp"
               alt={t().app.name}
               class="h-full w-full object-cover"
             />

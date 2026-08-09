@@ -2,12 +2,12 @@ import type { LanguageCode } from "./dictionaries";
 
 export type Language = LanguageCode;
 
-export const langs: { id: Language; label: string; flag: string }[] = [
-  { id: "en", label: "English", flag: "🇬🇧" },
-  { id: "id", label: "Bahasa Indonesia", flag: "🇮🇩" },
-  { id: "es", label: "Español", flag: "🇪🇸" },
-  { id: "de", label: "Deutsch", flag: "🇩🇪" },
-  { id: "ru", label: "Русский", flag: "🇷🇺" },
+export const langs: { id: Language; label: string; code: string }[] = [
+  { id: "en", label: "English", code: "EN" },
+  { id: "id", label: "Bahasa Indonesia", code: "ID" },
+  { id: "es", label: "Español", code: "ES" },
+  { id: "de", label: "Deutsch", code: "DE" },
+  { id: "ru", label: "Русский", code: "RU" },
 ];
 
 export const messages: Record<Language, any> = {
@@ -32,7 +32,7 @@ export const messages: Record<Language, any> = {
       lesson: "Lesson",
       unlock: "Complete previous lessons to unlock.",
       dueReviews: "Due reviews",
-      heroBadge: "✨ Touch-Typing Coach",
+      heroBadge: "Touch-Typing Coach",
       heroTitle: "Master 10-Finger Typing Without Looking.",
       feature1Title: "Structured Zone Path",
       feature1Desc: "13 progressive stages covering left hand, right hand, and full keyboard mastery.",
@@ -48,7 +48,7 @@ export const messages: Record<Language, any> = {
       stageCount: "{n} Stages",
       featureTagline: "Keycoach Features",
       featureSectionTitle: "Why Learn with Keycoach?",
-      allDone: "All lessons completed! 🎉",
+      allDone: "All lessons completed!",
       keepPracticing: "Keep practicing to unlock new stages.",
     },
     lessons: {
@@ -129,7 +129,7 @@ export const messages: Record<Language, any> = {
       lesson: "Pelajaran",
       unlock: "Selesaikan pelajaran sebelumnya untuk membuka.",
       dueReviews: "Review tertunda",
-      heroBadge: "✨ Pelatih Mengetik 10 Jari",
+      heroBadge: "Pelatih Mengetik 10 Jari",
       heroTitle: "Kuasai Mengetik 10 Jari Tanpa Perlu Melirik.",
       feature1Title: "Kurikulum Zona Terstruktur",
       feature1Desc: "13 stage bertahap mencakup tangan kiri, tangan kanan, dan penggabungan seluruh keyboard.",
@@ -145,7 +145,7 @@ export const messages: Record<Language, any> = {
       stageCount: "{n} Stage",
       featureTagline: "Fitur Keycoach",
       featureSectionTitle: "Mengapa Belajar di Keycoach?",
-      allDone: "Semua pelajaran selesai! 🎉",
+      allDone: "Semua pelajaran selesai!",
       keepPracticing: "Teruskan latihanmu untuk membuka stage baru.",
     },
     lessons: {
@@ -227,7 +227,7 @@ export const messages: Record<Language, any> = {
       lesson: "Lección",
       unlock: "Completa lecciones anteriores para desbloquear.",
       dueReviews: "Repasos pendientes",
-      heroBadge: "✨ Entrenador de Mecanografía",
+      heroBadge: "Entrenador de Mecanografía",
       heroTitle: "Domina la Mecanografía de 10 Dedos Sin Mirar.",
       feature1Title: "Ruta Estructurada por Zonas",
       feature1Desc: "13 etapas progresivas para mano izquierda, mano derecha y teclado completo.",
@@ -243,7 +243,7 @@ export const messages: Record<Language, any> = {
       stageCount: "{n} Etapas",
       featureTagline: "Características de Keycoach",
       featureSectionTitle: "¿Por qué aprender con Keycoach?",
-      allDone: "¡Todas las lecciones completadas! 🎉",
+      allDone: "¡Todas las lecciones completadas!",
       keepPracticing: "Sigue practicando para desbloquear nuevas etapas.",
     },
     lessons: {
@@ -308,7 +308,7 @@ export const messages: Record<Language, any> = {
       lesson: "Lektion",
       unlock: "Vorherige Lektionen abschließen.",
       dueReviews: "Fällige Wiederholungen",
-      heroBadge: "✨ Moderner Tipptrainer",
+      heroBadge: "Moderner Tipptrainer",
       heroTitle: "Meistere das 10-Finger-Tippen ohne Hinsehen.",
       feature1Title: "Strukturierter Zonenpfad",
       feature1Desc: "13 Stufen für linke Hand, rechte Hand und das gesamte Keyboard.",
@@ -324,7 +324,7 @@ export const messages: Record<Language, any> = {
       stageCount: "{n} Stufen",
       featureTagline: "Keycoach-Funktionen",
       featureSectionTitle: "Warum mit Keycoach lernen?",
-      allDone: "Alle Lektionen abgeschlossen! 🎉",
+      allDone: "Alle Lektionen abgeschlossen!",
       keepPracticing: "Übe weiter, um neue Stufen freizuschalten.",
     },
     lessons: {
@@ -392,7 +392,7 @@ export const messages: Record<Language, any> = {
       lesson: "Урок",
       unlock: "Завершите предыдущие уроки для разблокировки.",
       dueReviews: "Необходимые повторения",
-      heroBadge: "✨ Тренер Слепой Печати",
+      heroBadge: "Тренер Слепой Печати",
       heroTitle: "Освойте 10-Пальцевую Печать Не Глядя.",
       feature1Title: "Зональная Система Обучения",
       feature1Desc: "13 этапов: левая рука, правая рука и вся клавиатура.",
@@ -408,7 +408,7 @@ export const messages: Record<Language, any> = {
       stageCount: "{n} Этапов",
       featureTagline: "Возможности Keycoach",
       featureSectionTitle: "Почему именно Keycoach?",
-      allDone: "Все уроки пройдены! 🎉",
+      allDone: "Все уроки пройдены!",
       keepPracticing: "Продолжайте заниматься, чтобы открыть новые этапы.",
     },
     lessons: {
