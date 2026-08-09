@@ -25,7 +25,7 @@
 
   function cls(k: string): string {
     const isModifier = k.length > 1 && k !== " ";
-    let base = "flex h-10 sm:h-12 items-center justify-center rounded-xl shadow-[0_2px_0_0_var(--color-surface-2)] transition-all duration-100 select-none uppercase";
+    let base = "flex h-10 sm:h-12 items-center justify-center rounded-xl shadow-[0_2px_0_0_var(--color-surface-2)] transition-[transform,box-shadow,background-color,border-color] duration-100 select-none uppercase";
     
     if (isModifier) {
       base += " text-[10px] sm:text-xs font-semibold tracking-wide lowercase";
@@ -87,8 +87,8 @@
     </div>
   </div>
 
-  <div class="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 sm:p-4 shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]">
-    <div class="flex flex-col gap-1.5 sm:gap-2">
+  <div class="rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 sm:p-4 shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)] overflow-x-auto">
+    <div class="flex flex-col gap-1.5 sm:gap-2 min-w-[500px] sm:min-w-0">
       <!-- Row 1: Numbers -->
       <div class="flex gap-1.5 sm:gap-2">
         {#each rows[0] as k}

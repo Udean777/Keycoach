@@ -9,6 +9,7 @@
   import { t, langs, getLang, setLang } from "$lib/i18n.svelte";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import { onMount } from "svelte";
+  import { fly } from "svelte/transition";
 
   onMount(() => {
     srs.load(getLang());
@@ -29,26 +30,26 @@ let { children } = $props();
 <ModeWatcher />
 
 <div class="flex min-h-screen flex-col">
-  <!-- Hallmark · nav: N1b canonical app bar (collapses to hamburger <sm) · footer: Ft2 inline · Hum -->
+  <!-- Hallmark · nav: N1b canonical app bar (collapses to hamburger <sm) · footer: Ft2 inline · arcade · design-system: design.md -->
   <header
     class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-bg)]/80"
   >
     <div
-      class="mx-auto flex min-h-14 w-full max-w-4xl items-center justify-between gap-4 px-4 py-2"
+      class="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-8 py-2"
     >
       <a href="/" class="group flex items-center gap-2 font-bold tracking-[-0.02em]">
         <span
-          class="grid h-7 w-7 place-items-center rounded-[8px] bg-[var(--color-accent)] text-sm font-bold text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:translate-y-[1px] group-active:shadow-none"
+          class="grid h-8 w-8 place-items-center rounded-[10px] bg-[var(--color-accent)] text-sm font-bold text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:translate-y-[1px] group-active:shadow-none"
           >K<span class="sr-only">{t().app.name}</span></span
         >
-        <span>{t().app.name}</span>
+        <span class="text-lg">{t().app.name}</span>
       </a>
 
       <nav class="hidden items-center gap-1 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/70 p-1 sm:flex">
         {#each links as link (link.href)}
           <a
             href={link.href}
-            class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors {page
+            class="flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-colors {page
               .url.pathname === link.href
               ? 'bg-[var(--color-accent)]/15 text-[var(--color-ink)]'
               : 'text-[var(--color-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]'}"
@@ -72,7 +73,7 @@ let { children } = $props();
             void srs.load(lang);
           }}
         >
-          <Select.Trigger class="h-8 w-11 justify-center">
+          <Select.Trigger class="h-9 w-12 justify-center">
             {langs.find((l) => l.id === getLang())?.flag}
           </Select.Trigger>
           <Select.Content>
@@ -105,8 +106,11 @@ let { children } = $props();
     </div>
 
     {#if menuOpen}
-      <nav class="border-t border-[var(--color-border)] bg-[var(--color-bg)] sm:hidden">
-        <div class="mx-auto flex max-w-4xl flex-col gap-1 px-4 py-3">
+      <nav
+        transition:fly={{ y: -8, duration: 180 }}
+        class="border-t border-[var(--color-border)] bg-[var(--color-bg)] sm:hidden"
+      >
+        <div class="mx-auto flex max-w-7xl flex-col gap-1 px-4 sm:px-8 py-3">
           {#each links as link (link.href)}
             <a
               href={link.href}
@@ -129,25 +133,28 @@ let { children } = $props();
     {@render children()}
   </main>
 
-  <footer class="mt-auto border-t border-[var(--color-border)] bg-[var(--color-surface)] py-10">
+  <footer class="mt-auto border-t border-[var(--color-border)] bg-[var(--color-surface)]/60 backdrop-blur-md py-8">
     <div
-      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 px-4 text-center sm:flex-row sm:justify-between sm:text-left"
+      class="mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-4 sm:px-8 sm:flex-row sm:justify-between text-center sm:text-left"
     >
-      <div class="flex flex-col gap-3">
-        <a href="/" class="group flex items-center justify-center sm:justify-start gap-2 font-bold tracking-[-0.02em] text-[var(--color-ink)]">
+      <!-- Brand & Tagline -->
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <a href="/" class="group flex items-center gap-2 font-bold tracking-[-0.02em] text-[var(--color-ink)]">
           <span
-            class="grid h-8 w-8 place-items-center rounded-[10px] bg-[var(--color-accent)] text-sm font-bold text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:translate-y-[1px] group-active:shadow-none"
+            class="grid h-7 w-7 place-items-center rounded-[8px] bg-[var(--color-accent)] text-xs font-extrabold text-[var(--color-ink)] shadow-[0_1.5px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5"
             >K</span
           >
-          <span class="text-lg">{t().app.name}</span>
+          <span class="text-base font-bold">{t().app.name}</span>
         </a>
-        <span class="font-label text-[11px] font-medium tracking-[0.05em] text-[var(--color-muted)] max-w-xs">{t().app.tagline}</span>
+        <span class="hidden sm:inline text-[var(--color-border)]">•</span>
+        <span class="text-xs text-[var(--color-muted)]">{t().app.tagline}</span>
       </div>
-      
-      <div class="flex flex-col items-center sm:items-end gap-3">
-        <div class="flex items-center gap-1 rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] shadow-sm">
-          {t().footer.made}
-        </div>
+
+      <!-- Copyright & Rights -->
+      <div class="flex items-center gap-3 text-xs text-[var(--color-muted)]">
+        <span>© {new Date().getFullYear()} {t().app.name}</span>
+        <span class="text-[var(--color-border)]">•</span>
+        <span>{t().footer.rights}</span>
       </div>
     </div>
   </footer>

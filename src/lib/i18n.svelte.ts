@@ -32,6 +32,24 @@ export const messages: Record<Language, any> = {
       lesson: "Lesson",
       unlock: "Complete previous lessons to unlock.",
       dueReviews: "Due reviews",
+      heroBadge: "✨ Touch-Typing Coach",
+      heroTitle: "Master 10-Finger Typing Without Looking.",
+      feature1Title: "Structured Zone Path",
+      feature1Desc: "13 progressive stages covering left hand, right hand, and full keyboard mastery.",
+      feature2Title: "Smart SRS System",
+      feature2Desc: "Intelligent spaced repetition schedules reviews for weak keys automatically.",
+      feature3Title: "3-Star Objectives",
+      feature3Desc: "Hit 95% accuracy and target speed thresholds to earn 3 stars on every stage.",
+      ctaTitle: "Ready to boost your typing speed?",
+      ctaBtn: "Start Learning Now",
+      interactiveCoach: "Interactive Coach",
+      leftHand: "Left Hand",
+      rightHand: "Right Hand",
+      stageCount: "{n} Stages",
+      featureTagline: "Keycoach Features",
+      featureSectionTitle: "Why Learn with Keycoach?",
+      allDone: "All lessons completed! 🎉",
+      keepPracticing: "Keep practicing to unlock new stages.",
     },
     lessons: {
       title: "Lessons",
@@ -85,6 +103,8 @@ export const messages: Record<Language, any> = {
     },
     footer: {
       made: "Built with SvelteKit",
+      quickLinks: "Navigation",
+      rights: "All rights reserved.",
     },
     common: { back: "Back" },
   },
@@ -109,6 +129,24 @@ export const messages: Record<Language, any> = {
       lesson: "Pelajaran",
       unlock: "Selesaikan pelajaran sebelumnya untuk membuka.",
       dueReviews: "Review tertunda",
+      heroBadge: "✨ Pelatih Mengetik 10 Jari",
+      heroTitle: "Kuasai Mengetik 10 Jari Tanpa Perlu Melirik.",
+      feature1Title: "Kurikulum Zona Terstruktur",
+      feature1Desc: "13 stage bertahap mencakup tangan kiri, tangan kanan, dan penggabungan seluruh keyboard.",
+      feature2Title: "Algoritma SRS Pintar",
+      feature2Desc: "Pengulangan otomatis berbasis waktu untuk memperkuat tombol yang sering salah.",
+      feature3Title: "Sistem Target 3 Bintang",
+      feature3Desc: "Tantang dirimu mencapai akurasi 95% dan target KPM di setiap pelajaran.",
+      ctaTitle: "Siap mengetik lebih cepat dan akurat?",
+      ctaBtn: "Mulai Belajar Sekarang",
+      interactiveCoach: "Pelatih Interaktif",
+      leftHand: "Tangan Kiri",
+      rightHand: "Tangan Kanan",
+      stageCount: "{n} Stage",
+      featureTagline: "Fitur Keycoach",
+      featureSectionTitle: "Mengapa Belajar di Keycoach?",
+      allDone: "Semua pelajaran selesai! 🎉",
+      keepPracticing: "Teruskan latihanmu untuk membuka stage baru.",
     },
     lessons: {
       title: "Pelajaran",
@@ -163,6 +201,8 @@ export const messages: Record<Language, any> = {
     },
     footer: {
       made: "Dibangun dengan SvelteKit",
+      quickLinks: "Navigasi",
+      rights: "Hak cipta dilindungi.",
     },
     common: { back: "Kembali" },
   },
@@ -187,6 +227,24 @@ export const messages: Record<Language, any> = {
       lesson: "Lección",
       unlock: "Completa lecciones anteriores para desbloquear.",
       dueReviews: "Repasos pendientes",
+      heroBadge: "✨ Entrenador de Mecanografía",
+      heroTitle: "Domina la Mecanografía de 10 Dedos Sin Mirar.",
+      feature1Title: "Ruta Estructurada por Zonas",
+      feature1Desc: "13 etapas progresivas para mano izquierda, mano derecha y teclado completo.",
+      feature2Title: "Sistema SRS Inteligente",
+      feature2Desc: "Repetición espaciada automática para reforzar las teclas difíciles.",
+      feature3Title: "Objetivos de 3 Estrellas",
+      feature3Desc: "Alcanza el 95% de precisión y velocidad objetivo en cada nivel.",
+      ctaTitle: "¿Listo para escribir más rápido?",
+      ctaBtn: "Empieza a Aprender Ahora",
+      interactiveCoach: "Entrenador Interactivo",
+      leftHand: "Mano Izquierda",
+      rightHand: "Mano Derecha",
+      stageCount: "{n} Etapas",
+      featureTagline: "Características de Keycoach",
+      featureSectionTitle: "¿Por qué aprender con Keycoach?",
+      allDone: "¡Todas las lecciones completadas! 🎉",
+      keepPracticing: "Sigue practicando para desbloquear nuevas etapas.",
     },
     lessons: {
       title: "Lecciones",
@@ -225,7 +283,11 @@ export const messages: Record<Language, any> = {
       reset: "Reiniciar progreso",
       cancel: "Cancelar",
     },
-    footer: { made: "Creado con SvelteKit" },
+    footer: {
+      made: "Creado con SvelteKit",
+      quickLinks: "Navegación",
+      rights: "Todos los derechos reservados.",
+    },
     common: { back: "Volver" },
   },
   de: {
@@ -246,6 +308,24 @@ export const messages: Record<Language, any> = {
       lesson: "Lektion",
       unlock: "Vorherige Lektionen abschließen.",
       dueReviews: "Fällige Wiederholungen",
+      heroBadge: "✨ Moderner Tipptrainer",
+      heroTitle: "Meistere das 10-Finger-Tippen ohne Hinsehen.",
+      feature1Title: "Strukturierter Zonenpfad",
+      feature1Desc: "13 Stufen für linke Hand, rechte Hand und das gesamte Keyboard.",
+      feature2Title: "Intelligentes SRS-System",
+      feature2Desc: "Automatische Wiederholungen für schwierige Tasten.",
+      feature3Title: "3-Sterne-Ziele",
+      feature3Desc: "Erreiche 95% Genauigkeit und Zielgeschwindigkeit für 3 Sterne.",
+      ctaTitle: "Bereit, schneller zu tippen?",
+      ctaBtn: "Jetzt Lernen Starten",
+      interactiveCoach: "Interaktiver Trainer",
+      leftHand: "Linke Hand",
+      rightHand: "Rechte Hand",
+      stageCount: "{n} Stufen",
+      featureTagline: "Keycoach-Funktionen",
+      featureSectionTitle: "Warum mit Keycoach lernen?",
+      allDone: "Alle Lektionen abgeschlossen! 🎉",
+      keepPracticing: "Übe weiter, um neue Stufen freizuschalten.",
     },
     lessons: {
       title: "Lektionen",
@@ -284,7 +364,11 @@ export const messages: Record<Language, any> = {
       reset: "Fortschritt zurücksetzen",
       cancel: "Abbrechen",
     },
-    footer: { made: "Erstellt mit SvelteKit" },
+    footer: {
+      made: "Erstellt mit SvelteKit",
+      quickLinks: "Navigation",
+      rights: "Alle Rechte vorbehalten.",
+    },
     common: { back: "Zurück" },
   },
   ru: {
@@ -308,6 +392,24 @@ export const messages: Record<Language, any> = {
       lesson: "Урок",
       unlock: "Завершите предыдущие уроки для разблокировки.",
       dueReviews: "Необходимые повторения",
+      heroBadge: "✨ Тренер Слепой Печати",
+      heroTitle: "Освойте 10-Пальцевую Печать Не Глядя.",
+      feature1Title: "Зональная Система Обучения",
+      feature1Desc: "13 этапов: левая рука, правая рука и вся клавиатура.",
+      feature2Title: "Умная Система SRS",
+      feature2Desc: "Автоматическое повторение сложных клавиш по интервалам.",
+      feature3Title: "3-Звездные Цели",
+      feature3Desc: "Достигайте 95% точности и целевой скорости на каждом уроке.",
+      ctaTitle: "Готовы печатать быстрее?",
+      ctaBtn: "Начать Обучение Сейчас",
+      interactiveCoach: "Интерактивный Тренер",
+      leftHand: "Левая Рука",
+      rightHand: "Правая Рука",
+      stageCount: "{n} Этапов",
+      featureTagline: "Возможности Keycoach",
+      featureSectionTitle: "Почему именно Keycoach?",
+      allDone: "Все уроки пройдены! 🎉",
+      keepPracticing: "Продолжайте заниматься, чтобы открыть новые этапы.",
     },
     lessons: {
       title: "Уроки",
@@ -338,7 +440,7 @@ export const messages: Record<Language, any> = {
     },
     results: { wpm: "Сл/м", accuracy: "Точность", stars: "Звезды", objectives: "Цели", objAcc80: "Точность ≥ 80%", objAcc95: "Точность ≥ 95%", objWpm: "Скорость ≥ {wpm} Сл/м" },
     settings: { title: "Настройки", language: "Язык", preferences: "Предпочтения",
-      danger: "Опасная зона",
+      danger: "Zona de peligro",
       resetTitle: "Сбросить весь прогресс",
       resetDesc: "Сбрасывает весь прогресс и статистику. Это действие нельзя отменить.",
       resetConfirm: "Вы точно уверены?",
@@ -346,7 +448,11 @@ export const messages: Record<Language, any> = {
       reset: "Сбросить прогресс",
       cancel: "Отмена",
     },
-    footer: { made: "Сделано на SvelteKit" },
+    footer: {
+      made: "Сделано на SvelteKit",
+      quickLinks: "Навигация",
+      rights: "Все права защищены.",
+    },
     common: { back: "Назад" },
   },
 } as const;
@@ -364,6 +470,24 @@ export type Messages = {
     lesson: string;
     unlock: string;
     dueReviews: string;
+    heroBadge: string;
+    heroTitle: string;
+    feature1Title: string;
+    feature1Desc: string;
+    feature2Title: string;
+    feature2Desc: string;
+    feature3Title: string;
+    feature3Desc: string;
+    ctaTitle: string;
+    ctaBtn: string;
+    interactiveCoach: string;
+    leftHand: string;
+    rightHand: string;
+    stageCount: string;
+    featureTagline: string;
+    featureSectionTitle: string;
+    allDone: string;
+    keepPracticing: string;
   };
   lessons: {
     title: string;
@@ -405,7 +529,11 @@ export type Messages = {
     reset: string;
     cancel: string;
   };
-  footer: { made: string };
+  footer: {
+    made: string;
+    quickLinks: string;
+    rights: string;
+  };
   common: { back: string };
 };
 

@@ -11,6 +11,7 @@
   import { Skeleton } from "$lib/components/ui/skeleton";
   import { Button } from "$lib/components/ui/button";
   import { Badge } from "$lib/components/ui/badge";
+  import { reveal } from "$lib/actions/reveal";
 
   const lessons = compileStages();
   const order = lessons.map((l) => l.id);
@@ -88,16 +89,18 @@
 </script>
 
 <div class="mx-auto w-full max-w-4xl px-4 py-12">
-  <!-- Hallmark · genre: playful · macrostructure: Workbench · theme: Hum · design-system: design.md · designed-as-app -->
+  <!-- Hallmark · genre: playful (arcade) · macrostructure: Workbench · theme: arcade · design-system: design.md · designed-as-app -->
   <div class="mb-8 flex flex-col gap-1.5">
-    <Button
-      variant="link"
-      href="/lessons"
-      class="w-fit h-auto p-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-accent-2)]"
-    >
-      ← {t().lesson.back}
-    </Button>
-    <div class="mt-2 flex items-end justify-between gap-4">
+    <span class="reveal block w-fit" use:reveal>
+      <Button
+        variant="link"
+        href="/lessons"
+        class="w-fit h-auto p-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-accent-2)]"
+      >
+        ← {t().lesson.back}
+      </Button>
+    </span>
+    <div class="reveal mt-2 flex items-end justify-between gap-4" style="--i: 1" use:reveal>
       <div class="flex flex-col gap-1">
         <h1 class="text-2xl font-bold tracking-[-0.02em]">{lesson.id}</h1>
         <p class="font-label font-medium text-xs text-[var(--color-muted)]">
@@ -115,23 +118,25 @@
 
   {#if finished && result}
     <section
-      class="relative mx-auto max-w-lg rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_16px_40px_-12px_color-mix(in_oklch,var(--color-ink)_15%,transparent)]"
+      class="animate-result-in relative mx-auto max-w-lg rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-8 text-center shadow-[0_16px_40px_-12px_color-mix(in_oklch,var(--color-ink)_15%,transparent)]"
     >
       <div class="text-5xl tracking-[0.1em] text-[var(--color-accent-3)] drop-shadow-sm mb-4">
-        {"★".repeat(result.stars)}<span class="opacity-20">{"★".repeat(3 - result.stars)}</span>
+        {#each { length: result.stars } as _, i}
+          <span class="animate-star-pop" style="--reveal-delay: {i * 160}ms">★</span>
+        {/each}<span class="opacity-20">{"★".repeat(3 - result.stars)}</span>
       </div>
       <h2 class="text-2xl font-bold tracking-[-0.02em] text-[var(--color-ink)]">
         {t().lesson.done}
       </h2>
       
       <div class="mt-8 flex justify-center gap-4">
-        <div class="flex-1 rounded-[16px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm">
+        <div class="animate-result-in flex-1 rounded-[10px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm" style="animation-delay: 180ms">
           <p class="text-3xl font-bold tabular-nums text-[var(--color-ink)]">{result.wpm}</p>
           <p class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]">
             {t().results.wpm}
           </p>
         </div>
-        <div class="flex-1 rounded-[16px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm">
+        <div class="animate-result-in flex-1 rounded-[10px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm" style="animation-delay: 260ms">
           <p class="text-3xl font-bold tabular-nums text-[var(--color-ink)]">{result.accuracy}%</p>
           <p class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]">
             {t().results.accuracy}
@@ -139,7 +144,7 @@
         </div>
       </div>
 
-      <div class="mt-6 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-bg)] p-5 shadow-sm text-left">
+      <div class="animate-result-in mt-6 rounded-[10px] border border-[var(--color-border)] bg-[var(--color-bg)] p-5 shadow-sm text-left" style="animation-delay: 340ms">
         <p class="font-label mb-3 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)]">
           {t().results.objectives}
         </p>
@@ -175,7 +180,7 @@
         </div>
       </div>
 
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <div class="animate-result-in mt-8 flex flex-wrap justify-center gap-3" style="animation-delay: 480ms">
         <Button
           variant="outline"
           href="/"
@@ -222,7 +227,7 @@
         <Skeleton class="h-4 w-16" />
       </div>
       <div
-        class="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+        class="rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
       >
         <Skeleton class="h-4 w-full" />
         <Skeleton class="h-4 w-[90%]" />

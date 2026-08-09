@@ -176,7 +176,7 @@
       class="h-2 w-40 overflow-hidden rounded-full bg-[var(--color-surface)]"
     >
       <div
-        class="h-full rounded-full bg-[var(--color-accent)] transition-all"
+        class="h-full rounded-full bg-[var(--color-accent)] transition-[width]"
         style="width: {live.progress * 100}%"
       ></div>
     </div>

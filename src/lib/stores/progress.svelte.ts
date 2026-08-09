@@ -13,8 +13,12 @@ import {
 
 export function createProgressStore() {
   let lessons = $state<Record<string, LessonProgress>>({});
+  // load() is idempotent — store survives client-side navigation, so a page
+  // mount must not re-fetch (that's the "page reloads on every nav" flash).
+  let loaded = $state(false);
 
   async function load() {
+    if (loaded) return;
     try {
       const all = await getAllLessonProgress();
       const map: Record<string, LessonProgress> = {};
@@ -24,6 +28,7 @@ export function createProgressStore() {
       console.warn("Failed loading progress store:", err);
       lessons = {};
     }
+    loaded = true;
   }
 
   async function save(lessonId: string, progress: LessonProgress) {
@@ -50,6 +55,9 @@ export function createProgressStore() {
   return {
     get lessons() {
       return lessons;
+    },
+    get loaded() {
+      return loaded;
     },
     load,
     save,

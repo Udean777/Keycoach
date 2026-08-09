@@ -15,6 +15,9 @@ function createSrsStore() {
     lang: "en",
     keys: new Map(),
   });
+  // load() is idempotent per language (store survives navigation; language
+  // switch is the only reason to re-fetch from IndexedDB).
+  const loadedLangs = new Set<Language>();
 
   /** ensure every learned key has an entry (so drills can weight them) */
   function ensure(keys: string[]) {
@@ -45,6 +48,7 @@ function createSrsStore() {
 
   /** load a language's state from IndexedDB */
   async function load(l: Language) {
+    if (loadedLangs.has(l)) return;
     try {
       const stored = await getSrs(l);
       state = {
@@ -58,6 +62,7 @@ function createSrsStore() {
       console.warn("Failed loading SRS store:", err);
       state = { lang: l, keys: new Map() };
     }
+    loadedLangs.add(l);
   }
 
   /** write-through to IndexedDB */
@@ -67,6 +72,7 @@ function createSrsStore() {
 
   async function reset() {
     state = { lang: state.lang, keys: new Map() };
+    loadedLangs.clear();
     try {
       await clearAllSrs();
     } catch (err) {

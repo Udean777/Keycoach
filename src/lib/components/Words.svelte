@@ -38,7 +38,7 @@ interface Props {
             ? 'scale-110 border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-[0_0_0_3px_var(--color-accent)]/15'
             : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted)]/40'}
       <div
-        class="flex h-16 w-14 items-center justify-center rounded-[20px] border-2 text-3xl font-bold transition-all {cls}"
+        class="flex h-16 w-14 items-center justify-center rounded-[20px] border-2 text-3xl font-bold transition-[transform,border-color,background-color,color] {cls}"
         >{ch}
       </div>
       {/each}
