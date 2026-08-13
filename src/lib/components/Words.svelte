@@ -31,12 +31,12 @@ interface Props {
       {@const done = ci < active}
       {@const wrong = typedCh !== undefined && typedCh !== ch}
       {@const cls = wrong
-        ? 'animate-shake border-[var(--color-wrong)] bg-[var(--color-wrong)]/15 text-[var(--color-wrong)]'
+        ? 'animate-shake border-[var(--color-destructive)] bg-[var(--color-destructive)]/15 text-[var(--color-destructive)]'
         : done
-          ? 'border-[var(--color-correct)] bg-[var(--color-correct)]/10 text-[var(--color-correct)]'
+          ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
           : ci === active
-            ? 'scale-110 border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-[0_0_0_3px_var(--color-accent)]/15'
-            : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted)]/40'}
+            ? 'scale-110 border-[var(--primary)] bg-primary/10 text-primary shadow-[0_0_0_3px_var(--primary)]/15'
+            : 'border-border bg-card text-muted-foreground/40'}
       <div
         class="flex h-16 w-14 items-center justify-center rounded-[20px] border-2 text-3xl font-bold transition-[transform,border-color,background-color,color] {cls}"
         >{ch}
@@ -59,25 +59,25 @@ interface Props {
             {@const isWrong = wordState === "current" && tch !== undefined && tch !== ch}
             <span
               class="relative transition-colors {wordState === 'done'
-                ? 'text-[var(--color-correct)]'
+                ? 'text-[var(--color-primary)]'
                 : isCurrent
                   ? tch === undefined
-                    ? 'text-[var(--color-muted)]'
+                    ? 'text-muted-foreground'
                     : tch === ch
-                      ? 'text-[var(--color-correct)]'
-                      : 'animate-shake text-[var(--color-wrong)]'
-                  : 'text-[var(--color-muted)]/40'}"
+                      ? 'text-[var(--color-primary)]'
+                      : 'animate-shake text-[var(--color-destructive)]'
+                  : 'text-muted-foreground/40'}"
             >
               {#if isCurrent && ci === typed.length}
                 <span
-                  class="absolute -left-[1px] top-[6%] h-[82%] w-[2px] animate-pulse rounded bg-[var(--color-accent)]"
+                  class="absolute -left-[1px] top-[6%] h-[82%] w-[2px] animate-pulse rounded bg-primary"
                 ></span>
               {/if}
               {ch}
             </span>
           {/each}
           {#if typed.length > word.length}
-            <span class="text-[var(--color-wrong)]"
+            <span class="text-[var(--color-destructive)]"
               >{typed.slice(word.length)}</span
             >
           {/if}

@@ -157,27 +157,27 @@
 <div class="flex flex-col gap-6">
   <div class="flex items-center justify-between text-sm">
     <div class="flex gap-5">
-      <span class="text-[var(--color-muted)]"
-        >WPM <b class="text-[var(--color-ink)] tabular-nums">{live.wpm}</b
+      <span class="text-muted-foreground"
+        >WPM <b class="text-foreground tabular-nums">{live.wpm}</b
         ></span
       >
-      <span class="text-[var(--color-muted)]"
-        >Acc <b class="text-[var(--color-ink)] tabular-nums">{live.accuracy}%</b
+      <span class="text-muted-foreground"
+        >Acc <b class="text-foreground tabular-nums">{live.accuracy}%</b
         ></span
       >
       {#if boxed}
-        <span class="text-[var(--color-muted)]"
-          >Combo <b class="text-[var(--color-accent)] tabular-nums"
+        <span class="text-muted-foreground"
+          >Combo <b class="text-primary tabular-nums"
             >{session.state.currentWordIndex + 1}/{words.length}</b
           ></span
         >
       {/if}
     </div>
     <div
-      class="h-2 w-40 overflow-hidden rounded-full bg-[var(--color-surface)]"
+      class="h-2 w-40 overflow-hidden rounded-full bg-card"
     >
       <div
-        class="h-full rounded-full bg-[var(--color-accent)] transition-[width]"
+        class="h-full rounded-full bg-primary transition-[width]"
         style="width: {live.progress * 100}%"
       ></div>
     </div>
@@ -196,7 +196,7 @@
         class="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
         <div
-          class="animate-combo-pop rounded-full border border-[var(--color-mint)]/40 bg-[var(--color-mint)]/10 px-5 py-2 text-[var(--color-mint)]"
+          class="animate-combo-pop rounded-full border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 px-5 py-2 text-[var(--color-primary)]"
         >
           <Check class="h-6 w-6 stroke-[3]" />
         </div>

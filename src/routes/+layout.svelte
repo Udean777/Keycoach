@@ -106,7 +106,7 @@
 <div class="flex min-h-screen flex-col overflow-x-clip">
   <!-- Hallmark · nav: N1b canonical app bar (collapses to hamburger <sm) · footer: Ft2 inline · arcade · design-system: design.md -->
   <header
-    class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-bg)]/80"
+    class="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/80"
   >
     <div
       class="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-8 py-2"
@@ -116,7 +116,7 @@
         class="group flex items-center gap-2 font-bold tracking-[-0.02em]"
       >
         <span
-          class="grid h-8 w-8 place-items-center overflow-hidden rounded-[10px] bg-[var(--color-accent)] shadow-[0_2px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:translate-y-[1px] group-active:shadow-none"
+          class="grid h-8 w-8 place-items-center overflow-hidden rounded-[10px] bg-primary shadow-[0_2px_0_0_var(--color-primary)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:translate-y-[1px] group-active:shadow-none"
         >
           <img
             src="/logo.webp"
@@ -128,15 +128,15 @@
       </a>
 
       <nav
-        class="hidden items-center gap-1 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/70 p-1 sm:flex"
+        class="hidden items-center gap-1 rounded-full border border-border bg-card/70 p-1 sm:flex"
       >
         {#each links as link (link.href)}
           <a
             href={link.href}
             class="flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-colors {page
               .url.pathname === link.href
-              ? 'bg-[var(--color-accent)]/15 text-[var(--color-ink)]'
-              : 'text-[var(--color-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]'}"
+              ? 'bg-primary/15 text-foreground'
+              : 'text-muted-foreground hover:bg-secondary hover:text-foreground'}"
           >
             <link.icon class="h-3.5 w-3.5" />
             {link.label()}
@@ -186,7 +186,7 @@
           onclick={() => (menuOpen = !menuOpen)}
           aria-expanded={menuOpen}
           aria-label="Menu"
-          class="grid h-8 w-8 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] sm:hidden"
+          class="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-foreground sm:hidden"
         >
           {#if menuOpen}
             <X class="h-4 w-4" />
@@ -204,7 +204,7 @@
     {#if menuOpen}
       <nav
         transition:fly={{ y: -8, duration: 180 }}
-        class="border-t border-[var(--color-border)] bg-[var(--color-bg)] sm:hidden"
+        class="border-t border-border bg-background sm:hidden"
       >
         <div class="mx-auto flex max-w-7xl flex-col gap-1 px-4 sm:px-8 py-3">
           {#each links as link (link.href)}
@@ -213,8 +213,8 @@
               onclick={() => (menuOpen = false)}
               class="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors {page
                 .url.pathname === link.href
-                ? 'bg-[var(--color-accent)]/15 text-[var(--color-ink)]'
-                : 'text-[var(--color-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]'}"
+                ? 'bg-primary/15 text-foreground'
+                : 'text-muted-foreground hover:bg-secondary hover:text-foreground'}"
             >
               <link.icon class="h-4 w-4" />
               {link.label()}
@@ -230,7 +230,7 @@
   </main>
 
   <footer
-    class="mt-auto border-t border-[var(--color-border)] bg-[var(--color-surface)]/60 backdrop-blur-md py-8"
+    class="mt-auto border-t border-border bg-card/60 backdrop-blur-md py-8"
   >
     <div
       class="mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-4 sm:px-8 sm:flex-row sm:justify-between text-center sm:text-left"
@@ -239,10 +239,10 @@
       <div class="flex flex-col sm:flex-row items-center gap-3">
         <a
           href="/"
-          class="group flex items-center gap-2 font-bold tracking-[-0.02em] text-[var(--color-ink)]"
+          class="group flex items-center gap-2 font-bold tracking-[-0.02em] text-foreground"
         >
           <span
-            class="grid h-7 w-7 place-items-center overflow-hidden rounded-[8px] bg-[var(--color-accent)] shadow-[0_1.5px_0_0_var(--color-accent-strong)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5"
+            class="grid h-7 w-7 place-items-center overflow-hidden rounded-[8px] bg-primary shadow-[0_1.5px_0_0_var(--color-primary)] transition-transform duration-150 ease-out group-hover:-translate-y-0.5"
           >
             <img
               src="/logo.webp"
@@ -252,14 +252,14 @@
           </span>
           <span class="text-base font-bold">{t().app.name}</span>
         </a>
-        <span class="hidden sm:inline text-[var(--color-border)]">•</span>
-        <span class="text-xs text-[var(--color-muted)]">{t().app.tagline}</span>
+        <span class="hidden sm:inline text-[var(--border)]">•</span>
+        <span class="text-xs text-muted-foreground">{t().app.tagline}</span>
       </div>
 
       <!-- Copyright & Rights -->
-      <div class="flex items-center gap-3 text-xs text-[var(--color-muted)]">
+      <div class="flex items-center gap-3 text-xs text-muted-foreground">
         <span>© {new Date().getFullYear()} {t().app.name}</span>
-        <span class="text-[var(--color-border)]">•</span>
+        <span class="text-[var(--border)]">•</span>
         <span>{t().footer.rights}</span>
       </div>
     </div>

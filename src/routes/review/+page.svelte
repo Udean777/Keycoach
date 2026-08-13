@@ -61,7 +61,7 @@
   <div class="reveal mb-10 flex flex-col gap-1.5" use:reveal>
     <span class="mono-label">{t().review.eyebrow}</span>
     <h1 class="text-2xl font-bold tracking-[-0.02em]">{t().review.title}</h1>
-    <p class="text-sm text-[var(--color-muted)]">{t().review.subtitle}</p>
+    <p class="text-sm text-muted-foreground">{t().review.subtitle}</p>
   </div>
 
   {#if !loaded}
@@ -71,7 +71,7 @@
         <Skeleton class="h-4 w-16" />
       </div>
       <div
-        class="rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+        class="rounded-[12px] border border-border bg-card p-8 flex flex-col gap-2"
       >
         <Skeleton class="h-4 w-full" />
         <Skeleton class="h-4 w-[90%]" />
@@ -81,15 +81,15 @@
     </div>
   {:else if !started && !finished}
     <div
-      class="reveal flex flex-col gap-8 rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center text-sm text-[var(--color-muted)]"
+      class="reveal flex flex-col gap-8 rounded-[12px] border border-border bg-card p-8 text-center text-sm text-muted-foreground"
       use:reveal
     >
       <div class="flex flex-col gap-2 mb-4">
-        <h3 class="text-lg font-bold text-[var(--color-ink)]">Heatmap Stats</h3>
+        <h3 class="text-lg font-bold text-foreground">Heatmap Stats</h3>
         <p class="text-xs">
-          <span class="inline-block w-3 h-3 bg-[var(--color-mint)]/20 border border-[var(--color-mint)] rounded-sm mr-1"></span> Mastered
-          <span class="inline-block w-3 h-3 bg-[var(--color-accent-2)]/20 border border-[var(--color-accent-2)] rounded-sm ml-3 mr-1"></span> Learning
-          <span class="inline-block w-3 h-3 bg-[var(--color-accent-3)]/20 border border-[var(--color-accent-3)] rounded-sm ml-3 mr-1"></span> Struggling
+          <span class="inline-block w-3 h-3 bg-[var(--color-primary)]/20 border border-[var(--color-primary)] rounded-sm mr-1"></span> Mastered
+          <span class="inline-block w-3 h-3 bg-[var(--color-secondary)]/20 border border-[var(--color-secondary)] rounded-sm ml-3 mr-1"></span> Learning
+          <span class="inline-block w-3 h-3 bg-[var(--primary)]/20 border border-[var(--primary)] rounded-sm ml-3 mr-1"></span> Struggling
         </p>
       </div>
       <div class="pointer-events-none">
@@ -97,16 +97,16 @@
       </div>
       <div class="mt-4">
         <p>{t().review.nothing}</p>
-        <Button variant="link" href="/" class="mt-4 text-[var(--color-accent-2)]">
+        <Button variant="link" href="/" class="mt-4 text-[var(--color-secondary)]">
           ← {t().review.back}
         </Button>
       </div>
     </div>
   {:else if finished}
     <div
-      class="animate-result-in mx-auto w-full max-w-4xl rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]"
+      class="animate-result-in mx-auto w-full max-w-4xl rounded-[12px] border border-border bg-card p-8 text-center shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--foreground)_20%,transparent)]"
     >
-      <div class="animate-star-pop flex justify-center text-4xl text-[var(--color-mint)]">
+      <div class="animate-star-pop flex justify-center text-4xl text-[var(--color-primary)]">
         <Check class="h-12 w-12 stroke-[3]" />
       </div>
       <h2 class="mt-3 mb-8 text-xl font-bold tracking-[-0.02em]">
@@ -114,11 +114,11 @@
       </h2>
       
       <div class="flex flex-col gap-2 mb-4">
-        <h3 class="text-lg font-bold text-[var(--color-ink)]">Heatmap Stats</h3>
+        <h3 class="text-lg font-bold text-foreground">Heatmap Stats</h3>
         <p class="text-xs">
-          <span class="inline-block w-3 h-3 bg-[var(--color-mint)]/20 border border-[var(--color-mint)] rounded-sm mr-1"></span> Mastered
-          <span class="inline-block w-3 h-3 bg-[var(--color-accent-2)]/20 border border-[var(--color-accent-2)] rounded-sm ml-3 mr-1"></span> Learning
-          <span class="inline-block w-3 h-3 bg-[var(--color-accent-3)]/20 border border-[var(--color-accent-3)] rounded-sm ml-3 mr-1"></span> Struggling
+          <span class="inline-block w-3 h-3 bg-[var(--color-primary)]/20 border border-[var(--color-primary)] rounded-sm mr-1"></span> Mastered
+          <span class="inline-block w-3 h-3 bg-[var(--color-secondary)]/20 border border-[var(--color-secondary)] rounded-sm ml-3 mr-1"></span> Learning
+          <span class="inline-block w-3 h-3 bg-[var(--primary)]/20 border border-[var(--primary)] rounded-sm ml-3 mr-1"></span> Struggling
         </p>
       </div>
       <div class="pointer-events-none w-full max-w-3xl mx-auto mb-8">

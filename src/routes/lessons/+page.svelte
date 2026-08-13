@@ -13,7 +13,7 @@
 
   const tints = ["accent", "accent-2", "accent-3", "mint", "lavender"];
   function tint(i: number) {
-    return `color-mix(in oklch, var(--color-${tints[i % tints.length]}) 8%, var(--color-surface))`;
+    return `color-mix(in oklch, var(--color-${tints[i % tints.length]}) 8%, var(--card))`;
   }
 
   onMount(async () => {
@@ -52,7 +52,7 @@
       <h1 class="text-2xl font-bold tracking-[-0.02em]">
         {t().lessons.title}
       </h1>
-      <p class="text-sm text-[var(--color-muted)]">{t().lessons.subtitle}</p>
+      <p class="text-sm text-muted-foreground">{t().lessons.subtitle}</p>
     </section>
 
     <div
@@ -67,21 +67,21 @@
         <div class="reveal-child" style="--i: {i}">
           <a
             href={unlocked ? `/lessons/${lesson.id}` : undefined}
-            class="group flex items-center gap-4 rounded-[12px] border border-[var(--color-border)] p-4 transition-[transform,border-color] duration-200 {unlocked
-              ? 'hover:-translate-y-1 hover:border-[var(--color-accent)]/50'
+            class="group flex items-center gap-4 rounded-[12px] border border-border p-4 transition-[transform,border-color] duration-200 {unlocked
+              ? 'hover:-translate-y-1 hover:border-[var(--primary)]/50'
               : 'cursor-not-allowed opacity-50'}"
             style={unlocked
-              ? `background: ${tint(i)}; box-shadow: 0 8px 20px -12px color-mix(in oklch, var(--color-ink) 25%, transparent);`
-              : `background: color-mix(in oklch, var(--color-ink) 3%, var(--color-surface));`}
+              ? `background: ${tint(i)}; box-shadow: 0 8px 20px -12px color-mix(in oklch, var(--foreground) 25%, transparent);`
+              : `background: color-mix(in oklch, var(--foreground) 3%, var(--card));`}
             aria-disabled={!unlocked}
           >
             <span
               class={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-base font-bold transition-colors ${
                 stars >= 1
-                  ? "bg-[var(--color-mint)]/20 text-[var(--color-mint)]"
+                  ? "bg-[var(--color-primary)]/20 text-[var(--color-primary)]"
                   : unlocked
                     ? `bg-[var(--color-${accent})]/15`
-                    : "bg-[var(--color-surface-2)] text-[var(--color-muted)]"
+                    : "bg-secondary text-muted-foreground"
               }`}
               style={stars >= 1 || !unlocked
                 ? undefined
@@ -92,12 +92,12 @@
             </span>
             <div class="flex min-w-0 flex-1 flex-col">
               <p class="font-bold leading-tight">{lesson.id}</p>
-              <p class="text-xs text-[var(--color-ink-2)] capitalize">
+              <p class="text-xs text-muted-foreground capitalize">
                 {lesson.mode}
               </p>
             </div>
             <div
-              class="flex shrink-0 flex-col items-end gap-1 text-xs tabular-nums text-[var(--color-muted)]"
+              class="flex shrink-0 flex-col items-end gap-1 text-xs tabular-nums text-muted-foreground"
             >
               {#if stars > 0}
                 <span class={`flex gap-0.5 text-[var(--color-${accent})]`}>

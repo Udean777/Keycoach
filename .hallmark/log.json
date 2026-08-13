@@ -1,0 +1,11 @@
+[
+  {
+    "date": "2026-08-13",
+    "scope": "app",
+    "macrostructure": "Split Studio",
+    "theme": "Arcade (custom)",
+    "enrichment": "interactive keyboard demo (function)",
+    "design_system": "docs/design.md",
+    "brief": "Keycoach landing page redesign — arcade scoreboard hero, split feature ledger, stage-select curriculum, CTA band"
+  }
+]

@@ -13,7 +13,7 @@
 <SelectPrimitive.ScrollDownButton
 	bind:ref
 	data-slot="select-scroll-down-button"
-	class={cn("z-10 flex cursor-default items-center justify-center bg-[var(--color-surface)] py-1 text-[var(--color-muted)] [&_svg:not([class*='size-'])]:size-4 bottom-0 w-full", className)}
+	class={cn("z-10 flex cursor-default items-center justify-center bg-card py-1 text-muted-foreground [&_svg:not([class*='size-'])]:size-4 bottom-0 w-full", className)}
 	{...restProps}
 >
 	<ChevronDownIcon  />

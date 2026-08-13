@@ -38,33 +38,33 @@
     }
 
     if (target && target === k) {
-      return `${base} animate-key-bounce bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_0_0_3px_color-mix(in_oklch,var(--color-accent)_40%,transparent)]`;
+      return `${base} animate-key-bounce bg-primary text-foreground shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_40%,transparent)]`;
     }
     if (pressed.has(k)) {
-      return `${base} bg-[var(--color-accent-2)] text-[var(--color-ink)] shadow-none scale-[0.97]`;
+      return `${base} bg-[var(--color-secondary)] text-foreground shadow-none scale-[0.97]`;
     }
     if (showHeatmap && !isModifier) {
       const state = srs.states.get(k);
       if (state) {
         if (state.box >= 3) {
-          return `${base} border border-[var(--color-mint)] bg-[var(--color-mint)]/20 text-[var(--color-mint)]`;
+          return `${base} border border-[var(--color-primary)] bg-[var(--color-primary)]/20 text-[var(--color-primary)]`;
         }
         if (state.box === 0 && state.errorCount > 0) {
-          return `${base} border border-[var(--color-accent-3)] bg-[var(--color-accent-3)]/20 text-[var(--color-accent-3)]`;
+          return `${base} border border-[var(--primary)] bg-[var(--primary)]/20 text-[var(--primary)]`;
         }
         if (state.box === 1 || state.box === 2) {
-          return `${base} border border-[var(--color-accent-2)] bg-[var(--color-accent-2)]/20 text-[var(--color-accent-2)]`;
+          return `${base} border border-[var(--color-secondary)] bg-[var(--color-secondary)]/20 text-[var(--color-secondary)]`;
         }
       }
     }
     if (learnKeys.has(k)) {
-      return `${base} border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:border-[var(--color-accent)]`;
+      return `${base} border border-border bg-card text-foreground hover:border-[var(--primary)]`;
     }
     
     if (isModifier) {
-      return `${base} border border-[var(--color-border)]/50 bg-[var(--color-surface)]/50 text-[var(--color-muted)]/60`;
+      return `${base} border border-border/50 bg-card/50 text-muted-foreground/60`;
     }
-    return `${base} border border-[var(--color-border)]/80 bg-[var(--color-surface)]/80 text-[var(--color-muted)]/80`;
+    return `${base} border border-border/80 bg-card/80 text-muted-foreground/80`;
   }
 </script>
 
@@ -78,7 +78,7 @@
         value={activeLayout}
         onValueChange={(val) => (activeLayout = val as LayoutName)}
       >
-        <Select.Trigger class="w-[140px] h-8 text-xs bg-[var(--color-surface)] border-[var(--color-border)]">
+        <Select.Trigger class="w-[140px] h-8 text-xs bg-card border-border">
           {Object.values(LAYOUTS).find(l => l.id === activeLayout)?.name ?? "Layout"}
         </Select.Trigger>
         <Select.Content>
@@ -94,7 +94,7 @@
         value={keyboardType}
         onValueChange={(val) => (keyboardType = val as KeyboardType)}
       >
-        <Select.Trigger class="w-[120px] h-8 text-xs bg-[var(--color-surface)] border-[var(--color-border)]">
+        <Select.Trigger class="w-[120px] h-8 text-xs bg-card border-border">
           {keyboardType === "windows" ? "Windows / PC" : "Mac / Apple"}
         </Select.Trigger>
         <Select.Content>
@@ -105,7 +105,7 @@
     </div>
   </div>
 
-  <div class="rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 sm:p-4 shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)] overflow-x-auto">
+  <div class="rounded-[12px] border border-border bg-card p-2 sm:p-4 shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--foreground)_20%,transparent)] overflow-x-auto">
     <div class="flex flex-col gap-1.5 sm:gap-2 min-w-[500px] sm:min-w-0">
       <!-- Row 1: Numbers -->
       <div class="flex gap-1.5 sm:gap-2">

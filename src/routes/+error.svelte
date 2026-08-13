@@ -17,12 +17,12 @@
     <img
       src="/logo.webp"
       alt={t().app.name}
-      class="h-14 w-14 rounded-2xl object-cover shadow-[0_4px_16px_-4px_var(--color-accent-strong)]"
+      class="h-14 w-14 rounded-2xl object-cover shadow-[0_4px_16px_-4px_var(--color-primary)]"
     />
-    <h1 class="text-4xl font-bold tracking-[-0.02em] text-[var(--color-ink)]">
+    <h1 class="text-4xl font-bold tracking-[-0.02em] text-foreground">
       {$page.status}
     </h1>
-    <p class="text-lg text-[var(--color-muted)]">
+    <p class="text-lg text-muted-foreground">
       {$page.error?.message ?? "Page not found or an error occurred."}
     </p>
   </div>

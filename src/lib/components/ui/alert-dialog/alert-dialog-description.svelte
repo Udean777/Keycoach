@@ -12,6 +12,6 @@
 <AlertDialogPrimitive.Description
 	bind:ref
 	data-slot="alert-dialog-description"
-	class={cn("text-sm leading-relaxed text-[var(--color-muted)] *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground", className)}
+	class={cn("text-sm leading-relaxed text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground", className)}
 	{...restProps}
 />

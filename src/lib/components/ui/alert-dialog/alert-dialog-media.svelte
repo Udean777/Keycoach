@@ -13,7 +13,7 @@
 <div
 	bind:this={ref}
 	data-slot="alert-dialog-media"
-	class={cn("mb-2 inline-flex size-10 items-center justify-center rounded-[var(--radius-input)] bg-[var(--color-surface-2)] text-[var(--color-accent-2)] sm:group-data-[size=default]/alert-dialog-content:row-span-2 *:[svg:not([class*='size-'])]:size-6", className)}
+	class={cn("mb-2 inline-flex size-10 items-center justify-center rounded-[var(--radius-input)] bg-secondary text-[var(--color-secondary)] sm:group-data-[size=default]/alert-dialog-content:row-span-2 *:[svg:not([class*='size-'])]:size-6", className)}
 	{...restProps}
 >
 	{@render children?.()}

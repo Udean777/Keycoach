@@ -22,7 +22,7 @@
 
   const tints = ["accent", "accent-2", "mint", "lavender"];
   function tint(i: number) {
-    return `color-mix(in oklch, var(--color-${tints[i % tints.length]}) 10%, var(--color-surface))`;
+    return `color-mix(in oklch, var(--color-${tints[i % tints.length]}) 10%, var(--card))`;
   }
 
   let resetOpen = $state(false);
@@ -39,7 +39,7 @@
   <div class="reveal mb-10 flex flex-col gap-1.5" use:reveal>
     <span class="mono-label">{t().settings.preferences}</span>
     <h1 class="text-2xl font-bold tracking-[-0.02em]">{t().settings.title}</h1>
-    <p class="text-sm text-[var(--color-muted)]">{t().settings.language}</p>
+    <p class="text-sm text-muted-foreground">{t().settings.language}</p>
   </div>
 
   <div class="reveal-stagger flex flex-col gap-2" use:reveal>
@@ -50,11 +50,11 @@
           aria-pressed={getLang() === l.id}
           class="flex w-full items-center justify-between rounded-[12px] border px-4 py-3 text-sm font-bold transition-[transform,border-color,box-shadow] duration-150 {getLang() ===
           l.id
-            ? 'border-[var(--color-accent-2)]/60 shadow-[0_2px_0_0_var(--color-accent-2)]'
-            : 'border-[var(--color-border)] text-[var(--color-ink)] hover:-translate-y-0.5 hover:border-[var(--color-accent)]/50'}"
+            ? 'border-[var(--color-secondary)]/60 shadow-[0_2px_0_0_var(--color-secondary)]'
+            : 'border-border text-foreground hover:-translate-y-0.5 hover:border-[var(--primary)]/50'}"
           style={getLang() === l.id
             ? `background: ${tint(i)}`
-            : `background: var(--color-surface)`}
+            : `background: var(--card)`}
         >
           <div class="flex items-center gap-3">
             <img src="https://flagcdn.com/w40/{flagMap[l.id]}.png" width="24" alt={l.label} class="rounded-sm shadow-sm" />
@@ -62,7 +62,7 @@
           </div>
           {#if getLang() === l.id}
             <span
-              class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]"
+              class="grid h-6 w-6 place-items-center rounded-full bg-primary text-foreground shadow-[0_2px_0_0_var(--color-primary)]"
             >
               <Check class="h-3.5 w-3.5 stroke-[4]" />
             </span>
@@ -91,16 +91,16 @@
           aria-pressed={currentSoundTheme === theme.id}
           class="flex w-full items-center justify-between rounded-[12px] border px-4 py-3 text-sm font-bold transition-[transform,border-color,box-shadow] duration-150 {currentSoundTheme ===
           theme.id
-            ? 'border-[var(--color-accent-2)]/60 shadow-[0_2px_0_0_var(--color-accent-2)] bg-surface'
-            : 'border-[var(--color-border)] text-[var(--color-ink)] hover:-translate-y-0.5 hover:border-[var(--color-accent)]/50 bg-surface'}"
+            ? 'border-[var(--color-secondary)]/60 shadow-[0_2px_0_0_var(--color-secondary)] bg-surface'
+            : 'border-border text-foreground hover:-translate-y-0.5 hover:border-[var(--primary)]/50 bg-surface'}"
           style={currentSoundTheme === theme.id
             ? `background: ${tint(i)}`
-            : `background: var(--color-surface)`}
+            : `background: var(--card)`}
         >
           {theme.label}
           {#if currentSoundTheme === theme.id}
             <span
-              class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]"
+              class="grid h-6 w-6 place-items-center rounded-full bg-primary text-foreground shadow-[0_2px_0_0_var(--color-primary)]"
             >
               <Check class="h-3.5 w-3.5 stroke-[4]" />
             </span>
@@ -112,18 +112,18 @@
 
   <div class="reveal mt-16 mb-4 flex flex-col gap-1.5" use:reveal>
     <span
-      class="font-label text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--color-accent-3)]"
+      class="font-label text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--primary)]"
       >{t().settings.danger}</span
     >
     <h2 class="text-xl font-bold tracking-[-0.02em]">
       {t().settings.resetTitle}
     </h2>
-    <p class="text-sm text-[var(--color-muted)]">{t().settings.resetDesc}</p>
+    <p class="text-sm text-muted-foreground">{t().settings.resetDesc}</p>
   </div>
 
   <AlertDialog.Root bind:open={resetOpen}>
     <AlertDialog.Trigger
-      class="flex w-full items-center justify-center rounded-full border border-[var(--color-accent-3)]/30 bg-[var(--color-accent-3)]/10 px-4 py-3 text-sm font-bold text-[var(--color-accent-3)] transition-colors hover:bg-[var(--color-accent-3)]/20"
+      class="flex w-full items-center justify-center rounded-full border border-[var(--primary)]/30 bg-[var(--primary)]/10 px-4 py-3 text-sm font-bold text-[var(--primary)] transition-colors hover:bg-[var(--primary)]/20"
     >
       {t().settings.reset}
     </AlertDialog.Trigger>

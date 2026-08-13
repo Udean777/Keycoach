@@ -9,14 +9,14 @@
 			variant: {
 				/* arcade CTA — pill, lime fill, 2px edge, 1px press lift */
 				default:
-					"bg-primary text-primary-foreground shadow-[0_2px_0_0_var(--color-accent-strong)] hover:-translate-y-0.5 hover:shadow-[0_3px_0_0_var(--color-accent-strong)] active:translate-y-[1px] active:shadow-none",
+					"bg-primary text-primary-foreground shadow-[0_2px_0_0_var(--color-primary)] hover:-translate-y-0.5 hover:shadow-[0_3px_0_0_var(--color-primary)] active:translate-y-[1px] active:shadow-none",
 				outline:
-					"border border-border bg-transparent text-foreground hover:border-[var(--color-accent-2)]/50 hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+					"border border-border bg-transparent text-foreground hover:border-[var(--color-secondary)]/50 hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
 				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
 				ghost: "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
 				destructive:
-					"bg-[var(--color-accent-3)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-wrong)] hover:-translate-y-0.5 hover:shadow-[0_3px_0_0_var(--color-wrong)] active:translate-y-[1px] active:shadow-none",
-				link: "text-[var(--color-accent-2)] underline-offset-4 hover:underline",
+					"bg-[var(--primary)] text-foreground shadow-[0_2px_0_0_var(--color-destructive)] hover:-translate-y-0.5 hover:shadow-[0_3px_0_0_var(--color-destructive)] active:translate-y-[1px] active:shadow-none",
+				link: "text-[var(--color-secondary)] underline-offset-4 hover:underline",
 			},
 			size: {
 				default: "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",

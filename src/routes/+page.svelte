@@ -1,3 +1,4 @@
+<!-- Hallmark · genre: playful · macrostructure: Split Studio · design-system: design.md · designed-as-app -->
 <script lang="ts">
   import { onMount } from "svelte";
   import { progress } from "$lib/stores/progress.svelte.ts";

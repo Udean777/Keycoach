@@ -96,7 +96,7 @@
       <Button
         variant="link"
         href="/lessons"
-        class="w-fit h-auto p-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-accent-2)]"
+        class="w-fit h-auto p-0 text-xs text-muted-foreground hover:text-[var(--color-secondary)]"
       >
         ← {t().lesson.back}
       </Button>
@@ -108,13 +108,13 @@
     >
       <div class="flex flex-col gap-1">
         <h1 class="text-2xl font-bold tracking-[-0.02em]">{lesson.id}</h1>
-        <p class="font-label font-medium text-xs text-[var(--color-muted)]">
+        <p class="font-label font-medium text-xs text-muted-foreground">
           {lesson.keys.join(" · ")}
         </p>
       </div>
       <Badge
         variant="outline"
-        class="shrink-0 rounded-full border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-3 py-1 font-label text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--color-ink-2)]"
+        class="shrink-0 rounded-full border-[var(--primary)]/30 bg-primary/10 px-3 py-1 font-label text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground"
       >
         {lesson.mode}
       </Badge>
@@ -123,10 +123,10 @@
 
   {#if finished && result}
     <section
-      class="animate-result-in relative mx-auto max-w-lg rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-8 text-center shadow-[0_16px_40px_-12px_color-mix(in_oklch,var(--color-ink)_15%,transparent)]"
+      class="animate-result-in relative mx-auto max-w-lg rounded-[10px] border border-border bg-card p-5 sm:p-8 text-center shadow-[0_16px_40px_-12px_color-mix(in_oklch,var(--foreground)_15%,transparent)]"
     >
       <div
-        class="mb-4 flex justify-center text-[var(--color-accent-3)] drop-shadow-sm"
+        class="mb-4 flex justify-center text-[var(--primary)] drop-shadow-sm"
       >
         {#each { length: result.stars } as _, i}
           <span class="animate-star-pop" style="--reveal-delay: {i * 160}ms">
@@ -137,33 +137,33 @@
           <Star class="h-10 w-10 opacity-20" />
         {/each}
       </div>
-      <h2 class="text-2xl font-bold tracking-[-0.02em] text-[var(--color-ink)]">
+      <h2 class="text-2xl font-bold tracking-[-0.02em] text-foreground">
         {t().lesson.done}
       </h2>
 
       <div class="mt-8 flex justify-center gap-4">
         <div
-          class="animate-result-in flex-1 rounded-[10px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm"
+          class="animate-result-in flex-1 rounded-[10px] bg-background py-4 border border-border shadow-sm"
           style="animation-delay: 180ms"
         >
-          <p class="text-3xl font-bold tabular-nums text-[var(--color-ink)]">
+          <p class="text-3xl font-bold tabular-nums text-foreground">
             {result.wpm}
           </p>
           <p
-            class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]"
+            class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             {t().results.wpm}
           </p>
         </div>
         <div
-          class="animate-result-in flex-1 rounded-[10px] bg-[var(--color-bg)] py-4 border border-[var(--color-border)] shadow-sm"
+          class="animate-result-in flex-1 rounded-[10px] bg-background py-4 border border-border shadow-sm"
           style="animation-delay: 260ms"
         >
-          <p class="text-3xl font-bold tabular-nums text-[var(--color-ink)]">
+          <p class="text-3xl font-bold tabular-nums text-foreground">
             {result.accuracy}%
           </p>
           <p
-            class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]"
+            class="font-label mt-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             {t().results.accuracy}
           </p>
@@ -171,11 +171,11 @@
       </div>
 
       <div
-        class="animate-result-in mt-6 rounded-[10px] border border-[var(--color-border)] bg-[var(--color-bg)] p-5 shadow-sm text-left"
+        class="animate-result-in mt-6 rounded-[10px] border border-border bg-background p-5 shadow-sm text-left"
         style="animation-delay: 340ms"
       >
         <p
-          class="font-label mb-3 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)]"
+          class="font-label mb-3 text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground"
         >
           {t().results.objectives}
         </p>
@@ -184,8 +184,8 @@
             <div
               class="grid h-5 w-5 shrink-0 place-items-center rounded-full {result.accuracy >=
               80
-                ? 'bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]'
-                : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'}"
+                ? 'bg-primary text-foreground shadow-[0_2px_0_0_var(--color-primary)]'
+                : 'bg-secondary text-muted-foreground'}"
             >
               {#if result.accuracy >= 80}
                 <svg
@@ -203,8 +203,8 @@
             </div>
             <span
               class="text-sm font-bold {result.accuracy >= 80
-                ? 'text-[var(--color-ink)]'
-                : 'text-[var(--color-muted)]'}">{t().results.objAcc80}</span
+                ? 'text-foreground'
+                : 'text-muted-foreground'}">{t().results.objAcc80}</span
             >
           </div>
 
@@ -212,8 +212,8 @@
             <div
               class="grid h-5 w-5 shrink-0 place-items-center rounded-full {result.accuracy >=
               95
-                ? 'bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]'
-                : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'}"
+                ? 'bg-primary text-foreground shadow-[0_2px_0_0_var(--color-primary)]'
+                : 'bg-secondary text-muted-foreground'}"
             >
               {#if result.accuracy >= 95}
                 <svg
@@ -231,8 +231,8 @@
             </div>
             <span
               class="text-sm font-bold {result.accuracy >= 95
-                ? 'text-[var(--color-ink)]'
-                : 'text-[var(--color-muted)]'}">{t().results.objAcc95}</span
+                ? 'text-foreground'
+                : 'text-muted-foreground'}">{t().results.objAcc95}</span
             >
           </div>
 
@@ -240,8 +240,8 @@
             <div
               class="grid h-5 w-5 shrink-0 place-items-center rounded-full {result.wpm >=
               (lesson.mode === 'drill' ? 25 : 20)
-                ? 'bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]'
-                : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'}"
+                ? 'bg-primary text-foreground shadow-[0_2px_0_0_var(--color-primary)]'
+                : 'bg-secondary text-muted-foreground'}"
             >
               {#if result.wpm >= (lesson.mode === "drill" ? 25 : 20)}
                 <svg
@@ -260,8 +260,8 @@
             <span
               class="text-sm font-bold {result.wpm >=
               (lesson.mode === 'drill' ? 25 : 20)
-                ? 'text-[var(--color-ink)]'
-                : 'text-[var(--color-muted)]'}"
+                ? 'text-foreground'
+                : 'text-muted-foreground'}"
             >
               {t().results.objWpm.replace(
                 "{wpm}",
@@ -279,14 +279,14 @@
         <Button
           variant="outline"
           href="/"
-          class="px-4 py-2 text-[var(--color-muted)]"
+          class="px-4 py-2 text-muted-foreground"
         >
           {t().nav.home}
         </Button>
         <Button
           variant="outline"
           onclick={replay}
-          class="px-4 py-2 text-[var(--color-muted)]"
+          class="px-4 py-2 text-muted-foreground"
         >
           {t().lesson.again}
         </Button>
@@ -316,7 +316,7 @@
         <Skeleton class="h-4 w-16" />
       </div>
       <div
-        class="rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 flex flex-col gap-2"
+        class="rounded-[12px] border border-border bg-card p-8 flex flex-col gap-2"
       >
         <Skeleton class="h-4 w-full" />
         <Skeleton class="h-4 w-[90%]" />

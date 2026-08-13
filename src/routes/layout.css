@@ -1,26 +1,142 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
 
-@theme {
-  /* Hallmark · genre: playful (arcade) · macrostructure: multi · theme: custom (arcade) · nav: N1b · footer: Ft2 */
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-border: var(--border);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-strong: var(--accent-strong);
-  --color-accent-2: var(--accent-2);
-  --color-accent-3: var(--accent-3);
-  --color-mint: var(--mint);
-  --color-lavender: var(--lavender);
-  --color-correct: var(--correct);
-  --color-wrong: var(--wrong);
-  --color-focus: var(--focus);
+:root {
+  --background: oklch(0.9824 0.0013 286.3757);
+  --foreground: oklch(0.3211 0 0);
+  --card: oklch(1.0000 0 0);
+  --card-foreground: oklch(0.3211 0 0);
+  --popover: oklch(1.0000 0 0);
+  --popover-foreground: oklch(0.3211 0 0);
+  --primary: oklch(0.6487 0.1538 150.3071);
+  --primary-foreground: oklch(1.0000 0 0);
+  --secondary: oklch(0.6746 0.1414 261.3380);
+  --secondary-foreground: oklch(1.0000 0 0);
+  --muted: oklch(0.8828 0.0285 98.1033);
+  --muted-foreground: oklch(0.5382 0 0);
+  --accent: oklch(0.8269 0.1080 211.9627);
+  --accent-foreground: oklch(0.3211 0 0);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1.0000 0 0);
+  --border: oklch(0.8699 0 0);
+  --input: oklch(0.8699 0 0);
+  --ring: oklch(0.6487 0.1538 150.3071);
+  --chart-1: oklch(0.6487 0.1538 150.3071);
+  --chart-2: oklch(0.6746 0.1414 261.3380);
+  --chart-3: oklch(0.8269 0.1080 211.9627);
+  --chart-4: oklch(0.5880 0.0993 245.7394);
+  --chart-5: oklch(0.5905 0.1608 148.2409);
+  --sidebar: oklch(0.9824 0.0013 286.3757);
+  --sidebar-foreground: oklch(0.3211 0 0);
+  --sidebar-primary: oklch(0.6487 0.1538 150.3071);
+  --sidebar-primary-foreground: oklch(1.0000 0 0);
+  --sidebar-accent: oklch(0.8269 0.1080 211.9627);
+  --sidebar-accent-foreground: oklch(0.3211 0 0);
+  --sidebar-border: oklch(0.8699 0 0);
+  --sidebar-ring: oklch(0.6487 0.1538 150.3071);
+  --font-sans: Plus Jakarta Sans, sans-serif;
+  --font-serif: Source Serif 4, serif;
+  --font-mono: JetBrains Mono, monospace;
+  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-label: JetBrains Mono, ui-monospace, monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: oklch(0 0 0);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
 
+  /* arcade trio — design.md Arcade theme (light) */
+  --color-accent-2: oklch(62% 0.16 295);
+  --color-accent-3: oklch(62% 0.2 25);
+  --color-mint: oklch(83% 0.1 150);
+  --color-lavender: oklch(84% 0.08 300);
+  --color-surface-2: oklch(89% 0.024 108);
+  --color-ink: oklch(19% 0.014 100);
+  --color-ink-2: oklch(43% 0.018 100);
+  --color-correct: oklch(72% 0.14 150);
+  --color-wrong: oklch(58% 0.2 23);
+}
+
+.dark {
+  --background: oklch(0.2303 0.0125 264.2926);
+  --foreground: oklch(0.9219 0 0);
+  --card: oklch(0.3210 0.0078 223.6661);
+  --card-foreground: oklch(0.9219 0 0);
+  --popover: oklch(0.3210 0.0078 223.6661);
+  --popover-foreground: oklch(0.9219 0 0);
+  --primary: oklch(0.6487 0.1538 150.3071);
+  --primary-foreground: oklch(1.0000 0 0);
+  --secondary: oklch(0.5880 0.0993 245.7394);
+  --secondary-foreground: oklch(0.9219 0 0);
+  --muted: oklch(0.3867 0 0);
+  --muted-foreground: oklch(0.7155 0 0);
+  --accent: oklch(0.6746 0.1414 261.3380);
+  --accent-foreground: oklch(0.9219 0 0);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1.0000 0 0);
+  --border: oklch(0.3867 0 0);
+  --input: oklch(0.3867 0 0);
+  --ring: oklch(0.6487 0.1538 150.3071);
+  --chart-1: oklch(0.6487 0.1538 150.3071);
+  --chart-2: oklch(0.5880 0.0993 245.7394);
+  --chart-3: oklch(0.6746 0.1414 261.3380);
+  --chart-4: oklch(0.8269 0.1080 211.9627);
+  --chart-5: oklch(0.5905 0.1608 148.2409);
+  --sidebar: oklch(0.2303 0.0125 264.2926);
+  --sidebar-foreground: oklch(0.9219 0 0);
+  --sidebar-primary: oklch(0.6487 0.1538 150.3071);
+  --sidebar-primary-foreground: oklch(1.0000 0 0);
+  --sidebar-accent: oklch(0.6746 0.1414 261.3380);
+  --sidebar-accent-foreground: oklch(0.9219 0 0);
+  --sidebar-border: oklch(0.3867 0 0);
+  --sidebar-ring: oklch(0.6487 0.1538 150.3071);
+  --font-sans: Plus Jakarta Sans, sans-serif;
+  --font-serif: Source Serif 4, serif;
+  --font-mono: JetBrains Mono, monospace;
+  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-label: JetBrains Mono, ui-monospace, monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: oklch(0 0 0);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+
+  /* arcade trio — design.md Arcade theme (dark) */
+  --color-accent-2: oklch(70% 0.15 300);
+  --color-accent-3: oklch(70% 0.18 30);
+  --color-mint: oklch(80% 0.1 152);
+  --color-lavender: oklch(82% 0.08 302);
+  --color-surface-2: oklch(35% 0.02 100);
+  --color-ink: oklch(92% 0.01 100);
+  --color-ink-2: oklch(80% 0.012 100);
+  --color-correct: oklch(78% 0.12 155);
+  --color-wrong: oklch(68% 0.2 25);
+}
+
+@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -31,120 +147,66 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-lg: var(--radius-card);
-  --radius-md: var(--radius-input);
-  --radius-sm: calc(var(--radius-input) - 2px);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
-  --font-body: "Plus Jakarta Sans", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
-  --font-label: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+  --font-display: var(--font-display);
+  --font-label: var(--font-label);
 
-  --space-3xs: 0.25rem;
-  --space-2xs: 0.5rem;
-  --space-xs: 0.75rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 4.5rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-short: 140ms;
-  --radius-card: 12px;
-  --radius-pill: 999px;
-  --radius-input: 10px;
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
 }
 
 @layer base {
-  :root {
-    --bg: oklch(97% 0.014 100);
-    --surface: oklch(93.5% 0.02 105);
-    --surface-2: oklch(89% 0.024 108);
-    --border: oklch(86% 0.028 100);
-    --ink: oklch(19% 0.014 100);
-    --ink-2: oklch(43% 0.018 100);
-    --muted: oklch(49% 0.02 100);
-    --accent: oklch(70% 0.18 145);
-    --accent-strong: oklch(60% 0.19 142);
-    --accent-2: oklch(62% 0.16 295);
-    --accent-3: oklch(62% 0.2 25);
-    --mint: oklch(83% 0.1 150);
-    --lavender: oklch(84% 0.08 300);
-    --correct: oklch(72% 0.14 150);
-    --wrong: oklch(58% 0.2 23);
-    --focus: oklch(56% 0.2 295);
-
-    --background: oklch(97% 0.014 100);
-    --foreground: oklch(19% 0.014 100);
-    --card: oklch(93.5% 0.02 105);
-    --card-foreground: oklch(19% 0.014 100);
-    --popover: oklch(97% 0.014 100);
-    --popover-foreground: oklch(19% 0.014 100);
-    --primary: oklch(70% 0.18 145);
-    --primary-foreground: oklch(19% 0.014 100);
-    --secondary: oklch(89% 0.024 108);
-    --secondary-foreground: oklch(19% 0.014 100);
-    --muted-foreground: oklch(49% 0.02 100);
-    --destructive: oklch(58% 0.2 23);
-    --destructive-foreground: oklch(97% 0 0);
-    --input: oklch(86% 0.028 100);
-    --ring: oklch(56% 0.2 295);
-    --radius: 12px;
+  * {
+    @apply border-border outline-ring/50;
   }
-
-  .dark {
-    --bg: oklch(20% 0.02 100);
-    --surface: oklch(24% 0.022 105);
-    --surface-2: oklch(29% 0.024 108);
-    --border: oklch(33% 0.028 100);
-    --ink: oklch(93% 0.008 100);
-    --ink-2: oklch(78% 0.012 100);
-    --muted: oklch(66% 0.015 100);
-    --accent: oklch(76% 0.16 145);
-    --accent-strong: oklch(66% 0.18 142);
-    --accent-2: oklch(72% 0.15 295);
-    --accent-3: oklch(74% 0.18 25);
-    --mint: oklch(80% 0.12 150);
-    --lavender: oklch(82% 0.09 300);
-    --correct: oklch(78% 0.12 150);
-    --wrong: oklch(70% 0.22 23);
-    --focus: oklch(72% 0.18 295);
-
-    --background: oklch(20% 0.02 100);
-    --foreground: oklch(93% 0.008 100);
-    --card: oklch(24% 0.022 105);
-    --card-foreground: oklch(93% 0.008 100);
-    --popover: oklch(24% 0.022 105);
-    --popover-foreground: oklch(93% 0.008 100);
-    --primary: oklch(76% 0.16 145);
-    --primary-foreground: oklch(19% 0.014 100);
-    --secondary: oklch(29% 0.024 108);
-    --secondary-foreground: oklch(93% 0.008 100);
-    --muted-foreground: oklch(66% 0.015 100);
-    --destructive: oklch(70% 0.22 23);
-    --destructive-foreground: oklch(20% 0 0);
-    --input: oklch(33% 0.028 100);
-    --ring: oklch(72% 0.18 295);
-    --radius: 12px;
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
 html,
 body {
-  background: var(--color-bg);
-  color: var(--color-ink);
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "ss01" on, "cv11" on;
   font-variant-numeric: tabular-nums;
+  overflow-x: clip;
 }
 
 body {
@@ -154,22 +216,20 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
 }
 
-/* instant, ≥3:1 focus ring — never animated */
 :focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 
-/* mono uppercase label — the one allowed eyebrow per page */
 .mono-label {
-  font-family: var(--font-label);
+  font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-ink-2);
+  color: var(--muted-foreground);
   opacity: 0.75;
 }
 
@@ -222,19 +282,14 @@ h1, h2, h3 {
   animation: shake 0.3s ease-in-out;
 }
 
-/* reveal-on-view — design.md Motion: opacity + up-to-4px lift on cards.
-   `.reveal` = standalone section; `.reveal .reveal-child` / `.reveal-stagger
-   .reveal-child` = staggered children, delay via --i (50ms steps). Driven by
-   the use:reveal action. Delay only applies pre-reveal, so hover states stay
-   instant once visible. */
 .reveal,
 .reveal .reveal-child,
 .reveal-stagger .reveal-child {
   opacity: 0;
   transform: translateY(4px);
   transition:
-    opacity 0.45s var(--ease-out),
-    transform 0.45s var(--ease-out);
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal:not(.is-visible) .reveal-child,
 .reveal-stagger:not(.is-visible) .reveal-child {
@@ -247,7 +302,6 @@ h1, h2, h3 {
   transform: translateY(0);
 }
 
-/* result panel pop — spring scale-in on the complete screen */
 @keyframes result-in {
   from {
     opacity: 0;
@@ -259,10 +313,9 @@ h1, h2, h3 {
   }
 }
 .animate-result-in {
-  animation: result-in 0.4s var(--ease-out) both;
+  animation: result-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* earned-star pop — staggered per star, spring overshoot */
 @keyframes star-pop {
   0% {
     transform: scale(0);
@@ -278,11 +331,10 @@ h1, h2, h3 {
   }
 }
 .animate-star-pop {
-  animation: star-pop 0.4s var(--ease-spring) both;
+  animation: star-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   animation-delay: var(--reveal-delay, 0ms);
 }
 
-/* star-burst micro-celebration — coral, fires once on lesson complete */
 @keyframes star-burst {
   0% {
     transform: scale(0) rotate(0deg);
@@ -303,13 +355,13 @@ h1, h2, h3 {
   height: 24px;
   pointer-events: none;
   background:
-    linear-gradient(90deg, transparent 47%, var(--color-accent-3) 47% 53%, transparent 53%),
-    linear-gradient(0deg, transparent 47%, var(--color-accent-3) 47% 53%, transparent 53%);
+    linear-gradient(90deg, transparent 47%, var(--accent) 47% 53%, transparent 53%),
+    linear-gradient(0deg, transparent 47%, var(--accent) 47% 53%, transparent 53%);
   animation: star-burst 420ms ease-out forwards;
 }
 
 ::selection {
-  background: color-mix(in oklch, var(--color-accent-2) 30%, transparent);
+  background: color-mix(in oklch, var(--secondary) 30%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
