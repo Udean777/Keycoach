@@ -1,4 +1,4 @@
-import type { LanguageCode } from "./dictionaries";
+import type { LanguageCode } from "$lib/core/dictionaries";
 
 export type Language = LanguageCode;
 
@@ -14,7 +14,8 @@ export const messages: Record<Language, any> = {
   en: {
     app: {
       name: "Keycoach",
-      tagline: "Build your touch-typing instincts. Type faster without looking.",
+      tagline:
+        "Build your touch-typing instincts. Type faster without looking.",
     },
     nav: {
       home: "Home",
@@ -35,11 +36,14 @@ export const messages: Record<Language, any> = {
       heroBadge: "Touch-Typing Coach",
       heroTitle: "Master 10-Finger Typing Without Looking.",
       feature1Title: "Structured Zone Path",
-      feature1Desc: "13 progressive stages covering left hand, right hand, and full keyboard mastery.",
+      feature1Desc:
+        "13 progressive stages covering left hand, right hand, and full keyboard mastery.",
       feature2Title: "Smart SRS System",
-      feature2Desc: "Intelligent spaced repetition schedules reviews for weak keys automatically.",
+      feature2Desc:
+        "Intelligent spaced repetition schedules reviews for weak keys automatically.",
       feature3Title: "3-Star Objectives",
-      feature3Desc: "Hit 95% accuracy and target speed thresholds to earn 3 stars on every stage.",
+      feature3Desc:
+        "Hit 95% accuracy and target speed thresholds to earn 3 stars on every stage.",
       ctaTitle: "Ready to boost your typing speed?",
       ctaBtn: "Start Learning Now",
       interactiveCoach: "Interactive Coach",
@@ -116,7 +120,8 @@ export const messages: Record<Language, any> = {
   id: {
     app: {
       name: "Keycoach",
-      tagline: "Latih insting ngetik 10 jarimu biar makin ngebut tanpa perlu melirik.",
+      tagline:
+        "Latih insting ngetik 10 jarimu biar makin ngebut tanpa perlu melirik.",
     },
     nav: {
       home: "Beranda",
@@ -137,11 +142,14 @@ export const messages: Record<Language, any> = {
       heroBadge: "Pelatih Mengetik 10 Jari",
       heroTitle: "Kuasai Mengetik 10 Jari Tanpa Perlu Melirik.",
       feature1Title: "Kurikulum Zona Terstruktur",
-      feature1Desc: "13 stage bertahap mencakup tangan kiri, tangan kanan, dan penggabungan seluruh keyboard.",
+      feature1Desc:
+        "13 stage bertahap mencakup tangan kiri, tangan kanan, dan penggabungan seluruh keyboard.",
       feature2Title: "Algoritma SRS Pintar",
-      feature2Desc: "Pengulangan otomatis berbasis waktu untuk memperkuat tombol yang sering salah.",
+      feature2Desc:
+        "Pengulangan otomatis berbasis waktu untuk memperkuat tombol yang sering salah.",
       feature3Title: "Sistem Target 3 Bintang",
-      feature3Desc: "Tantang dirimu mencapai akurasi 95% dan target KPM di setiap pelajaran.",
+      feature3Desc:
+        "Tantang dirimu mencapai akurasi 95% dan target KPM di setiap pelajaran.",
       ctaTitle: "Siap mengetik lebih cepat dan akurat?",
       ctaBtn: "Mulai Belajar Sekarang",
       interactiveCoach: "Pelatih Interaktif",
@@ -219,7 +227,8 @@ export const messages: Record<Language, any> = {
   es: {
     app: {
       name: "Keycoach",
-      tagline: "Desarrolla tu instinto para mecanografiar más rápido sin mirar el teclado.",
+      tagline:
+        "Desarrolla tu instinto para mecanografiar más rápido sin mirar el teclado.",
     },
     nav: {
       home: "Inicio",
@@ -240,11 +249,14 @@ export const messages: Record<Language, any> = {
       heroBadge: "Entrenador de Mecanografía",
       heroTitle: "Domina la Mecanografía de 10 Dedos Sin Mirar.",
       feature1Title: "Ruta Estructurada por Zonas",
-      feature1Desc: "13 etapas progresivas para mano izquierda, mano derecha y teclado completo.",
+      feature1Desc:
+        "13 etapas progresivas para mano izquierda, mano derecha y teclado completo.",
       feature2Title: "Sistema SRS Inteligente",
-      feature2Desc: "Repetición espaciada automática para reforzar las teclas difíciles.",
+      feature2Desc:
+        "Repetición espaciada automática para reforzar las teclas difíciles.",
       feature3Title: "Objetivos de 3 Estrellas",
-      feature3Desc: "Alcanza el 95% de precisión y velocidad objetivo en cada nivel.",
+      feature3Desc:
+        "Alcanza el 95% de precisión y velocidad objetivo en cada nivel.",
       ctaTitle: "¿Listo para escribir más rápido?",
       ctaBtn: "Empieza a Aprender Ahora",
       interactiveCoach: "Entrenador Interactivo",
@@ -283,13 +295,26 @@ export const messages: Record<Language, any> = {
       back: "Volver al inicio",
       eyebrow: "Vencidos SRS",
     },
-    results: { wpm: "PPM", accuracy: "Precisión", stars: "Estrellas", objectives: "Objetivos", objAcc80: "Precisión ≥ 80%", objAcc95: "Precisión ≥ 95%", objWpm: "Velocidad ≥ {wpm} PPM" },
-    settings: { title: "Ajustes", language: "Idioma", preferences: "Preferencias",
+    results: {
+      wpm: "PPM",
+      accuracy: "Precisión",
+      stars: "Estrellas",
+      objectives: "Objetivos",
+      objAcc80: "Precisión ≥ 80%",
+      objAcc95: "Precisión ≥ 95%",
+      objWpm: "Velocidad ≥ {wpm} PPM",
+    },
+    settings: {
+      title: "Ajustes",
+      language: "Idioma",
+      preferences: "Preferencias",
       danger: "Zona de peligro",
       resetTitle: "Reiniciar todo el progreso",
-      resetDesc: "Reinicia todo el progreso y estadísticas. Esta acción no se puede deshacer.",
+      resetDesc:
+        "Reinicia todo el progreso y estadísticas. Esta acción no se puede deshacer.",
       resetConfirm: "¿Estás totalmente seguro?",
-      resetConfirmDesc: "Esto eliminará permanentemente todo el progreso, estadísticas y restablecerá el calendario SRS. Esta acción no se puede deshacer.",
+      resetConfirmDesc:
+        "Esto eliminará permanentemente todo el progreso, estadísticas y restablecerá el calendario SRS. Esta acción no se puede deshacer.",
       reset: "Reiniciar progreso",
       cancel: "Cancelar",
       soundTheme: "Tema de sonido",
@@ -306,7 +331,11 @@ export const messages: Record<Language, any> = {
     common: { back: "Volver" },
   },
   de: {
-    app: { name: "Keycoach", tagline: "Trainiere deinen Tipp-Instinkt, um schneller zu tippen, ohne hinzusehen." },
+    app: {
+      name: "Keycoach",
+      tagline:
+        "Trainiere deinen Tipp-Instinkt, um schneller zu tippen, ohne hinzusehen.",
+    },
     nav: {
       home: "Start",
       lessons: "Lektionen",
@@ -326,11 +355,13 @@ export const messages: Record<Language, any> = {
       heroBadge: "Moderner Tipptrainer",
       heroTitle: "Meistere das 10-Finger-Tippen ohne Hinsehen.",
       feature1Title: "Strukturierter Zonenpfad",
-      feature1Desc: "13 Stufen für linke Hand, rechte Hand und das gesamte Keyboard.",
+      feature1Desc:
+        "13 Stufen für linke Hand, rechte Hand und das gesamte Keyboard.",
       feature2Title: "Intelligentes SRS-System",
       feature2Desc: "Automatische Wiederholungen für schwierige Tasten.",
       feature3Title: "3-Sterne-Ziele",
-      feature3Desc: "Erreiche 95% Genauigkeit und Zielgeschwindigkeit für 3 Sterne.",
+      feature3Desc:
+        "Erreiche 95% Genauigkeit und Zielgeschwindigkeit für 3 Sterne.",
       ctaTitle: "Bereit, schneller zu tippen?",
       ctaBtn: "Jetzt Lernen Starten",
       interactiveCoach: "Interaktiver Trainer",
@@ -369,13 +400,26 @@ export const messages: Record<Language, any> = {
       back: "Zurück zum Start",
       eyebrow: "SRS fällig",
     },
-    results: { wpm: "WPM", accuracy: "Genauigkeit", stars: "Sterne", objectives: "Ziele", objAcc80: "Genauigkeit ≥ 80%", objAcc95: "Genauigkeit ≥ 95%", objWpm: "Geschwindigkeit ≥ {wpm} WPM" },
-    settings: { title: "Einstellungen", language: "Sprache", preferences: "Einstellungen",
+    results: {
+      wpm: "WPM",
+      accuracy: "Genauigkeit",
+      stars: "Sterne",
+      objectives: "Ziele",
+      objAcc80: "Genauigkeit ≥ 80%",
+      objAcc95: "Genauigkeit ≥ 95%",
+      objWpm: "Geschwindigkeit ≥ {wpm} WPM",
+    },
+    settings: {
+      title: "Einstellungen",
+      language: "Sprache",
+      preferences: "Einstellungen",
       danger: "Gefahrenzone",
       resetTitle: "Gesamten Fortschritt zurücksetzen",
-      resetDesc: "Setzt den gesamten Fortschritt und die Statistik zurück. Dies kann nicht rückgängig gemacht werden.",
+      resetDesc:
+        "Setzt den gesamten Fortschritt und die Statistik zurück. Dies kann nicht rückgängig gemacht werden.",
       resetConfirm: "Sind Sie ganz sicher?",
-      resetConfirmDesc: "Dies löscht dauerhaft den gesamten Fortschritt, die Statistik und setzt den SRS-Plan zurück. Diese Aktion kann nicht rückgängig gemacht werden.",
+      resetConfirmDesc:
+        "Dies löscht dauerhaft den gesamten Fortschritt, die Statistik und setzt den SRS-Plan zurück. Diese Aktion kann nicht rückgängig gemacht werden.",
       reset: "Fortschritt zurücksetzen",
       cancel: "Abbrechen",
       soundTheme: "Sound-Thema",
@@ -394,7 +438,8 @@ export const messages: Record<Language, any> = {
   ru: {
     app: {
       name: "Keycoach",
-      tagline: "Тренируйте инстинкт слепой печати, чтобы набирать текст быстрее и не глядя.",
+      tagline:
+        "Тренируйте инстинкт слепой печати, чтобы набирать текст быстрее и не глядя.",
     },
     nav: {
       home: "Главная",
@@ -419,7 +464,8 @@ export const messages: Record<Language, any> = {
       feature2Title: "Умная Система SRS",
       feature2Desc: "Автоматическое повторение сложных клавиш по интервалам.",
       feature3Title: "3-Звездные Цели",
-      feature3Desc: "Достигайте 95% точности и целевой скорости на каждом уроке.",
+      feature3Desc:
+        "Достигайте 95% точности и целевой скорости на каждом уроке.",
       ctaTitle: "Готовы печатать быстрее?",
       ctaBtn: "Начать Обучение Сейчас",
       interactiveCoach: "Интерактивный Тренер",
@@ -458,13 +504,26 @@ export const messages: Record<Language, any> = {
       back: "На главную",
       eyebrow: "Сдача SRS",
     },
-    results: { wpm: "Сл/м", accuracy: "Точность", stars: "Звезды", objectives: "Цели", objAcc80: "Точность ≥ 80%", objAcc95: "Точность ≥ 95%", objWpm: "Скорость ≥ {wpm} Сл/м" },
-    settings: { title: "Настройки", language: "Язык", preferences: "Предпочтения",
+    results: {
+      wpm: "Сл/м",
+      accuracy: "Точность",
+      stars: "Звезды",
+      objectives: "Цели",
+      objAcc80: "Точность ≥ 80%",
+      objAcc95: "Точность ≥ 95%",
+      objWpm: "Скорость ≥ {wpm} Сл/м",
+    },
+    settings: {
+      title: "Настройки",
+      language: "Язык",
+      preferences: "Предпочтения",
       danger: "Zona de peligro",
       resetTitle: "Сбросить весь прогресс",
-      resetDesc: "Сбрасывает весь прогресс и статистику. Это действие нельзя отменить.",
+      resetDesc:
+        "Сбрасывает весь прогресс и статистику. Это действие нельзя отменить.",
       resetConfirm: "Вы точно уверены?",
-      resetConfirmDesc: "Это навсегда удалит весь прогресс, статистику и сбросит расписание SRS. Действие нельзя отменить.",
+      resetConfirmDesc:
+        "Это навсегда удалит весь прогресс, статистику и сбросит расписание SRS. Действие нельзя отменить.",
       reset: "Сбросить прогресс",
       cancel: "Отмена",
       soundTheme: "Звуковая тема",
@@ -541,7 +600,15 @@ export type Messages = {
     back: string;
     eyebrow: string;
   };
-  results: { wpm: string; accuracy: string; stars: string; objectives: string; objAcc80: string; objAcc95: string; objWpm: string };
+  results: {
+    wpm: string;
+    accuracy: string;
+    stars: string;
+    objectives: string;
+    objAcc80: string;
+    objAcc95: string;
+    objWpm: string;
+  };
   settings: {
     title: string;
     language: string;

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { langs, getLang, setLang, t } from "$lib/i18n.svelte";
+  import { langs, getLang, setLang, t } from "$lib/i18n/i18n.svelte";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import { progress } from "$lib/stores/progress.svelte.ts";
-  import type { Language } from "$lib/i18n.svelte";
+  import type { Language } from "$lib/i18n/i18n.svelte";
   import { Check } from "lucide-svelte";
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { reveal } from "$lib/actions/reveal";

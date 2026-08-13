@@ -6,11 +6,11 @@
   import { ModeWatcher } from "mode-watcher";
   import ThemeToggle from "$lib/components/ThemeToggle.svelte";
   import * as Select from "$lib/components/ui/select";
-  import { t, langs, getLang, setLang } from "$lib/i18n.svelte";
+  import { t, langs, getLang, setLang } from "$lib/i18n/i18n.svelte";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
-  import type { Language } from "$lib/i18n.svelte";
+  import type { Language } from "$lib/i18n/i18n.svelte";
 
   const flagMap: Record<Language, string> = {
     en: "gb",
@@ -158,13 +158,23 @@
           }}
         >
           <Select.Trigger class="h-9 w-12 justify-center">
-            <img src="https://flagcdn.com/w40/{flagMap[getLang()]}.png" width="20" alt={getLang()} class="rounded-sm shadow-sm" />
+            <img
+              src="https://flagcdn.com/w40/{flagMap[getLang()]}.png"
+              width="20"
+              alt={getLang()}
+              class="rounded-sm shadow-sm"
+            />
           </Select.Trigger>
           <Select.Content side="bottom" align="end">
             {#each langs as l (l.id)}
               <Select.Item value={l.id} label={l.label}>
                 <div class="mr-2 flex items-center">
-                  <img src="https://flagcdn.com/w40/{flagMap[l.id]}.png" width="20" alt={l.label} class="rounded-sm shadow-sm" />
+                  <img
+                    src="https://flagcdn.com/w40/{flagMap[l.id]}.png"
+                    width="20"
+                    alt={l.label}
+                    class="rounded-sm shadow-sm"
+                  />
                 </div>
                 {l.label}
               </Select.Item>

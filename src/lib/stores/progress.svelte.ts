@@ -4,7 +4,7 @@ import {
   putLessonProgress,
   clearAllProgress,
   type LessonProgress,
-} from "../db";
+} from "$lib/db/db";
 
 /**
  * Reactive progress store (Svelte 5 runes). Backed by IndexedDB; exposes a
@@ -70,7 +70,7 @@ export function createProgressStore() {
       } catch (err) {
         console.warn("Failed clearing progress from DB:", err);
       }
-    }
+    },
   };
 }
 

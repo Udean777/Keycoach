@@ -3,14 +3,14 @@
   // learned keys.
   import { onMount } from "svelte";
   import { Check } from "lucide-svelte";
-  import { compileStages } from "$lib/curriculum";
-  import { generateWords } from "$lib/generate";
+  import { compileStages } from "$lib/core/curriculum";
+  import { generateWords } from "$lib/core/generate";
   import { dueKeys } from "$lib/srs/srs";
   import { progress } from "$lib/stores/progress.svelte.ts";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import TypingSession from "$lib/components/TypingSession.svelte";
   import Keyboard from "$lib/components/Keyboard.svelte";
-  import { t, getLang } from "$lib/i18n.svelte";
+  import { t, getLang } from "$lib/i18n/i18n.svelte";
   import { Skeleton } from "$lib/components/ui/skeleton";
   import { Button } from "$lib/components/ui/button";
   import { reveal } from "$lib/actions/reveal";

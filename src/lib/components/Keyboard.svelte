@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LAYOUTS, type LayoutName, type KeyboardType } from "$lib/keyboardLayouts";
+  import { LAYOUTS, type LayoutName, type KeyboardType } from "$lib/core/keyboardLayouts";
   import * as Select from "$lib/components/ui/select";
 
   interface Props {

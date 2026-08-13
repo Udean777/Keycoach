@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { progress } from "$lib/stores/progress.svelte.ts";
-  import { compileStages } from "$lib/curriculum";
-  import { t } from "$lib/i18n.svelte";
+  import { compileStages } from "$lib/core/curriculum";
+  import { t } from "$lib/i18n/i18n.svelte";
   import { Skeleton } from "$lib/components/ui/skeleton";
   import { reveal } from "$lib/actions/reveal";
   import { Star } from "lucide-svelte";
@@ -55,7 +55,10 @@
       <p class="text-sm text-[var(--color-muted)]">{t().lessons.subtitle}</p>
     </section>
 
-    <div class="reveal-stagger grid grid-cols-1 gap-3 sm:grid-cols-2" use:reveal>
+    <div
+      class="reveal-stagger grid grid-cols-1 gap-3 sm:grid-cols-2"
+      use:reveal
+    >
       {#each lessons as lesson, i (lesson.id)}
         {@const p = progress.get(lesson.id)}
         {@const unlocked = progress.isUnlocked(lesson.id, order)}
@@ -75,17 +78,17 @@
             <span
               class={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-base font-bold transition-colors ${
                 stars >= 1
-                  ? 'bg-[var(--color-mint)]/20 text-[var(--color-mint)]'
+                  ? "bg-[var(--color-mint)]/20 text-[var(--color-mint)]"
                   : unlocked
                     ? `bg-[var(--color-${accent})]/15`
-                    : 'bg-[var(--color-surface-2)] text-[var(--color-muted)]'
+                    : "bg-[var(--color-surface-2)] text-[var(--color-muted)]"
               }`}
-              style={stars >= 1 || !unlocked ? undefined : `color: var(--color-${accent});`}
+              style={stars >= 1 || !unlocked
+                ? undefined
+                : `color: var(--color-${accent});`}
             >
-              {#if stars >= 1}<span><Star class="h-5 w-5 fill-current" /></span>{:else}{String(i + 1).padStart(
-                    2,
-                    "0",
-                  )}{/if}
+              {#if stars >= 1}<span><Star class="h-5 w-5 fill-current" /></span
+                >{:else}{String(i + 1).padStart(2, "0")}{/if}
             </span>
             <div class="flex min-w-0 flex-1 flex-col">
               <p class="font-bold leading-tight">{lesson.id}</p>

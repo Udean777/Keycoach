@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import type { KeyState } from "./srs/srs";
+import type { KeyState } from "../srs/srs";
 
 export interface LessonProgress {
   lessonId: string;

@@ -1,5 +1,5 @@
-import type { Language } from "$lib/i18n.svelte";
-import { getSrs, putSrs, clearAllSrs } from "../db";
+import type { Language } from "$lib/i18n/i18n.svelte";
+import { getSrs, putSrs, clearAllSrs } from "../db/db";
 import { applyOutcome, newKeyState, type KeyState } from "../srs/srs";
 
 /**

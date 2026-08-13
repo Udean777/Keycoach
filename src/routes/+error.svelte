@@ -2,7 +2,7 @@
   import { page } from "$app/stores";
   import { Button } from "$lib/components/ui/button";
   import { reveal } from "$lib/actions/reveal";
-  import { t } from "$lib/i18n.svelte";
+  import { t } from "$lib/i18n/i18n.svelte";
 </script>
 
 <!-- Hallmark · genre: playful (arcade) · macrostructure: Centered-Hero · theme: arcade · design-system: design.md -->

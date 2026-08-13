@@ -1,5 +1,5 @@
 import type { RequestEvent } from "@sveltejs/kit";
-import { compileStages } from "$lib/curriculum";
+import { compileStages } from "$lib/core/curriculum";
 
 export function GET({ url }: RequestEvent) {
   const origin = url.origin;
