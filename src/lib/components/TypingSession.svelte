@@ -1,32 +1,39 @@
 <script lang="ts">
   // A live typing session: captures keyboard input, drives the engine, records
   // outcomes to SRS, and reports live stats + completion.
-  import { onMount, onDestroy, untrack } from 'svelte';
+  import { onMount, onDestroy, untrack } from "svelte";
   import {
     applyPress,
     initialState,
     computeStats,
     errorCounts,
-    type TypingState
-  } from '$lib/engine/typing';
-  import { playTick, playError } from '$lib/engine/sound';
-  import { srs } from '$lib/stores/srs.svelte.ts';
-  import { Check } from 'lucide-svelte';
-  import Words from './Words.svelte';
-  import Keyboard from './Keyboard.svelte';
+    type TypingState,
+  } from "$lib/engine/typing";
+  import { playTick, playError } from "$lib/engine/sound";
+  import { srs } from "$lib/stores/srs.svelte.ts";
+  import { Check } from "lucide-svelte";
+  import Words from "./Words.svelte";
+  import Keyboard from "./Keyboard.svelte";
 
   interface Props {
     words: string[];
     focusKeys?: string[];
     learnedKeys?: string[];
     boxed?: boolean;
+    timeLimit?: number; // Time limit in seconds
     onComplete?: (result: {
       state: TypingState;
       errorsByKey: Record<string, number>;
     }) => void;
   }
-  let { words, focusKeys = [], learnedKeys = [], boxed = false, onComplete }: Props =
-    $props();
+  let {
+    words,
+    focusKeys = [],
+    learnedKeys = [],
+    boxed = false,
+    timeLimit,
+    onComplete,
+  }: Props = $props();
 
   // session is replaced wholesale on every press; build the initial snapshot
   // once (raw + untrack: no deep proxying, no reactivity on the seed words)
@@ -44,7 +51,8 @@
     if (s.finished) return null;
     const word = s.words[s.currentWordIndex] ?? "";
     const typed = s.typedWords[s.currentWordIndex] ?? "";
-    for (let i = 0; i < typed.length; i++) if (typed[i] !== word[i]) return word[i];
+    for (let i = 0; i < typed.length; i++)
+      if (typed[i] !== word[i]) return word[i];
     return word[typed.length] ?? (boxed ? null : " ");
   });
 
@@ -56,8 +64,37 @@
   // keys currently held down — lights up the keyboard
   let pressed = $state(new Set<string>());
 
+  // Timer logic
+  let timeLeft = $state(timeLimit ?? 0);
+  let timerInterval: ReturnType<typeof setInterval> | undefined;
+
+  function startTimer() {
+    if (!timeLimit || timerInterval) return;
+    timeLeft = timeLimit;
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        session = { ...session, reported: true };
+        const finalState = { ...session.state, finished: true };
+        session = { ...session, state: finalState };
+        onComplete?.({
+          state: finalState,
+          errorsByKey: errorCounts(finalState),
+        });
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = undefined;
+    }
+  }
+
   function norm(key: string): string {
-    return key === ' ' ? ' ' : key.toLowerCase();
+    return key === " " ? " " : key.toLowerCase();
   }
 
   function onKeyUp(e: KeyboardEvent) {
@@ -86,16 +123,24 @@
     const key = e.key;
     // drill (boxed): any printable character is valid, but no space,
     // backspace, or navigation keys. Words advance automatically on success.
-    if (boxed && (key.length !== 1 || key === ' ')) return;
-    if (key === 'Tab') {
+    if (boxed && (key.length !== 1 || key === " ")) return;
+    if (key === "Tab") {
       e.preventDefault();
       session = { ...session, state: initialState(words) };
       return;
     }
-    if (!(key.length === 1 || key === 'Backspace' || key === ' ')) return;
-    if (key === ' ') e.preventDefault();
+    if (!(key.length === 1 || key === "Backspace" || key === " ")) return;
+    if (key === " ") e.preventDefault();
+
+    // Start timer on first keypress
+    if (timeLimit && session.state.log.length === 0) {
+      startTimer();
+    }
+
     const normalized =
-      key === 'Backspace' ? 'Backspace' : key.length === 1 ? key.toLowerCase() : key;
+      key === "Backspace"
+        ? "Backspace"
+        : key;
     let prev = session.state;
     clearTimeout(comboTimer);
     comboFlash = false;
@@ -112,7 +157,7 @@
         errorTick++;
         playError();
       } else {
-        if (key !== 'Backspace') playTick();
+        if (key !== "Backspace") playTick();
       }
     }
     if (next.finished && !session.reported) {
@@ -145,12 +190,13 @@
   }
 
   onMount(() => {
-    window.addEventListener('keydown', onKeyDownTrack);
-    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener("keydown", onKeyDownTrack);
+    window.addEventListener("keyup", onKeyUp);
   });
   onDestroy(() => {
-    window.removeEventListener('keydown', onKeyDownTrack);
-    window.removeEventListener('keyup', onKeyUp);
+    window.removeEventListener("keydown", onKeyDownTrack);
+    window.removeEventListener("keyup", onKeyUp);
+    stopTimer();
   });
 </script>
 
@@ -158,12 +204,10 @@
   <div class="flex items-center justify-between text-sm">
     <div class="flex gap-5">
       <span class="text-muted-foreground"
-        >WPM <b class="text-foreground tabular-nums">{live.wpm}</b
-        ></span
+        >WPM <b class="text-foreground tabular-nums">{live.wpm}</b></span
       >
       <span class="text-muted-foreground"
-        >Acc <b class="text-foreground tabular-nums">{live.accuracy}%</b
-        ></span
+        >Acc <b class="text-foreground tabular-nums">{live.accuracy}%</b></span
       >
       {#if boxed}
         <span class="text-muted-foreground"
@@ -172,24 +216,29 @@
           ></span
         >
       {/if}
+      {#if timeLimit}
+        <span class="text-muted-foreground"
+          >Time <b class="text-accent tabular-nums">{timeLeft}s</b></span
+        >
+      {/if}
     </div>
-    <div
-      class="h-2 w-40 overflow-hidden rounded-full bg-card"
-    >
+    <div class="h-2 w-40 overflow-hidden rounded-full bg-card">
       <div
-        class="h-full rounded-full bg-primary transition-[width]"
-        style="width: {live.progress * 100}%"
+        class="h-full rounded-full bg-primary transition-all duration-300 ease-linear"
+        style="width: {timeLimit
+          ? ((timeLimit - timeLeft) / timeLimit) * 100
+          : live.progress * 100}%"
       ></div>
     </div>
   </div>
 
   <div class="relative">
     <Words
-      words={words}
+      {words}
       typedWords={session.state.typedWords}
       currentWordIndex={session.state.currentWordIndex}
       {boxed}
-      errorTick={errorTick}
+      {errorTick}
     />
     {#if boxed && comboFlash}
       <div

@@ -16,6 +16,36 @@ interface Props {
     boxed = false,
     errorTick = 0,
   }: Props = $props();
+
+  let activeWordEl = $state<HTMLElement | null>(null);
+  let scrollTop = $state(0);
+
+  $effect(() => {
+    if (currentWordIndex === 0) {
+      scrollTop = 0;
+    } else if (activeWordEl) {
+      const top = activeWordEl.offsetTop;
+      // offsetHeight is the height of the word, we add gap-y (4px)
+      const lh = activeWordEl.offsetHeight + 4; 
+      
+      // If active word is below the 2nd visible line, scroll down
+      if (top >= scrollTop + lh * 2) {
+        scrollTop = top - lh;
+      } 
+      // If user backspaced to a line above visible area, scroll up
+      else if (top < scrollTop) {
+        scrollTop = top;
+      }
+    }
+  });
+  function trackCurrent(node: HTMLElement, isCurrent: boolean) {
+    if (isCurrent) activeWordEl = node;
+    return {
+      update(newIsCurrent: boolean) {
+        if (newIsCurrent) activeWordEl = node;
+      }
+    };
+  }
 </script>
 
 {#if boxed}
@@ -45,15 +75,22 @@ interface Props {
     </div>
   {:else}
   <div
-    class="w-full select-none overflow-hidden pb-2 text-2xl leading-[1.7] tracking-wide sm:text-[30px]"
+    class="relative w-full select-none overflow-hidden text-2xl leading-[1.7] tracking-wide sm:text-[30px]"
+    style="height: 150px; mask-image: linear-gradient(to bottom, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);"
   >
-    <div class="flex flex-wrap gap-x-4 gap-y-1">
+    <div 
+      class="flex flex-wrap gap-x-4 gap-y-1 transition-transform duration-200"
+      style="transform: translateY(-{scrollTop}px)"
+    >
       {#each words as word, wi (wi)}
         {@const typed = typedWords[wi] ?? ""}
         {@const isCurrent = wi === currentWordIndex}
         {@const wordState =
           wi < currentWordIndex ? "done" : isCurrent ? "current" : "future"}
-        <span class="flex">
+        <span 
+          class="flex"
+          use:trackCurrent={isCurrent}
+        >
           {#each word.split("") as ch, ci (isCurrent && typed[ci] !== undefined && typed[ci] !== ch ? `${ci}-w${errorTick}` : `${ci}`)}
             {@const tch = typed[ci]}
             {@const isWrong = wordState === "current" && tch !== undefined && tch !== ch}

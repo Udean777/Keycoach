@@ -22,6 +22,21 @@ export const messages: Record<Language, any> = {
       lessons: "Lessons",
       review: "Review",
       settings: "Settings",
+      freestyle: "Freestyle",
+    },
+    freestyle: {
+      title: "Freestyle Mode",
+      subtitle: "Type random words. No pressure, just speed.",
+      pb: "PB",
+      complete: "Session Complete!",
+      newPb: "New Personal Best! 🎉",
+      keepPracticing: "Great job! Keep practicing to beat your PB.",
+      speed: "Speed",
+      accuracy: "Accuracy",
+      typeAgain: "Type Again",
+      history: "Recent History (Local)",
+      date: "Date",
+      restart: "Restart",
     },
     home: {
       title: "Keycoach",
@@ -128,6 +143,21 @@ export const messages: Record<Language, any> = {
       lessons: "Pelajaran",
       review: "Review",
       settings: "Pengaturan",
+      freestyle: "Freestyle",
+    },
+    freestyle: {
+      title: "Mode Freestyle",
+      subtitle: "Ketik kata acak. Tanpa beban, fokus kecepatan.",
+      pb: "PB",
+      complete: "Sesi Selesai!",
+      newPb: "Rekor Pribadi Baru! 🎉",
+      keepPracticing: "Kerja bagus! Terus latihan untuk kalahkan rekor.",
+      speed: "KPM",
+      accuracy: "Akurasi",
+      typeAgain: "Ketik Lagi",
+      history: "Riwayat Terakhir (Lokal)",
+      date: "Tanggal",
+      restart: "Ulangi",
     },
     home: {
       title: "Keycoach",
@@ -235,6 +265,21 @@ export const messages: Record<Language, any> = {
       lessons: "Lecciones",
       review: "Repaso",
       settings: "Ajustes",
+      freestyle: "Estilo libre",
+    },
+    freestyle: {
+      title: "Modo Estilo Libre",
+      subtitle: "Escribe palabras al azar. Sin presión, solo velocidad.",
+      pb: "PB",
+      complete: "¡Sesión Completa!",
+      newPb: "¡Nuevo Récord Personal! 🎉",
+      keepPracticing: "¡Buen trabajo! Sigue practicando para superar tu récord.",
+      speed: "Velocidad",
+      accuracy: "Precisión",
+      typeAgain: "Escribir de nuevo",
+      history: "Historial Reciente (Local)",
+      date: "Fecha",
+      restart: "Reiniciar",
     },
     home: {
       title: "Keycoach",
@@ -341,6 +386,21 @@ export const messages: Record<Language, any> = {
       lessons: "Lektionen",
       review: "Wiederholung",
       settings: "Einstellungen",
+      freestyle: "Freistil",
+    },
+    freestyle: {
+      title: "Freistil-Modus",
+      subtitle: "Tippe zufällige Wörter. Kein Druck, nur Geschwindigkeit.",
+      pb: "PB",
+      complete: "Sitzung abgeschlossen!",
+      newPb: "Neue persönliche Bestleistung! 🎉",
+      keepPracticing: "Gut gemacht! Übe weiter, um deine Bestleistung zu schlagen.",
+      speed: "Geschwindigkeit",
+      accuracy: "Genauigkeit",
+      typeAgain: "Nochmal tippen",
+      history: "Letzter Verlauf (Lokal)",
+      date: "Datum",
+      restart: "Neustart",
     },
     home: {
       title: "Keycoach",
@@ -446,6 +506,21 @@ export const messages: Record<Language, any> = {
       lessons: "Уроки",
       review: "Повторение",
       settings: "Настройки",
+      freestyle: "Фристайл",
+    },
+    freestyle: {
+      title: "Свободный Режим",
+      subtitle: "Печатайте случайные слова. Без давления, только скорость.",
+      pb: "ЛР",
+      complete: "Сессия завершена!",
+      newPb: "Новый личный рекорд! 🎉",
+      keepPracticing: "Отличная работа! Продолжайте практиковаться, чтобы побить ЛР.",
+      speed: "Скорость",
+      accuracy: "Точность",
+      typeAgain: "Печатать Снова",
+      history: "Недавняя история (Локально)",
+      date: "Дата",
+      restart: "Перезапуск",
     },
     home: {
       title: "Keycoach",
@@ -543,7 +618,7 @@ export const messages: Record<Language, any> = {
 
 export type Messages = {
   app: { name: string; tagline: string };
-  nav: { home: string; lessons: string; review: string; settings: string };
+  nav: { home: string; lessons: string; review: string; settings: string; freestyle: string };
   home: {
     title: string;
     subtitle: string;
@@ -632,6 +707,20 @@ export type Messages = {
     rights: string;
   };
   common: { back: string };
+  freestyle: {
+    title: string;
+    subtitle: string;
+    pb: string;
+    complete: string;
+    newPb: string;
+    keepPracticing: string;
+    speed: string;
+    accuracy: string;
+    typeAgain: string;
+    history: string;
+    date: string;
+    restart: string;
+  };
 };
 
 // runes-based reactive language store

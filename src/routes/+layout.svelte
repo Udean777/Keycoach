@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./layout.css";
 
-  import { Home, GraduationCap, RefreshCcw, Settings, X } from "lucide-svelte";
+  import { Home, GraduationCap, RefreshCcw, Settings, X, Keyboard as KeyboardIcon } from "lucide-svelte";
   import { page } from "$app/state";
   import { ModeWatcher } from "mode-watcher";
   import ThemeToggle from "$lib/components/ThemeToggle.svelte";
@@ -69,6 +69,7 @@
     { href: "/", label: () => t().nav.home, icon: Home },
     { href: "/lessons", label: () => t().nav.lessons, icon: GraduationCap },
     { href: "/review", label: () => t().nav.review, icon: RefreshCcw },
+    { href: "/freestyle", label: () => t().nav.freestyle, icon: KeyboardIcon },
     { href: "/settings", label: () => t().settings.title, icon: Settings },
   ];
 
