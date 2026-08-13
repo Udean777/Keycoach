@@ -100,6 +100,11 @@ export const messages: Record<Language, any> = {
         "This will permanently delete all your progress, typing statistics, and reset the SRS schedule. This action cannot be undone.",
       reset: "Reset progress",
       cancel: "Cancel",
+      soundTheme: "Sound Theme",
+      soundMech: "Mechanical",
+      soundArcade: "Arcade Bleeps",
+      soundType: "Typewriter",
+      soundSilent: "Silent",
     },
     footer: {
       made: "Built with SvelteKit",
@@ -198,6 +203,11 @@ export const messages: Record<Language, any> = {
         "Ini akan menghapus permanen semua progres, statistik pengetikan, dan menyetel ulang jadwal SRS. Tindakan ini tidak dapat dibatalkan.",
       reset: "Reset progres",
       cancel: "Batal",
+      soundTheme: "Tema Suara",
+      soundMech: "Mekanikal",
+      soundArcade: "Arcade Bleeps",
+      soundType: "Mesin Tik",
+      soundSilent: "Hening",
     },
     footer: {
       made: "Dibangun dengan SvelteKit",
@@ -282,6 +292,11 @@ export const messages: Record<Language, any> = {
       resetConfirmDesc: "Esto eliminará permanentemente todo el progreso, estadísticas y restablecerá el calendario SRS. Esta acción no se puede deshacer.",
       reset: "Reiniciar progreso",
       cancel: "Cancelar",
+      soundTheme: "Tema de sonido",
+      soundMech: "Mecánico",
+      soundArcade: "Arcade Bleeps",
+      soundType: "Máquina de escribir",
+      soundSilent: "Silencio",
     },
     footer: {
       made: "Creado con SvelteKit",
@@ -363,6 +378,11 @@ export const messages: Record<Language, any> = {
       resetConfirmDesc: "Dies löscht dauerhaft den gesamten Fortschritt, die Statistik und setzt den SRS-Plan zurück. Diese Aktion kann nicht rückgängig gemacht werden.",
       reset: "Fortschritt zurücksetzen",
       cancel: "Abbrechen",
+      soundTheme: "Sound-Thema",
+      soundMech: "Mechanisch",
+      soundArcade: "Arcade Bleeps",
+      soundType: "Schreibmaschine",
+      soundSilent: "Stumm",
     },
     footer: {
       made: "Erstellt mit SvelteKit",
@@ -447,6 +467,11 @@ export const messages: Record<Language, any> = {
       resetConfirmDesc: "Это навсегда удалит весь прогресс, статистику и сбросит расписание SRS. Действие нельзя отменить.",
       reset: "Сбросить прогресс",
       cancel: "Отмена",
+      soundTheme: "Звуковая тема",
+      soundMech: "Механическая",
+      soundArcade: "Аркада",
+      soundType: "Печатная машинка",
+      soundSilent: "Без звука",
     },
     footer: {
       made: "Сделано на SvelteKit",
@@ -528,6 +553,11 @@ export type Messages = {
     resetConfirmDesc: string;
     reset: string;
     cancel: string;
+    soundTheme: string;
+    soundMech: string;
+    soundArcade: string;
+    soundType: string;
+    soundSilent: string;
   };
   footer: {
     made: string;

@@ -9,6 +9,7 @@
   import { progress } from "$lib/stores/progress.svelte.ts";
   import { srs } from "$lib/stores/srs.svelte.ts";
   import TypingSession from "$lib/components/TypingSession.svelte";
+  import Keyboard from "$lib/components/Keyboard.svelte";
   import { t, getLang } from "$lib/i18n.svelte";
   import { Skeleton } from "$lib/components/ui/skeleton";
   import { Button } from "$lib/components/ui/button";
@@ -80,24 +81,50 @@
     </div>
   {:else if !started && !finished}
     <div
-      class="reveal rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center text-sm text-[var(--color-muted)]"
+      class="reveal flex flex-col gap-8 rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center text-sm text-[var(--color-muted)]"
       use:reveal
     >
-      <p>{t().review.nothing}</p>
-      <Button variant="link" href="/" class="mt-4 text-[var(--color-accent-2)]">
-        ← {t().review.back}
-      </Button>
+      <div class="flex flex-col gap-2 mb-4">
+        <h3 class="text-lg font-bold text-[var(--color-ink)]">Heatmap Stats</h3>
+        <p class="text-xs">
+          <span class="inline-block w-3 h-3 bg-[var(--color-mint)]/20 border border-[var(--color-mint)] rounded-sm mr-1"></span> Mastered
+          <span class="inline-block w-3 h-3 bg-[var(--color-accent-2)]/20 border border-[var(--color-accent-2)] rounded-sm ml-3 mr-1"></span> Learning
+          <span class="inline-block w-3 h-3 bg-[var(--color-accent-3)]/20 border border-[var(--color-accent-3)] rounded-sm ml-3 mr-1"></span> Struggling
+        </p>
+      </div>
+      <div class="pointer-events-none">
+        <Keyboard learnedKeys={allKeys} showHeatmap={true} />
+      </div>
+      <div class="mt-4">
+        <p>{t().review.nothing}</p>
+        <Button variant="link" href="/" class="mt-4 text-[var(--color-accent-2)]">
+          ← {t().review.back}
+        </Button>
+      </div>
     </div>
   {:else if finished}
     <div
-      class="animate-result-in mx-auto max-w-lg rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]"
+      class="animate-result-in mx-auto w-full max-w-4xl rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-[0_12px_32px_-16px_color-mix(in_oklch,var(--color-ink)_20%,transparent)]"
     >
       <div class="animate-star-pop flex justify-center text-4xl text-[var(--color-mint)]">
         <Check class="h-12 w-12 stroke-[3]" />
       </div>
-      <h2 class="mt-3 text-xl font-bold tracking-[-0.02em]">
+      <h2 class="mt-3 mb-8 text-xl font-bold tracking-[-0.02em]">
         {t().review.done}
       </h2>
+      
+      <div class="flex flex-col gap-2 mb-4">
+        <h3 class="text-lg font-bold text-[var(--color-ink)]">Heatmap Stats</h3>
+        <p class="text-xs">
+          <span class="inline-block w-3 h-3 bg-[var(--color-mint)]/20 border border-[var(--color-mint)] rounded-sm mr-1"></span> Mastered
+          <span class="inline-block w-3 h-3 bg-[var(--color-accent-2)]/20 border border-[var(--color-accent-2)] rounded-sm ml-3 mr-1"></span> Learning
+          <span class="inline-block w-3 h-3 bg-[var(--color-accent-3)]/20 border border-[var(--color-accent-3)] rounded-sm ml-3 mr-1"></span> Struggling
+        </p>
+      </div>
+      <div class="pointer-events-none w-full max-w-3xl mx-auto mb-8">
+        <Keyboard learnedKeys={allKeys} showHeatmap={true} />
+      </div>
+
       <div class="mt-8 flex justify-center gap-3">
         <Button
           variant="outline"

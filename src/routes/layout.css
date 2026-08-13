@@ -139,8 +139,6 @@
 
 html,
 body {
-  /* gate 34 — clip, never hidden */
-  overflow-x: clip;
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);

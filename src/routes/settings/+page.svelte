@@ -7,6 +7,14 @@
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { reveal } from "$lib/actions/reveal";
 
+  const flagMap: Record<Language, string> = {
+    en: "gb",
+    id: "id",
+    es: "es",
+    de: "de",
+    ru: "ru",
+  };
+
   function pick(lang: Language) {
     setLang(lang);
     void srs.load(lang);
@@ -18,6 +26,12 @@
   }
 
   let resetOpen = $state(false);
+  let currentSoundTheme = $state("mechanical");
+
+  import { onMount } from "svelte";
+  onMount(() => {
+    currentSoundTheme = localStorage.getItem("soundTheme") || "mechanical";
+  });
 </script>
 
 <!-- Hallmark · genre: playful (arcade) · macrostructure: Index-First · theme: arcade · design-system: design.md · designed-as-app -->
@@ -38,11 +52,56 @@
           l.id
             ? 'border-[var(--color-accent-2)]/60 shadow-[0_2px_0_0_var(--color-accent-2)]'
             : 'border-[var(--color-border)] text-[var(--color-ink)] hover:-translate-y-0.5 hover:border-[var(--color-accent)]/50'}"
-          style={getLang() === l.id ? `background: ${tint(i)}` : `background: var(--color-surface)`}
+          style={getLang() === l.id
+            ? `background: ${tint(i)}`
+            : `background: var(--color-surface)`}
         >
-          {l.label}
+          <div class="flex items-center gap-3">
+            <img src="https://flagcdn.com/w40/{flagMap[l.id]}.png" width="24" alt={l.label} class="rounded-sm shadow-sm" />
+            <span>{l.label}</span>
+          </div>
           {#if getLang() === l.id}
-            <span class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]">
+            <span
+              class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]"
+            >
+              <Check class="h-3.5 w-3.5 stroke-[4]" />
+            </span>
+          {/if}
+        </button>
+      </div>
+    {/each}
+  </div>
+
+  <div class="reveal mt-12 flex flex-col gap-1.5" use:reveal>
+    <h2 class="text-xl font-bold tracking-[-0.02em]">
+      {t().settings.soundTheme}
+    </h2>
+  </div>
+  <div class="reveal-stagger mt-4 flex flex-col gap-2" use:reveal>
+    {#each [{ id: "mechanical", label: t().settings.soundMech }, { id: "arcade", label: t().settings.soundArcade }, { id: "typewriter", label: t().settings.soundType }, { id: "silent", label: t().settings.soundSilent }] as theme, i}
+      <div class="reveal-child" style="--i: {i}">
+        <button
+          onclick={() => {
+            if (typeof window !== "undefined") {
+              localStorage.setItem("soundTheme", theme.id);
+              // Force re-render of this block by assigning to a state variable
+              currentSoundTheme = theme.id;
+            }
+          }}
+          aria-pressed={currentSoundTheme === theme.id}
+          class="flex w-full items-center justify-between rounded-[12px] border px-4 py-3 text-sm font-bold transition-[transform,border-color,box-shadow] duration-150 {currentSoundTheme ===
+          theme.id
+            ? 'border-[var(--color-accent-2)]/60 shadow-[0_2px_0_0_var(--color-accent-2)] bg-surface'
+            : 'border-[var(--color-border)] text-[var(--color-ink)] hover:-translate-y-0.5 hover:border-[var(--color-accent)]/50 bg-surface'}"
+          style={currentSoundTheme === theme.id
+            ? `background: ${tint(i)}`
+            : `background: var(--color-surface)`}
+        >
+          {theme.label}
+          {#if currentSoundTheme === theme.id}
+            <span
+              class="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink)] shadow-[0_2px_0_0_var(--color-accent-strong)]"
+            >
               <Check class="h-3.5 w-3.5 stroke-[4]" />
             </span>
           {/if}
@@ -52,8 +111,13 @@
   </div>
 
   <div class="reveal mt-16 mb-4 flex flex-col gap-1.5" use:reveal>
-    <span class="font-label text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--color-accent-3)]">{t().settings.danger}</span>
-    <h2 class="text-xl font-bold tracking-[-0.02em]">{t().settings.resetTitle}</h2>
+    <span
+      class="font-label text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--color-accent-3)]"
+      >{t().settings.danger}</span
+    >
+    <h2 class="text-xl font-bold tracking-[-0.02em]">
+      {t().settings.resetTitle}
+    </h2>
     <p class="text-sm text-[var(--color-muted)]">{t().settings.resetDesc}</p>
   </div>
 

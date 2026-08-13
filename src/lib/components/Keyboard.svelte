@@ -7,12 +7,14 @@
     learnedKeys?: string[];
     pressed?: Set<string>;
     target?: string | null;
+    showHeatmap?: boolean;
   }
   let {
     focusKeys = [],
     learnedKeys = [],
     pressed = new Set<string>(),
     target = null,
+    showHeatmap = false,
   }: Props = $props();
 
   let activeLayout: LayoutName = $state("qwerty");
@@ -22,6 +24,8 @@
 
   const learnKeys = $derived(new Set(learnedKeys));
   const focus = $derived(new Set(focusKeys));
+
+  import { srs } from "$lib/stores/srs.svelte.ts";
 
   function cls(k: string): string {
     const isModifier = k.length > 1 && k !== " ";
@@ -38,6 +42,20 @@
     }
     if (pressed.has(k)) {
       return `${base} bg-[var(--color-accent-2)] text-[var(--color-ink)] shadow-none scale-[0.97]`;
+    }
+    if (showHeatmap && !isModifier) {
+      const state = srs.states.get(k);
+      if (state) {
+        if (state.box >= 3) {
+          return `${base} border border-[var(--color-mint)] bg-[var(--color-mint)]/20 text-[var(--color-mint)]`;
+        }
+        if (state.box === 0 && state.errorCount > 0) {
+          return `${base} border border-[var(--color-accent-3)] bg-[var(--color-accent-3)]/20 text-[var(--color-accent-3)]`;
+        }
+        if (state.box === 1 || state.box === 2) {
+          return `${base} border border-[var(--color-accent-2)] bg-[var(--color-accent-2)]/20 text-[var(--color-accent-2)]`;
+        }
+      }
     }
     if (learnKeys.has(k)) {
       return `${base} border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:border-[var(--color-accent)]`;

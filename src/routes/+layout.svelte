@@ -10,6 +10,15 @@
   import { srs } from "$lib/stores/srs.svelte.ts";
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
+  import type { Language } from "$lib/i18n.svelte";
+
+  const flagMap: Record<Language, string> = {
+    en: "gb",
+    id: "id",
+    es: "es",
+    de: "de",
+    ru: "ru",
+  };
 
   onMount(() => {
     srs.load(getLang());
@@ -94,7 +103,7 @@
 </svelte:head>
 <ModeWatcher />
 
-<div class="flex min-h-screen flex-col">
+<div class="flex min-h-screen flex-col overflow-x-clip">
   <!-- Hallmark · nav: N1b canonical app bar (collapses to hamburger <sm) · footer: Ft2 inline · arcade · design-system: design.md -->
   <header
     class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-bg)]/80"
@@ -149,12 +158,14 @@
           }}
         >
           <Select.Trigger class="h-9 w-12 justify-center">
-            {langs.find((l) => l.id === getLang())?.code}
+            <img src="https://flagcdn.com/w40/{flagMap[getLang()]}.png" width="20" alt={getLang()} class="rounded-sm shadow-sm" />
           </Select.Trigger>
-          <Select.Content>
+          <Select.Content side="bottom" align="end">
             {#each langs as l (l.id)}
               <Select.Item value={l.id} label={l.label}>
-                <span class="w-7 text-xs font-bold text-[var(--color-muted)]">{l.code}</span>
+                <div class="mr-2 flex items-center">
+                  <img src="https://flagcdn.com/w40/{flagMap[l.id]}.png" width="20" alt={l.label} class="rounded-sm shadow-sm" />
+                </div>
                 {l.label}
               </Select.Item>
             {/each}
